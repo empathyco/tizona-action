@@ -1,0 +1,146 @@
+# action.yml
+name: 'Tizona security checker action'
+description: 'Checks and analyzes the security of the code added to the specified repository.'
+branding:
+  icon: 'check-square'  
+  color: 'green'
+
+inputs:
+  deptrack_enable:
+    description: 'Enables Dependency Track check'
+    required: true
+    default: 'true'
+  deptrack_url:  
+    description: 'URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
+    required: false
+    default: "${{ secrets.SECRET_OWASP_DT_URL }}"
+  deptrack_key:
+    description: 'Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
+    required: false
+    default: "${{ secrets.SECRET_OWASP_DT_KEY }}"
+  deptrack_language:
+    description: 'Programming language. Required if Dependency Track is enabled.'
+    required: false
+    default: 'nodejs'
+  code_enable:
+    description: 'Enables SonarQube check'
+    required: true
+    default: 'true'
+  sonar_source:
+    description: 'SonarQube source. Required to run SonarQube.'
+    required: false
+    default: '.'
+  sonar_host:
+    description: 'SonarQube host. Required to run SonarQube.'
+    required: false
+    default: "${{ secrets.SONAR_HOST_URL }}"
+  sonar_login:
+    description: 'SonarQube login key. Required to run SonarQube.'
+    required: false
+    default: "${{ secrets.SONAR_TOKEN }}"
+  config_enable:
+    description: 'Enables configuration check.'
+    required: true
+    default: 'true'
+  secrets_enable:
+    description: 'Enables secrets check'
+    required: true
+    default: 'true'
+  reviewdog_github_token:
+    description: 'GitHub token. Required if config checker is enabled.'
+    required: false
+    default: "${{ github.token }}"
+  reviewdog_working_directory:
+    description: 'Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled.'
+    default: '.'
+    required: false
+  reviewdog_level:
+    description: 'Report level for reviewdog [info,warning,error]. Required if config checker is enabled.'
+    default: 'error'
+    required: false
+  reviewdog_reporter:
+    description: 'Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required if config checker is enabled.'
+    default: 'github-pr-check'
+    required: false
+  reviewdog_fail_on_error:
+    description: 'Exit code for reviewdog when errors are found [true,false]. Default is `false`. Required if config checker is enabled.'
+    default: 'false'
+    required: false
+  depcheck_project:
+    description: 'Dependency check project. Required if code checker is enabled.'
+    default: '<PROJECT>'
+    required: false
+  depcheck_path:
+    description: 'Dependency check path.  Required if code checker is enabled.'
+    default: '.'
+    required: false  
+  depcheck_format:
+    description: 'Dependency check format.  Required if code checker is enabled.'
+    default: 'HTML'
+    required: false
+  trivy_config_scan-ref:
+    description: 'Config scan reference. Required if config checker is enabled.'
+    required: false
+    default: '.'
+  trivy_config_severity:
+    description: 'Severities of vulnerabilities to be displayed. Required if config checker is enabled.'
+    required: false
+    default: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+  trivy_repo_scan-ref:
+    description: 'FS scan reference. Required if config checker is enabled.'
+    required: false
+    default: '.'
+  trivy_repo_ignore-unfixed:
+    description: 'Ignore unfixed vulnerabilities. Required if config checker is enabled.'
+    required: false
+    default: 'false'
+  trivy_repo_severity:
+    description: 'Severities of vulnerabilities to be displayed. Required if config checker is enabled.'
+    required: false
+    default: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+  trivy_repo_vuln:
+    description: 'comma-separated list of vulnerability types (os,library). Required if config checker is enabled.'
+    required: false
+    default: 'os,library'
+  trivy_timeout:
+    description: 'Trivy timeout duration. Required if config checker is enabled.'
+    required: false
+    default: "5m"
+
+outputs:
+  riskscore:
+    description: 'String with the number of vulnerabilities found'
+  tfsec-return-code:
+    description: 'tfsec command return code'
+  reviewdog-return-code:
+    description: 'reviewdog command return code'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ' -a ${{ inputs.deptrack_enable }}'
+    - ' -b ${{ inputs.deptrack_url }}'
+    - ' -c ${{ inputs.deptrack_key }}'
+    - ' -d ${{ inputs.deptrack_language }}'
+    - ' -e ${{ inputs.code_enable }}'
+    - ' -f ${{ inputs.sonar_source }}'
+    - ' -g ${{ inputs.sonar_host }}'
+    - ' -h ${{ inputs.sonar_login }}'
+    - ' -i ${{ inputs.config_enable }}'
+    - ' -j ${{ inputs.secrets_enable }}'
+    - ' -k ${{ inputs.reviewdog_github_token }}'
+    - ' -l ${{ inputs.reviewdog_working_directory }}'
+    - ' -m ${{ inputs.reviewdog_level }}'
+    - ' -n ${{ inputs.reviewdog_reporter }}'
+    - ' -o ${{ inputs.reviewdog_fail_on_error }}'
+    - ' -p ${{ inputs.depcheck_project }}'
+    - ' -q ${{ inputs.depcheck_path }}'
+    - ' -r ${{ inputs.depcheck_format }}'
+    - ' -s ${{ inputs.trivy_config_scan-ref }}'
+    - ' -t ${{ inputs.trivy_config_severity }}'
+    - ' -u ${{ inputs.trivy_repo_scan-ref }}'
+    - ' -v ${{ inputs.trivy_repo_ignore-unfixed }}'
+    - ' -w ${{ inputs.trivy_repo_severity }}'
+    - ' -x ${{ inputs.trivy_repo_vuln }}'
+    - ' -y ${{ inputs.trivy_timeout }}'
