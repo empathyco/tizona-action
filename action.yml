@@ -68,7 +68,7 @@ inputs:
     required: false
   depcheck_project:
     description: 'Dependency check project. Required if code checker is enabled.'
-    default: '<PROJECT>'
+    default: '.'
     required: false
   depcheck_path:
     description: 'Dependency check path.  Required if code checker is enabled.'
