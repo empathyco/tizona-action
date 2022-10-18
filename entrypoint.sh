@@ -84,7 +84,7 @@ done
 
 echo "Starting security checks"
 
-if [ ${DTRACK_ENABLE} == "true" ]; then
+if [ ${DTRACK_ENABLE} = "true" ]; then
     
     DTRACK_ARGS=""
 
@@ -116,7 +116,7 @@ else
     echo "Skip Dependency Track action"
 fi
 
-if [ ${CODE_ENABLE} == "true" ]; then
+if [ ${CODE_ENABLE} = "true" ]; then
 
     CODE_ARGS=""
 
@@ -160,7 +160,7 @@ else
     echo "Skip code check action"
 fi
 
-if [ ${CONFIG_ENABLE} == "true" ]; then
+if [ ${CONFIG_ENABLE} = "true" ]; then
     echo "Run configuration check action"
 
     REVIEWDOG_ARGS=""
@@ -262,7 +262,7 @@ else
     echo "Skip configuration check action"
 fi
 
-if [ ${SECRETS_ENABLE} == "true" ]; then
+if [ ${SECRETS_ENABLE} = "true" ]; then
     echo "Run secrets leaks action"
     ./secrets_leaks.sh
 else
