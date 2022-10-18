@@ -13,11 +13,9 @@ inputs:
   deptrack_url:  
     description: 'URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
     required: false
-    default: "${{ secrets.SECRET_OWASP_DT_URL }}"
   deptrack_key:
     description: 'Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
     required: false
-    default: "${{ secrets.SECRET_OWASP_DT_KEY }}"
   deptrack_language:
     description: 'Programming language. Required if Dependency Track is enabled.'
     required: false
@@ -33,11 +31,9 @@ inputs:
   sonar_host:
     description: 'SonarQube host. Required to run SonarQube.'
     required: false
-    default: "${{ secrets.SONAR_HOST_URL }}"
   sonar_login:
     description: 'SonarQube login key. Required to run SonarQube.'
     required: false
-    default: "${{ secrets.SONAR_TOKEN }}"
   config_enable:
     description: 'Enables configuration check.'
     required: true
@@ -49,7 +45,6 @@ inputs:
   reviewdog_github_token:
     description: 'GitHub token. Required if config checker is enabled.'
     required: false
-    default: "${{ github.token }}"
   reviewdog_working_directory:
     description: 'Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled.'
     default: '.'
