@@ -28,7 +28,6 @@ if [ $TRIVY_TIMEOUT ];then
 fi
 
 echo "Building SARIF repository report"
-echo "trivy --quiet ${TIMEOUT} fs --format sarif --output ${TRIVY_OUTPUT} ${ARGS} ${TRIVY_SCANREF}"
 trivy --quiet ${TIMEOUT} fs --format sarif --output ${TRIVY_OUTPUT} ${ARGS} ${TRIVY_SCANREF}
 
 echo "Upload trivy repository scan result to Github"
