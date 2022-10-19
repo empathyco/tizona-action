@@ -173,7 +173,7 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
     fi
 
     if [ $REVIEWDOG_DIR ];then
-      REVIEWDOG_ARGS=" $REVIEWDOG_DIR"
+      REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_DIR"
     else
       echo "ReviewDog requires path to review. Exit"
       exit 1
