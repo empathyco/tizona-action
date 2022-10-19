@@ -82,10 +82,6 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:" o; do
   esac
 done
 
-echo "Review dir"
-pwd
-find .  -name code.sh
-find /  -name code.sh
 echo "Starting security checks"
 
 if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
