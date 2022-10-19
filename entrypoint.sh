@@ -6,6 +6,9 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:" o; do
    case "${o}" in
        a)
          export DTRACK_ENABLE=${OPTARG}
+         echo ${OPTARG}
+         DTRACK_ENABLE=${OPTARG}
+         echo ${DTRACK_ENABLE}
        ;;
        b)
          export DTRACK_URL=${OPTARG}
