@@ -22,4 +22,5 @@ echo "Run Trivy for config"
 /bin/bash /trivy_config.sh ${TRIVY_CONFIG_SCANREF} ${TRIVY_CONFIG_SEVERITY} ${TRIVY_TIMEOUT}
 
 echo "Run Trivy for repository"
+echo "/bin/bash /trivy_repo.sh  ${TRIVY_REPO_SCANREF} ${TRIVY_REPO_IGNORE} ${TRIVY_REPO_SEVERITY} ${TRIVY_REPO_VULN} ${TRIVY_TIMEOUT}"
 /bin/bash /trivy_repo.sh  ${TRIVY_REPO_SCANREF} ${TRIVY_REPO_IGNORE} ${TRIVY_REPO_SEVERITY} ${TRIVY_REPO_VULN} ${TRIVY_TIMEOUT}
