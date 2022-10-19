@@ -6,9 +6,6 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:" o; do
    case "${o}" in
        a)
          export DTRACK_ENABLE=${OPTARG}
-         echo ${OPTARG}
-         DTRACK_ENABLE=${OPTARG}
-         echo ${DTRACK_ENABLE}
        ;;
        b)
          export DTRACK_URL=${OPTARG}
@@ -85,37 +82,9 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:" o; do
   esac
 done
 
-echo "Review arguments"
-
-echo $DTRACK_ENABLE
-echo $DTRACK_URL
-echo $DTRACK_KEY
-echo $DTRACK_LANGUAGE
-echo $CODE_ENABLE
-echo $SONAR_SOURCES
-echo $SONAR_HOST
-echo $SONAR_LOGIN
-echo $CONFIG_ENABLE
-echo $SECRETS_ENABLE
-echo $REVIEWDOG_GIT_TOKEN
-echo $REVIEWDOG_DIR
-echo $REVIEWDOG_LVL
-echo $REVIEWDOG_REPORTER
-echo $REVIEWDOG_FAIL
-echo $DEPCHECK_PROJECT
-echo $DEPCHECK_PATH
-echo $DEPCHECK_FORMAT
-echo $TRIVY_CONFIG_SCANREF
-echo $TRIVY_CONFIG_SEVERITY
-echo $TRIVY_REPO_SCANREF
-echo $TRIVY_REPO_IGNORE
-echo $TRIVY_REPO_SEVERITY
-echo $TRIVY_REPO_VULN
-echo $TRIVY_TIMEOUT
-
 echo "Starting security checks"
 
-if [[ ${DTRACK_ENABLE} == "true" ]]; then
+if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     
     DTRACK_ARGS=""
 
@@ -147,7 +116,7 @@ else
     echo "Skip Dependency Track action"
 fi
 
-if [[ ${CODE_ENABLE} == "true" ]]; then
+if [[ ${CODE_ENABLE} == *"true"* ]]; then
 
     CODE_ARGS=""
 
@@ -191,7 +160,7 @@ else
     echo "Skip code check action"
 fi
 
-if [[ ${CONFIG_ENABLE} == "true" ]]; then
+if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
     echo "Run configuration check action"
 
     REVIEWDOG_ARGS=""
@@ -293,7 +262,7 @@ else
     echo "Skip configuration check action"
 fi
 
-if [[ ${SECRETS_ENABLE} == "true" ]]; then
+if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
     echo "Run secrets leaks action"
     ./secrets_leaks.sh
 else
