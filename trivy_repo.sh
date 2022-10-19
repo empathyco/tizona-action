@@ -12,7 +12,7 @@ TIMEOUT=""
 set -e
 
 if [[ ${TRIVY_IGNORE} == "true" ]]; then
-  ARGS="$ARGS --ignore-unfixed $TRIVY_IGNORE"
+  ARGS="$ARGS --ignore-unfixed"
 fi
 
 if [ $TRIVY_SEVERITY ];then
