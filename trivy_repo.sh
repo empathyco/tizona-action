@@ -11,7 +11,7 @@ TIMEOUT=""
 
 set -e
 
-if [[ ${TRIVY_IGNORE} == "true" ]]; then
+if [[ ${TRIVY_IGNORE} == *"true"* ]]; then
   ARGS="$ARGS --ignore-unfixed"
 fi
 
