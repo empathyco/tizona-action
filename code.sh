@@ -22,6 +22,8 @@ if [[ -f $SONAR_PROPERTIES ]]; then
   SONAR_EXCLUSION=`sed -n 's/^sonar.exclusions=\(.*\)/\1/p' < $SONAR_PROPERTIES`
 
   echo "Run SonarQube"
+  echo "sonar-scanner -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.sources=$SONAR_SOURCES -Dsonar.host.url=$SONAR_HOST -Dsonar.login=$SONAR_LOGIN -Dsonar.exclusions=$SONAR_EXCLUSION"
+
   sonar-scanner \
     -Dsonar.projectKey=$SONAR_PROJECT \
     -Dsonar.sources=$SONAR_SOURCES \
