@@ -1,5 +1,7 @@
 #!/bin/bash -l
 
+set -e
+
 echo "Secrets leaks discovery"
 
 FILE_REPORT=report-secrets.json

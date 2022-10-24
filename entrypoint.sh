@@ -110,7 +110,7 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     fi
 
     echo "Run Dependency Track action"
-    /bin/bash /dependency_track.sh $DTRACK_ARGS
+    /bin/bash /app/dependency_track.sh $DTRACK_ARGS
 
 else
     echo "Skip Dependency Track action"
@@ -154,7 +154,7 @@ if [[ ${CODE_ENABLE} == *"true"* ]]; then
     fi
 
     echo "Run code check action"
-    /bin/bash /code.sh $CODE_ARGS
+    /bin/bash /app/code.sh $CODE_ARGS
 
 else
     echo "Skip code check action"
@@ -256,7 +256,7 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    /bin/bash /config.sh $REVIEWDOG_ARGS $TRIVY_CONFIG_ARGS $TRIVY_REPO_ARGS $TRIVY_COMMON_ARGS
+    /bin/bash /app/config.sh $REVIEWDOG_ARGS $TRIVY_CONFIG_ARGS $TRIVY_REPO_ARGS $TRIVY_COMMON_ARGS
 
 else
     echo "Skip configuration check action"
@@ -264,7 +264,7 @@ fi
 
 if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
     echo "Run secrets leaks action"
-    /bin/bash /secrets_leaks.sh
+    /bin/bash /app/secrets_leaks.sh
 else
     echo "Skip secrets leaks action"
 fi
