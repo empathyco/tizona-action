@@ -1,4 +1,4 @@
-FROM ghcr.io/empathyco/tizona-action:latest
+FROM ghcr.io/empathyco/tizona-action:main
 
 WORKDIR /app
 
