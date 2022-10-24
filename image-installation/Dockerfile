@@ -78,22 +78,3 @@ ENV PATH=$PATH:/var/opt/dependency-check/bin/
 ENV JAVA_HOME="/lib/jvm/java-11-openjdk-amd64"
 
 RUN /var/opt/dependency-check/bin/dependency-check.sh --updateonly
-
-# Copies your code file from your action repository to the filesystem path `/` of the container
-
-WORKDIR /app
-
-COPY entrypoint.sh entrypoint.sh
-COPY dependency_track.sh dependency_track.sh
-COPY secrets_leaks.sh secrets_leaks.sh
-COPY code.sh code.sh
-COPY config.sh config.sh
-COPY tfsec_check.sh tfsec_check.sh
-COPY trivy_config.sh trivy_config.sh
-COPY trivy_repo.sh trivy_repo.sh
-COPY to-rdjson.jq to-rdjson.jq
-
-RUN chmod +x /app/*.sh
-
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/app/entrypoint.sh"]
