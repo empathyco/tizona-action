@@ -10,7 +10,7 @@ set -e
 
 echo "Run Dependency check"
 
-dependency-check.sh --project ${DEPCHECK_PROJECT} --scan ${DEPCHECK_PATH} --format ${DEPCHECK_FORMAT} --out '/github/workspace/reports' --noupdate
+/var/opt/dependency-check/bin/dependency-check.sh --project ${DEPCHECK_PROJECT} --scan ${DEPCHECK_PATH} --format ${DEPCHECK_FORMAT} --out '/github/workspace/reports' --noupdate
 
 SONAR_PROPERTIES="sonar-project.properties"
 if [[ -f $SONAR_PROPERTIES ]]; then
