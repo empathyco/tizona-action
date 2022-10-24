@@ -47,7 +47,7 @@ RUN mkdir /downloads/sonarqube -p && \
     rm sonar-scanner-cli-4.7.0.2747-linux.zip
 
 
-ENV PATH $PATH:/var/opt/sonar-scanner-4.7.0.2747-linux/bin/
+ENV PATH=$PATH:/var/opt/sonar-scanner-4.7.0.2747-linux/bin/
 
 ##################################################################
 # Configuration checker requirements
@@ -74,7 +74,7 @@ RUN wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.2.1/
     mv dependency-check /var/opt && \
     rm dependency-check-7.2.1-release.zip 
 
-ENV PATH $PATH:/var/opt/dependency-check/bin/
+ENV PATH=$PATH:/var/opt/dependency-check/bin/
 ENV JAVA_HOME="/lib/jvm/java-11-openjdk-amd64"
 
 RUN /var/opt/dependency-check/bin/dependency-check.sh --updateonly
