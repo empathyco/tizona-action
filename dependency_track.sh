@@ -80,7 +80,14 @@ echo "[*] BoM file succesfully generated"
 # Cyclonedx CLI conversion
 echo "[*] Cyclonedx CLI conversion"
 #Does not upload to dtrack when output format = xml (every version available)
+ls $path
+
+cat $path
+
 cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format json_v1_2
+
+ls -la
+cat sbom.xml
 
 # UPLOAD BoM to Dependency track server
 echo "[*] Uploading BoM file to Dependency Track server"
