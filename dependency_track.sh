@@ -61,6 +61,7 @@ case $DTRACK_LANGUAGE in
         path="target/bom.xml"
         echo "maven compile"
         BoMResult=$(mvn compile)
+        echo "maven compiled"
         ;;
         
     *)
