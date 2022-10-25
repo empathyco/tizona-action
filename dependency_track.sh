@@ -8,6 +8,8 @@ DTRACK_DIR=$4
 INSECURE="--insecure"
 #VERBOSE="--verbose"
 
+apt-get upgrade -y
+
 # Access directory where GitHub will mount the repository code
 # $GITHUB_ variables are directly accessible in the script
 cd $GITHUB_WORKSPACE
@@ -26,14 +28,15 @@ case $DTRACK_LANGUAGE in
             echo "[-] Error executing npm install. Stopping the action!"
             exit 1
         fi
-        npm install -g @cyclonedx/bom
+        npm install -g cyclonedx-bom
         path="$GITHUB_WORKSPACE/bom.xml"
-        cd $GITHUB_WORKSPACE
+        
         echo "pwd"
         pwd
         ls -la
         cyclonedx-bom --help
-        BoMResult=$(cyclonedx-bom -o bom.xml)
+        BoMResult=$(cyclonedx-bom -o $path)
+        cd $GITHUB_WORKSPACE
         ;;
     
     "python")
