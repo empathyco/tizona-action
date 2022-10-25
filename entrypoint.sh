@@ -17,66 +17,69 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:" o; do
          export DTRACK_LANGUAGE=${OPTARG}
        ;;
        e)
-         export CODE_ENABLE=${OPTARG}
+         export DTRACK_DIR=${OPTARG}
        ;;
        f)
-         export SONAR_SOURCES=${OPTARG}
+         export CODE_ENABLE=${OPTARG}
        ;;
        g)
-         export SONAR_HOST=${OPTARG}
+         export SONAR_SOURCES=${OPTARG}
        ;;
        h)
-         export SONAR_LOGIN=${OPTARG}
+         export SONAR_HOST=${OPTARG}
        ;;
        i)
-         export CONFIG_ENABLE=${OPTARG}
+         export SONAR_LOGIN=${OPTARG}
        ;;
        j)
-         export SECRETS_ENABLE=${OPTARG}
+         export CONFIG_ENABLE=${OPTARG}
        ;;
        k)
-         export REVIEWDOG_GIT_TOKEN=${OPTARG}
+         export SECRETS_ENABLE=${OPTARG}
        ;;
        l)
-         export REVIEWDOG_DIR=${OPTARG}
+         export REVIEWDOG_GIT_TOKEN=${OPTARG}
        ;;
        m)
-         export REVIEWDOG_LVL=${OPTARG}
+         export REVIEWDOG_DIR=${OPTARG}
        ;;
        n)
-         export REVIEWDOG_REPORTER=${OPTARG}
+         export REVIEWDOG_LVL=${OPTARG}
        ;;
        o)
-         export REVIEWDOG_FAIL=${OPTARG}
+         export REVIEWDOG_REPORTER=${OPTARG}
        ;;
        p)
-         export DEPCHECK_PROJECT=${OPTARG}
+         export REVIEWDOG_FAIL=${OPTARG}
        ;;
        q)
-         export DEPCHECK_PATH=${OPTARG}
+         export DEPCHECK_PROJECT=${OPTARG}
        ;;
        r)
-         export DEPCHECK_FORMAT=${OPTARG}
+         export DEPCHECK_PATH=${OPTARG}
        ;;
        s)
-         export TRIVY_CONFIG_SCANREF=${OPTARG}
+         export DEPCHECK_FORMAT=${OPTARG}
        ;;
        t)
-         export TRIVY_CONFIG_SEVERITY=${OPTARG}
+         export TRIVY_CONFIG_SCANREF=${OPTARG}
        ;;
        u)
-         export TRIVY_REPO_SCANREF=${OPTARG}
+         export TRIVY_CONFIG_SEVERITY=${OPTARG}
        ;;
        v)
-         export TRIVY_REPO_IGNORE=${OPTARG}
+         export TRIVY_REPO_SCANREF=${OPTARG}
        ;;
        w)
-         export TRIVY_REPO_SEVERITY=${OPTARG}
+         export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
        x)
-         export TRIVY_REPO_VULN=${OPTARG}
+         export TRIVY_REPO_SEVERITY=${OPTARG}
        ;;
        y)
+         export TRIVY_REPO_VULN=${OPTARG}
+       ;;
+       z)
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
   esac
@@ -106,6 +109,13 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
       DTRACK_ARGS="$DTRACK_ARGS $DTRACK_LANGUAGE"
     else
       echo "Dependency Track requires programming language to review. Exit"
+      exit 1
+    fi
+
+    if [ $DTRACK_DIR ];then
+      DTRACK_ARGS="$DTRACK_ARGS $DTRACK_DIR"
+    else
+      echo "Dependency Track specific directory. Exit"
       exit 1
     fi
 

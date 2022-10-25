@@ -3,6 +3,7 @@
 DTRACK_URL=$1
 DTRACK_KEY=$2
 DTRACK_LANGUAGE=$3
+DTRACK_DIR=$4
 
 INSECURE="--insecure"
 #VERBOSE="--verbose"
@@ -13,6 +14,9 @@ cd $GITHUB_WORKSPACE
 
 case $DTRACK_LANGUAGE in
     "nodejs")
+        echo "pwd"
+        pwd
+        cd $DTRACK_DIR
         lscommand=$(ls)
         echo "[*] Processing NodeJS BoM"
         apt-get install --no-install-recommends -y nodejs
@@ -23,7 +27,11 @@ case $DTRACK_LANGUAGE in
             exit 1
         fi
         npm install -g @cyclonedx/bom
-        path="bom.xml"
+        path="$GITHUB_WORKSPACE/bom.xml"
+        cd $GITHUB_WORKSPACE
+        echo "pwd"
+        pwd
+        ls -la
         cyclonedx-bom --help
         BoMResult=$(cyclonedx-bom -o bom.xml)
         ;;
