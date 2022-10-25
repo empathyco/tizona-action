@@ -16,8 +16,6 @@ cd $GITHUB_WORKSPACE
 
 case $DTRACK_LANGUAGE in
     "nodejs")
-        echo "pwd"
-        pwd
         cd $DTRACK_DIR
         lscommand=$(ls)
         echo "[*] Processing NodeJS BoM"
@@ -31,8 +29,6 @@ case $DTRACK_LANGUAGE in
         npm install -g cyclonedx-bom
         path="$GITHUB_WORKSPACE/bom.xml"
         
-        echo "pwd"
-        pwd
         ls -la
         cyclonedx-bom --help
         BoMResult=$(cyclonedx-bom -o $path)
@@ -91,14 +87,18 @@ echo "[*] BoM file succesfully generated"
 # Cyclonedx CLI conversion
 echo "[*] Cyclonedx CLI conversion"
 #Does not upload to dtrack when output format = xml (every version available)
+
+echo "LOGS"
 ls $path
+echo $path
 
-cat $path
-
+echo "CYCLONE"
+echo "cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format json_v1_2"
+pwd
 cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format json_v1_2
 
 ls -la
-cat sbom.xml
+
 
 # UPLOAD BoM to Dependency track server
 echo "[*] Uploading BoM file to Dependency Track server"
