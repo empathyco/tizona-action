@@ -59,7 +59,9 @@ case $DTRACK_LANGUAGE in
         fi
         apt-get install --no-install-recommends -y build-essential default-jdk maven
         path="target/bom.xml"
+        echo "pre mvn"
         BoMResult=$(mvn compile)
+        echo "post mvn"
         ;;
         
     *)
