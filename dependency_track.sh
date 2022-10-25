@@ -84,6 +84,9 @@ cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format 
 
 # UPLOAD BoM to Dependency track server
 echo "[*] Uploading BoM file to Dependency Track server"
+
+echo "curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/api/v1/bom --header 'X-Api-Key: $DTRACK_KEY' --header 'Content-Type: multipart/form-data' --form 'autoCreate=true' --form 'projectName=$GITHUB_REPOSITORY' --form 'projectVersion=$GITHUB_REF' --form 'bom=@sbom.xml'"
+
 upload_bom=$(curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/api/v1/bom \
 --header "X-Api-Key: $DTRACK_KEY" \
 --header "Content-Type: multipart/form-data" \
