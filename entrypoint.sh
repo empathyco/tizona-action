@@ -83,6 +83,9 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:" o; do
 done
 
 echo "Starting security checks"
+ls -la
+pwd
+whereis package.json
 
 if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     
