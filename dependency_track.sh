@@ -59,9 +59,7 @@ case $DTRACK_LANGUAGE in
         fi
         apt-get install --no-install-recommends -y build-essential default-jdk maven
         path="target/bom.xml"
-        echo "pre mvn"
         BoMResult=$(mvn compile)
-        echo "post mvn"
         ;;
         
     *)
@@ -95,6 +93,11 @@ upload_bom=$(curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/ap
 token=$(echo $upload_bom | jq ".token" | tr -d "\"")
 echo "[*] BoM file succesfully uploaded with token $token"
 
+echo "bom"
+echo "$upload_bom"
+
+echo "token"
+echo "$token"
 
 if [ -z $token ]; then
     echo "[-]  The BoM file has not been successfully processed by OWASP Dependency Track"
