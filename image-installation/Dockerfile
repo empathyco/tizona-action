@@ -15,9 +15,9 @@ RUN apt-get update \
 
 RUN go get github.com/ozonru/cyclonedx-go/cmd/cyclonedx-go && cp /root/go/bin/cyclonedx-go /usr/bin/
 
-RUN curl -sS https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.24.1/cyclonedx-linux-x64 -o /usr/bin/cyclonedx-cli && \
-    chmod +x /usr/bin/cyclonedx-cli
-
+RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | NONINTERACTIVE=1 /bin/bash -s 
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
+RUN brew install cyclonedx/cyclonedx/cyclonedx-cli
 
 ##################################################################
 # Secrets leaks requirements

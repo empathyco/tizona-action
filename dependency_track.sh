@@ -87,23 +87,10 @@ echo "[*] BoM file succesfully generated"
 # Cyclonedx CLI conversion
 echo "[*] Cyclonedx CLI conversion"
 #Does not upload to dtrack when output format = xml (every version available)
-
-echo "LOGS"
-ls $path
-echo $path
-
-echo "CYCLONE"
-echo "cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format json_v1_2"
-pwd
-cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format json_v1_2
-
-ls -la
-
+cyclonedx convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_2
 
 # UPLOAD BoM to Dependency track server
 echo "[*] Uploading BoM file to Dependency Track server"
-
-echo "curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/api/v1/bom --header 'X-Api-Key: $DTRACK_KEY' --header 'Content-Type: multipart/form-data' --form 'autoCreate=true' --form 'projectName=$GITHUB_REPOSITORY' --form 'projectVersion=$GITHUB_REF' --form 'bom=@sbom.xml'"
 
 upload_bom=$(curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/api/v1/bom \
 --header "X-Api-Key: $DTRACK_KEY" \
@@ -115,12 +102,6 @@ upload_bom=$(curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/ap
 
 token=$(echo $upload_bom | jq ".token" | tr -d "\"")
 echo "[*] BoM file succesfully uploaded with token $token"
-
-echo "bom"
-echo "$upload_bom"
-
-echo "token"
-echo "$token"
 
 if [ -z $token ]; then
     echo "[-]  The BoM file has not been successfully processed by OWASP Dependency Track"
