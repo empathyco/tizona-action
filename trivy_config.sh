@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 TRIVY_SCANREF=$1
 TRIVY_SEVERITY=$2
