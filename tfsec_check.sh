@@ -26,11 +26,17 @@ export REVIEWDOG_GITHUB_API_TOKEN="${REVIEWDOG_GIT_TOKEN}"
 set +Eeuo pipefail
 
 # shellcheck disable=SC2086
+
+echo "TFSEC"
+
 tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error="${REVIEWDOG_FAIL}"
+
+echo "tfsec_return=\"${PIPESTATUS[0]}\" reviewdog_return=\"${PIPESTATUS[2]}\" exit_code=$?"
 
 tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 
 echo "set-output name=tfsec-return-code: ${tfsec_return}"
 echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
 
+echo "exit \"${exit_code}\""
 exit "${exit_code}"
