@@ -31,6 +31,8 @@ echo "TFSEC"
 
 tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error="${REVIEWDOG_FAIL}"
 
+echo "reviewdog -f=rdjson -name=\"tfsec\" -reporter=\"${REVIEWDOG_REPORTER}\" -level=\"${REVIEWDOG_LVL}\" -fail-on-error=\"${REVIEWDOG_FAIL}\""
+
 echo "tfsec_return=\"${PIPESTATUS[0]}\" reviewdog_return=\"${PIPESTATUS[2]}\" exit_code=$?"
 
 tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
