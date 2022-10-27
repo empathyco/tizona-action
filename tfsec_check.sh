@@ -4,7 +4,6 @@ REVIEWDOG_GIT_TOKEN=$1
 REVIEWDOG_DIR=$2
 REVIEWDOG_LVL=$3
 REVIEWDOG_REPORTER=$4
-REVIEWDOG_FAIL=$5
 
 # Print commands for debugging
 if [[ "$RUNNER_DEBUG" = "1" ]]; then
@@ -29,9 +28,9 @@ set +Eeuo pipefail
 
 echo "TFSEC"
 
-tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error="${REVIEWDOG_FAIL}"
+tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error
 
-echo "reviewdog -f=rdjson -name=\"tfsec\" -reporter=\"${REVIEWDOG_REPORTER}\" -level=\"${REVIEWDOG_LVL}\" -fail-on-error=\"${REVIEWDOG_FAIL}\""
+echo "reviewdog -f=rdjson -name=\"tfsec\" -reporter=\"${REVIEWDOG_REPORTER}\" -level=\"${REVIEWDOG_LVL}\" -fail-on-error"
 
 echo "tfsec_return=\"${PIPESTATUS[0]}\" reviewdog_return=\"${PIPESTATUS[2]}\" exit_code=$?"
 

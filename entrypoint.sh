@@ -2,7 +2,7 @@
 
 set -e
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:" o; do
    case "${o}" in
        a)
          export DTRACK_ENABLE=${OPTARG}
@@ -50,36 +50,33 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:" o; do
          export REVIEWDOG_REPORTER=${OPTARG}
        ;;
        p)
-         export REVIEWDOG_FAIL=${OPTARG}
-       ;;
-       q)
          export DEPCHECK_PROJECT=${OPTARG}
        ;;
-       r)
+       q)
          export DEPCHECK_PATH=${OPTARG}
        ;;
-       s)
+       r)
          export DEPCHECK_FORMAT=${OPTARG}
        ;;
-       t)
+       s)
          export TRIVY_CONFIG_SCANREF=${OPTARG}
        ;;
-       u)
+       t)
          export TRIVY_CONFIG_SEVERITY=${OPTARG}
        ;;
-       v)
+       u)
          export TRIVY_REPO_SCANREF=${OPTARG}
        ;;
-       w)
+       v)
          export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
-       x)
+       w)
          export TRIVY_REPO_SEVERITY=${OPTARG}
        ;;
-       y)
+       x)
          export TRIVY_REPO_VULN=${OPTARG}
        ;;
-       z)
+       y)
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
   esac
@@ -202,14 +199,6 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       echo "ReviewDog requires reporter of reviewdog command [github-pr-check,github-pr-review]. Exit"
       exit 1
     fi
-
-    if [ $REVIEWDOG_FAIL ];then
-      REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_FAIL"
-    else
-      echo "ReviewDog requires exit code for reviewdog when errors are found [true,false]. Exit"
-      exit 1
-    fi
-
 
     TRIVY_CONFIG_ARGS=""
 
