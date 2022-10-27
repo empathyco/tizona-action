@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash
 
 DTRACK_URL=$1
 DTRACK_KEY=$2
