@@ -22,7 +22,7 @@ echo 'Running tfsec with reviewdog ...'
 export REVIEWDOG_GITHUB_API_TOKEN="${REVIEWDOG_GIT_TOKEN}"
 
 # Allow failures now, as reviewdog handles them
-# set +Eeuo pipefail
+set +Eeuo pipefail
 
 # shellcheck disable=SC2086
 
@@ -34,4 +34,9 @@ echo "set-output name=tfsec-return-code: ${tfsec_return}"
 echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
 
 echo "exit ${exit_code}"
-exit ${exit_code}
+if [ ${exit_code} = "0" ]; then
+  echo "tfec result successful"
+  exit 0
+else
+  exit 1
+fi
