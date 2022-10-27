@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 REVIEWDOG_GIT_TOKEN=$1
 REVIEWDOG_DIR=$2

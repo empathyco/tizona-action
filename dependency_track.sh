@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DTRACK_URL=$1
 DTRACK_KEY=$2
