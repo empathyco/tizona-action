@@ -33,5 +33,7 @@ tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 echo "set-output name=tfsec-return-code: ${tfsec_return}"
 echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
 
+set -e
+
 echo "exit ${exit_code}"
 exit ${exit_code}
