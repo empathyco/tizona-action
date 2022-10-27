@@ -34,4 +34,4 @@ echo "set-output name=tfsec-return-code: ${tfsec_return}"
 echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
 
 echo "exit \"${exit_code}\""
-exit "${exit_code}"
+exit ${exit_code}
