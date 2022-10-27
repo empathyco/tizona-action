@@ -273,8 +273,18 @@ else
 fi
 
 if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
+
+    SECRETS_ARGS=""
+
+    if [ $REVIEWDOG_GIT_TOKEN ];then
+      SECRETS_ARGS="$SECRETS_ARGS $REVIEWDOG_GIT_TOKEN"
+    else
+      echo "ReviewDog requires GitHub token. Exit"
+      exit 1
+    fi
+
     echo "Run secrets leaks action"
-    /bin/bash /app/secrets_leaks.sh
+    /bin/bash /app/secrets_leaks.sh $SECRETS_ARGS
 else
     echo "Skip secrets leaks action"
 fi

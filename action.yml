@@ -51,7 +51,7 @@ inputs:
     required: true
     default: 'true'
   reviewdog_github_token:
-    description: 'GitHub token. Required if config checker is enabled.'
+    description: 'GitHub token. Required if config checker or secrets checker are enabled.'
     required: false
   reviewdog_working_directory:
     description: 'Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled.'

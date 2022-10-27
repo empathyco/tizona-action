@@ -5,11 +5,14 @@ TRIVY_IGNORE=$2
 TRIVY_SEVERITY=$3
 TRIVY_VULN=$4
 TRIVY_TIMEOUT=$5
+REVIEWDOG_GIT_TOKEN=$6
 TRIVY_OUTPUT='trivy-results-repo.sarif'
 ARGS=""
 TIMEOUT=""
 
 set -e
+
+export REVIEWDOG_GITHUB_API_TOKEN="${REVIEWDOG_GIT_TOKEN}"
 
 if [[ ${TRIVY_IGNORE} == *"true"* ]]; then
   ARGS="$ARGS --ignore-unfixed"

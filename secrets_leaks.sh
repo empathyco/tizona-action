@@ -1,6 +1,10 @@
 #!/bin/bash
 
+REVIEWDOG_GIT_TOKEN=$1
+
 set -e
+
+export REVIEWDOG_GITHUB_API_TOKEN="${REVIEWDOG_GIT_TOKEN}"
 
 echo "Secrets leaks discovery"
 
