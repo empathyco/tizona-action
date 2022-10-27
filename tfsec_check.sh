@@ -34,10 +34,4 @@ echo "set-output name=tfsec-return-code: ${tfsec_return}"
 echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
 
 echo "exit ${exit_code}"
-if [ ${exit_code} = "0" ]; then
-  echo "tfsec results successful"
-  exit 0
-else
-  echo "tfsec results in error"
-  exit 1
-fi
+exit ${exit_code}
