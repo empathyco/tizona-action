@@ -13,9 +13,11 @@ inputs:
   deptrack_url:  
     description: 'URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
     required: false
+    default: 'DEPTRACK_URL'
   deptrack_key:
     description: 'Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
     required: false
+    default: 'DEPTRACK_KEY'
   deptrack_language:
     description: 'Programming language. Required if Dependency Track is enabled.'
     required: false
@@ -35,9 +37,11 @@ inputs:
   sonar_host:
     description: 'SonarQube host. Required to run SonarQube.'
     required: false
+    default: 'SONAR_HOST'
   sonar_login:
     description: 'SonarQube login key. Required to run SonarQube.'
     required: false
+    default: 'SONAR_LOGIN'
   config_enable:
     description: 'Enables configuration check.'
     required: true
