@@ -48,10 +48,10 @@ if [[ -f $SONAR_PROPERTIES ]]; then
   status="$(jq -r '.task.status' <<< "$task")"
 
   until [[ ${status} != "PENDING" && ${status} != "IN_PROGRESS" ]]; do
-      printf '.'
       sleep 5s
       task="$(curl --location --location-trusted --max-redirs 10 --silent --fail --show-error --user "${SONAR_LOGIN}": "${ceTaskUrl}")"
       status="$(jq -r '.task.status' <<< "$task")"
+      echo "Status: ${status}. Waiting..."
   done
 
   echo "Quality gate task finish. Review status"
