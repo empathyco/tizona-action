@@ -36,6 +36,7 @@ case $DTRACK_LANGUAGE in
         ;;
     
     "python")
+        cd $DTRACK_DIR
         echo "[*]  Processing Python BoM"
         apt-get install --no-install-recommends -y python3 python3-pip
         freeze=$(pip freeze > requirements.txt)
@@ -46,9 +47,11 @@ case $DTRACK_LANGUAGE in
         pip install cyclonedx-bom
         path="bom.xml"
         BoMResult=$(cyclonedx-py -o bom.xml)
+        cd $GITHUB_WORKSPACE
         ;;
     
     "golang")
+        cd $DTRACK_DIR
         echo "[*]  Processing Golang BoM"
         if [ ! $? = 0 ]; then
             echo "[-] Error executing go build. Stopping the action!"
@@ -56,9 +59,11 @@ case $DTRACK_LANGUAGE in
         fi
         path="bom.xml"
         BoMResult=$(cyclonedx-go -o bom.xml)
+        cd $GITHUB_WORKSPACE
         ;;
 
     "java")
+        cd $DTRACK_DIR
         echo "[*]  Processing Java BoM"
         if [ ! $? = 0 ]; then
             echo "[-] Error executing Java build. Stopping the action!"
@@ -69,6 +74,7 @@ case $DTRACK_LANGUAGE in
         echo "maven compile"
         BoMResult=$(mvn compile)
         echo "maven compiled"
+        cd $GITHUB_WORKSPACE
         ;;
         
     *)

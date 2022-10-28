@@ -23,7 +23,7 @@ inputs:
     required: false
     default: 'nodejs'
   deptrack_dir:
-    description: 'Dependency track npm dir for nodejs. Required if Dependency Track is enabled.'
+    description: 'Dependency track directory path. Required if Dependency Track is enabled.'
     required: false
     default: '.'
   code_enable:

@@ -112,7 +112,7 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     if [ $DTRACK_DIR ];then
       DTRACK_ARGS="$DTRACK_ARGS $DTRACK_DIR"
     else
-      echo "Dependency Track specific directory. Exit"
+      echo "Dependency Track requires specific directory. Exit"
       exit 1
     fi
 
