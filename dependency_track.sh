@@ -28,9 +28,6 @@ case $DTRACK_LANGUAGE in
         fi
         npm install -g cyclonedx-bom
         path="$GITHUB_WORKSPACE/bom.xml"
-        
-        ls -la
-        cyclonedx-bom --help
         BoMResult=$(cyclonedx-bom -o $path)
         cd $GITHUB_WORKSPACE
         ;;
@@ -45,7 +42,7 @@ case $DTRACK_LANGUAGE in
             exit 1
         fi
         pip install cyclonedx-bom
-        path="bom.xml"
+        path="$GITHUB_WORKSPACE/bom.xml"
         BoMResult=$(cyclonedx-py -o bom.xml)
         cd $GITHUB_WORKSPACE
         ;;
@@ -57,7 +54,7 @@ case $DTRACK_LANGUAGE in
             echo "[-] Error executing go build. Stopping the action!"
             exit 1
         fi
-        path="bom.xml"
+        path="$GITHUB_WORKSPACE/bom.xml"
         BoMResult=$(cyclonedx-go -o bom.xml)
         cd $GITHUB_WORKSPACE
         ;;
@@ -70,7 +67,7 @@ case $DTRACK_LANGUAGE in
             exit 1
         fi
         apt-get install --no-install-recommends -y build-essential default-jdk maven
-        path="target/bom.xml"
+        path="$GITHUB_WORKSPACE/target/bom.xml"
         echo "maven compile"
         BoMResult=$(mvn compile)
         echo "maven compiled"
@@ -123,7 +120,7 @@ while [ $processing = true ]; do
     sleep 5
     processing=$(curl  $INSECURE $VERBOSE -s --location --request GET $DTRACK_URL/api/v1/bom/token/$token \
 --header "X-Api-Key: $DTRACK_KEY" | jq '.processing')
-    if [ $((++c)) -eq 10 ]; then
+    if [ $((++c)) -eq 60 ]; then
         echo "[-]  Timeout while waiting for processing result. Please check the OWASP Dependency Track status."
         exit 1
     fi
