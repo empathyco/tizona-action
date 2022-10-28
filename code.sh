@@ -68,11 +68,13 @@ if [[ -f $SONAR_PROPERTIES ]]; then
     set_output="quality-gate-status" "WARN"
     echo "Warnings on Quality Gate."
   elif [[ ${qualityGateStatus} == "ERROR" ]]; then
-    set_output="quality-gate-status" "FAILED"
-    echo "Quality Gate has FAILED."
+    set_output="quality-gate-status" "ERROR"
+    echo "Errors on Quality Gate."
+    exit 1
   else
     set_output="quality-gate-status" "FAILED"
     echo "Quality Gate not set for the project. Please configure the Quality Gate in SonarQube or remove sonarqube-quality-gate action from the workflow."
+    exit 1
   fi
 
 
