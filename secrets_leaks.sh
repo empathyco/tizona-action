@@ -23,5 +23,5 @@ reviewdog_return="${PIPESTATUS[3]}" exit_code=$?
 
 echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
 
-echo "exit ${exit_code}"
+echo "Gitleaks exit ${exit_code}"
 exit ${exit_code}
