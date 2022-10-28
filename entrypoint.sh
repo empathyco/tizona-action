@@ -165,6 +165,7 @@ if [[ ${CODE_ENABLE} == *"true"* ]]; then
 
     if [ $SONAR_REPORT_PATH ]; then
       CODE_ARGS="$CODE_ARGS $SONAR_REPORT_PATH"
+    fi
 
     echo "Run code check action"
     /bin/bash /app/code.sh $CODE_ARGS
