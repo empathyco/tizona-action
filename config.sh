@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 REVIEWDOG_GIT_TOKEN=${1}
 REVIEWDOG_DIR=${2}
 REVIEWDOG_LVL=${3}
