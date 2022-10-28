@@ -11,7 +11,7 @@ if [[ "$RUNNER_DEBUG" = "1" ]]; then
 fi
 
 # Fail fast on errors, unset variables, and failures in piped commands
-# set -Eeuo pipefail
+set -Eeuo pipefail
 
 cd "${GITHUB_WORKSPACE}/${REVIEWDOG_DIR}" || exit
 
@@ -22,18 +22,16 @@ echo 'Running tfsec with reviewdog ...'
 export REVIEWDOG_GITHUB_API_TOKEN="${REVIEWDOG_GIT_TOKEN}"
 
 # Allow failures now, as reviewdog handles them
-# set +Eeuo pipefail
+set +Eeuo pipefail
 
 # shellcheck disable=SC2086
 
-tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error=true || exit 1
+tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error=true 
 
-echo "$?"
+tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 
-# tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
-# 
-# echo "set-output name=tfsec-return-code: ${tfsec_return}"
-# echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
-# 
-# echo "exit ${exit_code}"
-# exit ${exit_code}
+echo "set-output name=tfsec-return-code: ${tfsec_return}"
+echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
+
+echo "exit ${exit_code}"
+exit ${exit_code}
