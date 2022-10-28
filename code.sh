@@ -32,8 +32,15 @@ if [[ -f $SONAR_PROPERTIES ]]; then
   echo "SonarQube scan finished"
   echo "Run quality gate scan"
 
+  SONAR_REPORT_PATH=$7
+
+  if [[ ! -f "$SONAR_REPORT_PATH" ]]; then
+    echo "$SONAR_REPORT_PATH does not exist."
+    exit 1
+  fi
+
   serverUrl="${SONAR_HOST%/}"
-  ceTaskUrl="${SONAR_HOST%/}/api$(sed -n 's/^ceTaskUrl=.*api//p' "${metadataFile}")"
+  ceTaskUrl="${SONAR_HOST%/}/api$(sed -n 's/^ceTaskUrl=.*api//p' "${SONAR_REPORT_PATH}")"
 
   echo "Prepare quality gate task"
 
