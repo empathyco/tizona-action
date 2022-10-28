@@ -58,18 +58,21 @@ if [[ -f $SONAR_PROPERTIES ]]; then
 
   analysisId="$(jq -r '.task.analysisId' <<< "${task}")"
   qualityGateUrl="${serverUrl}/api/qualitygates/project_status?analysisId=${analysisId}"
+  qualityGateResult=`curl --location --location-trusted --max-redirs 10 --silent --fail --show-error --user "${SONAR_LOGIN}": "${qualityGateUrl}"`
   qualityGateStatus="$(curl --location --location-trusted --max-redirs 10 --silent --fail --show-error --user "${SONAR_LOGIN}": "${qualityGateUrl}" | jq -r '.projectStatus.status')"
+
+  echo $qualityGateResult
 
   printf '\n'
   if [[ ${qualityGateStatus} == "OK" ]]; then
-    set_output="quality-gate-status: PASSED"
-    echo "Quality Gate has PASSED."
+    set_output="quality-gate-status: ${qualityGateStatus}"
+    echo "Quality Gate has PASSED. ${set_output}"
   elif [[ ${qualityGateStatus} == "WARN" ]]; then
-    set_output="quality-gate-status: WARN"
-    echo "Warnings on Quality Gate."
+    set_output="quality-gate-status: ${qualityGateStatus}"
+    echo "Warnings on Quality Gate. ${set_output}"
   elif [[ ${qualityGateStatus} == "ERROR" ]]; then
-    set_output="quality-gate-status: ERROR"
-    echo "Errors on Quality Gate."
+    set_output="quality-gate-status: ${qualityGateStatus}"
+    echo "Errors on Quality Gate. ${set_output}"
     exit 1
   else
     set_output="quality-gate-status: FAILED"
