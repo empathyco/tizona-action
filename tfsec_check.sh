@@ -11,7 +11,7 @@ if [[ "$RUNNER_DEBUG" = "1" ]]; then
 fi
 
 # Fail fast on errors, unset variables, and failures in piped commands
-set -Eeuo pipefail
+# set -Eeuo pipefail
 
 cd "${GITHUB_WORKSPACE}/${REVIEWDOG_DIR}" || exit
 
@@ -22,7 +22,7 @@ echo 'Running tfsec with reviewdog ...'
 export REVIEWDOG_GITHUB_API_TOKEN="${REVIEWDOG_GIT_TOKEN}"
 
 # Allow failures now, as reviewdog handles them
-set +Eeuo pipefail
+# set +Eeuo pipefail
 
 # shellcheck disable=SC2086
 
