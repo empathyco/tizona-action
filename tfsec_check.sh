@@ -28,10 +28,10 @@ set +Eeuo pipefail
 
 tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error=true
 
-tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
-
-echo "set-output name=tfsec-return-code: ${tfsec_return}"
-echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
-
-echo "exit ${exit_code}"
-exit ${exit_code}
+# tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
+# 
+# echo "set-output name=tfsec-return-code: ${tfsec_return}"
+# echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
+# 
+# echo "exit ${exit_code}"
+# exit ${exit_code}
