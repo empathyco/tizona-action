@@ -77,7 +77,6 @@ if [[ -f $SONAR_PROPERTIES ]]; then
     exit 1
   fi
 
-
 else
   echo "SonarQube properties file not found. Skip SonarQube Action"
 fi
