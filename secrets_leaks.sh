@@ -9,6 +9,7 @@ export REVIEWDOG_GITHUB_API_TOKEN="${REVIEWDOG_GIT_TOKEN}"
 echo "Secrets leaks discovery"
 
 FILE_REPORT=report-secrets.json
+git config --global --add safe.directory /github/workspace
 
 echo "Running gitleaks"
 /gitleaks detect -f sarif --exit-code 0 -r $FILE_REPORT
