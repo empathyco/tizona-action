@@ -84,14 +84,14 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:" o; do
 done
 
 if [[ ${ACTION_MODE} == *"false"* ]]; then
-  echo "Permissive mode disabled. The action will fail as soon as it encounters an error in the execution of the checks."
+  echo "TIZONA: Permissive mode disabled. The action will fail as soon as it encounters an error in the execution of the checks."
   set -e
 else
-  echo "Permissive mode enabled. The action will continue even if errors are encountered in the execution of the checks. "
+  echo "TIZONA: Permissive mode enabled. The action will continue even if errors are encountered in the execution of the checks. "
 fi
 
 
-echo "Starting security checks"
+echo "TIZONA: Starting security checks"
 
 if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     
@@ -100,36 +100,36 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     if [ $DTRACK_URL ];then
       DTRACK_ARGS="$DTRACK_ARGS $DTRACK_URL"
     else
-      echo "Dependency Track requires URL of OWASP Dependency Track REST API. Exit"
+      echo "TIZONA: Dependency Track requires URL of OWASP Dependency Track REST API. Exit"
       exit 1
     fi
 
     if [ $DTRACK_KEY ];then
       DTRACK_ARGS="$DTRACK_ARGS $DTRACK_KEY"
     else
-      echo "Dependency Track requires key to access OWASP Dependency Track REST API. Exit"
+      echo "TIZONA: Dependency Track requires key to access OWASP Dependency Track REST API. Exit"
       exit 1
     fi
 
     if [ $DTRACK_LANGUAGE ];then
       DTRACK_ARGS="$DTRACK_ARGS $DTRACK_LANGUAGE"
     else
-      echo "Dependency Track requires programming language to review. Exit"
+      echo "TIZONA: Dependency Track requires programming language to review. Exit"
       exit 1
     fi
 
     if [ $DTRACK_DIR ];then
       DTRACK_ARGS="$DTRACK_ARGS $DTRACK_DIR"
     else
-      echo "Dependency Track requires specific directory. Exit"
+      echo "TIZONA: Dependency Track requires specific directory. Exit"
       exit 1
     fi
 
-    echo "Run Dependency Track action"
+    echo "TIZONA: Run Dependency Track action"
     /bin/bash /app/dependency_track.sh $DTRACK_ARGS
 
 else
-    echo "Skip Dependency Track action"
+    echo "TIZONA: Skip Dependency Track action"
 fi
 
 if [[ ${CODE_ENABLE} == *"true"* ]]; then
@@ -139,21 +139,21 @@ if [[ ${CODE_ENABLE} == *"true"* ]]; then
     if [ $DEPCHECK_PROJECT ];then
       CODE_ARGS="$CODE_ARGS $DEPCHECK_PROJECT"
     else
-      echo "Dependency Check requires project review. Exit"
+      echo "TIZONA: Dependency Check requires project review. Exit"
       exit 1
     fi
 
     if [ $DEPCHECK_PATH ];then
       CODE_ARGS="$CODE_ARGS $DEPCHECK_PATH"
     else
-      echo "Dependency Check requires path review. Exit"
+      echo "TIZONA: Dependency Check requires path review. Exit"
       exit 1
     fi
 
     if [ $DEPCHECK_FORMAT ];then
       CODE_ARGS="$CODE_ARGS $DEPCHECK_FORMAT"
     else
-      echo "Dependency Check requires output format. Exit"
+      echo "TIZONA: Dependency Check requires output format. Exit"
       exit 1
     fi
 
@@ -173,43 +173,43 @@ if [[ ${CODE_ENABLE} == *"true"* ]]; then
       CODE_ARGS="$CODE_ARGS $SONAR_REPORT_PATH"
     fi
 
-    echo "Run code check action"
+    echo "TIZONA: Run code check action"
     /bin/bash /app/code.sh $CODE_ARGS
 
 else
-    echo "Skip code check action"
+    echo "TIZONA: Skip code check action"
 fi
 
 if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
-    echo "Run configuration check action"
+    echo "TIZONA: Run configuration check action"
 
     REVIEWDOG_ARGS=""
 
     if [ $REVIEWDOG_GIT_TOKEN ];then
       REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_GIT_TOKEN"
     else
-      echo "ReviewDog requires GitHub token. Exit"
+      echo "TIZONA: ReviewDog requires GitHub token. Exit"
       exit 1
     fi
 
     if [ $REVIEWDOG_DIR ];then
       REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_DIR"
     else
-      echo "ReviewDog requires path to review. Exit"
+      echo "TIZONA: ReviewDog requires path to review. Exit"
       exit 1
     fi
 
     if [ $REVIEWDOG_LVL ];then
       REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_LVL"
     else
-      echo "ReviewDog requires level. Exit"
+      echo "TIZONA: ReviewDog requires level. Exit"
       exit 1
     fi
 
     if [ $REVIEWDOG_REPORTER ];then
       REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_REPORTER"
     else
-      echo "ReviewDog requires reporter of reviewdog command [github-pr-check,github-pr-review]. Exit"
+      echo "TIZONA: ReviewDog requires reporter of reviewdog command [github-pr-check,github-pr-review]. Exit"
       exit 1
     fi
 
@@ -218,7 +218,7 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
     if [ $TRIVY_CONFIG_SCANREF ];then
       TRIVY_CONFIG_ARGS="$TRIVY_CONFIG_ARGS $TRIVY_CONFIG_SCANREF"
     else
-      echo "Trivy requires path to scan configuration. Exit"
+      echo "TIZONA: Trivy requires path to scan configuration. Exit"
       exit 1
     fi
 
@@ -227,21 +227,21 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
     if [ $TRIVY_REPO_SCANREF ];then
       TRIVY_REPO_ARGS="$TRIVY_REPO_ARGS $TRIVY_REPO_SCANREF"
     else
-      echo "Trivy requires path to scan repository. Exit"
+      echo "TIZONA: Trivy requires path to scan repository. Exit"
       exit 1
     fi
 
     if [ $TRIVY_REPO_IGNORE ];then
       TRIVY_REPO_ARGS="$TRIVY_REPO_ARGS $TRIVY_REPO_IGNORE"
     else
-      echo "Trivy requires set ignore unfixed vulnerabilities [true/false]. Exit"
+      echo "TIZONA: Trivy requires set ignore unfixed vulnerabilities [true/false]. Exit"
       exit 1
     fi
 
     if [ $TRIVY_REPO_VULN ];then
       TRIVY_REPO_ARGS="$TRIVY_REPO_ARGS $TRIVY_REPO_VULN"
     else
-      echo "Trivy requires comma-separated list of vulnerability types (os,library). Exit"
+      echo "TIZONA: Trivy requires comma-separated list of vulnerability types (os,library). Exit"
       exit 1
     fi
 
@@ -250,21 +250,21 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
     if [ $TRIVY_SEVERITY ];then
       TRIVY_COMMON_ARGS="$TRIVY_COMMON_ARGS $TRIVY_SEVERITY"
     else
-      echo "Trivy requires severity for configuration scan. Exit"
+      echo "TIZONA: Trivy requires severity for configuration scan. Exit"
       exit 1
     fi
 
     if [ $TRIVY_TIMEOUT ]; then
       TRIVY_COMMON_ARGS="$TRIVY_COMMON_ARGS $TRIVY_TIMEOUT"
     else
-      echo "Trivy requires timeout (default 5m0s). Exit"
+      echo "TIZONA: Trivy requires timeout (default 5m0s). Exit"
       exit 1
     fi
 
     /bin/bash /app/config.sh $REVIEWDOG_ARGS $TRIVY_CONFIG_ARGS $TRIVY_REPO_ARGS $TRIVY_COMMON_ARGS
 
 else
-    echo "Skip configuration check action"
+    echo "TIZONA: Skip configuration check action"
 fi
 
 if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
@@ -274,14 +274,14 @@ if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
     if [ $REVIEWDOG_GIT_TOKEN ];then
       SECRETS_ARGS="$SECRETS_ARGS $REVIEWDOG_GIT_TOKEN"
     else
-      echo "ReviewDog requires GitHub token. Exit"
+      echo "TIZONA: ReviewDog requires GitHub token. Exit"
       exit 1
     fi
 
-    echo "Run secrets leaks action"
+    echo "TIZONA: Run secrets leaks action"
     /bin/bash /app/secrets_leaks.sh $SECRETS_ARGS
 else
-    echo "Skip secrets leaks action"
+    echo "TIZONA: Skip secrets leaks action"
 fi
 
-echo "Security checks finished"
+echo "TIZONA: Security checks finished"

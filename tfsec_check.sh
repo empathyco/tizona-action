@@ -15,7 +15,7 @@ set -Eeuo pipefail
 
 cd "${GITHUB_WORKSPACE}/${REVIEWDOG_DIR}" || exit
 
-echo "Print tfsec details ..."
+echo "TIZONA - Tfsec review: Print tfsec details ..."
 tfsec --version
 
 echo 'Running tfsec with reviewdog ...'
@@ -30,8 +30,8 @@ tfsec --format=json . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name
 
 tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 
-echo "set-output name=tfsec-return-code: ${tfsec_return}"
-echo "set-output name=reviewdog-return-code: ${reviewdog_return}"
+echo "TIZONA - Tfsec review: set-output name=tfsec-return-code: ${tfsec_return}"
+echo "TIZONA - Tfsec review: set-output name=reviewdog-return-code: ${reviewdog_return}"
 
-echo "Tfsec exit ${exit_code}"
+echo "TIZONA - Tfsec review: Tfsec exit ${exit_code}"
 exit ${exit_code}

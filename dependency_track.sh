@@ -18,12 +18,12 @@ case $DTRACK_LANGUAGE in
     "nodejs")
         cd $DTRACK_DIR
         lscommand=$(ls)
-        echo "[*] Processing NodeJS BoM"
+        echo "TIZONA - Dependency Track: [*] Processing NodeJS BoM"
         apt-get install --no-install-recommends -y nodejs
         npm install
         npm audit fix --force
         if [ ! $? = 0 ]; then
-            echo "[-] Error executing npm install. Stopping the action!"
+            echo "TIZONA - Dependency Track: [-] Error executing npm install. Stopping the action!"
             exit 1
         fi
         npm install -g cyclonedx-bom
@@ -34,11 +34,11 @@ case $DTRACK_LANGUAGE in
     
     "python")
         cd $DTRACK_DIR
-        echo "[*]  Processing Python BoM"
+        echo "TIZONA - Dependency Track: [*]  Processing Python BoM"
         apt-get install --no-install-recommends -y python3 python3-pip
         freeze=$(pip freeze > requirements.txt)
         if [ ! $? = 0 ]; then
-            echo "[-] Error executing pip freeze to get a requirements.txt with frozen parameters. Stopping the action!"
+            echo "TIZONA - Dependency Track: [-] Error executing pip freeze to get a requirements.txt with frozen parameters. Stopping the action!"
             exit 1
         fi
         pip install cyclonedx-bom
@@ -49,9 +49,9 @@ case $DTRACK_LANGUAGE in
     
     "golang")
         cd $DTRACK_DIR
-        echo "[*]  Processing Golang BoM"
+        echo "TIZONA - Dependency Track: [*]  Processing Golang BoM"
         if [ ! $? = 0 ]; then
-            echo "[-] Error executing go build. Stopping the action!"
+            echo "TIZONA - Dependency Track: [-] Error executing go build. Stopping the action!"
             exit 1
         fi
         path="$GITHUB_WORKSPACE/bom.xml"
@@ -61,16 +61,16 @@ case $DTRACK_LANGUAGE in
 
     "java")
         cd $DTRACK_DIR
-        echo "[*]  Processing Java BoM"
+        echo "TIZONA - Dependency Track: [*]  Processing Java BoM"
         if [ ! $? = 0 ]; then
-            echo "[-] Error executing Java build. Stopping the action!"
+            echo "TIZONA - Dependency Track: [-] Error executing Java build. Stopping the action!"
             exit 1
         fi
         apt-get install --no-install-recommends -y build-essential default-jdk maven
         path="$GITHUB_WORKSPACE/target/bom.xml"
-        echo "maven compile"
+        echo "TIZONA - Dependency Track: maven compile"
         BoMResult=$(mvn compile)
-        echo "maven compiled"
+        echo "TIZONA - Dependency Track: maven compiled"
         cd $GITHUB_WORKSPACE
         ;;
         
@@ -81,19 +81,19 @@ case $DTRACK_LANGUAGE in
 esac    
 
 if [ ! $? = 0 ]; then
-    echo "[-] Error generating BoM file: $BomResult. Stopping the action!"
+    echo "TIZONA - Dependency Track: [-] Error generating BoM file: $BomResult. Stopping the action!"
     exit 1
 fi
 
-echo "[*] BoM file succesfully generated"
+echo "TIZONA - Dependency Track: [*] BoM file succesfully generated"
 
 # Cyclonedx CLI conversion
-echo "[*] Cyclonedx CLI conversion"
+echo "TIZONA - Dependency Track: [*] Cyclonedx CLI conversion"
 #Does not upload to dtrack when output format = xml (every version available)
 cyclonedx convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_2
 
 # UPLOAD BoM to Dependency track server
-echo "[*] Uploading BoM file to Dependency Track server"
+echo "TIZONA - Dependency Track: [*] Uploading BoM file to Dependency Track server"
 
 upload_bom=$(curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/api/v1/bom \
 --header "X-Api-Key: $DTRACK_KEY" \
@@ -104,14 +104,14 @@ upload_bom=$(curl $INSECURE $VERBOSE -s --location --request POST $DTRACK_URL/ap
 --form "bom=@sbom.xml")
 
 token=$(echo $upload_bom | jq ".token" | tr -d "\"")
-echo "[*] BoM file succesfully uploaded with token $token"
+echo "TIZONA - Dependency Track: [*] BoM file succesfully uploaded with token $token"
 
 if [ -z $token ]; then
-    echo "[-]  The BoM file has not been successfully processed by OWASP Dependency Track"
+    echo "TIZONA - Dependency Track: [-]  The BoM file has not been successfully processed by OWASP Dependency Track"
     exit 1
 fi
 
-echo "[*] Checking BoM processing status"
+echo "TIZONA - Dependency Track: [*] Checking BoM processing status"
 processing=$(curl $INSECURE $VERBOSE -s --location --request GET $DTRACK_URL/api/v1/bom/token/$token \
 --header "X-Api-Key: $DTRACK_KEY" | jq '.processing')
 
@@ -121,24 +121,24 @@ while [ $processing = true ]; do
     processing=$(curl  $INSECURE $VERBOSE -s --location --request GET $DTRACK_URL/api/v1/bom/token/$token \
 --header "X-Api-Key: $DTRACK_KEY" | jq '.processing')
     if [ $((++c)) -eq 60 ]; then
-        echo "[-]  Timeout while waiting for processing result. Please check the OWASP Dependency Track status."
+        echo "TIZONA - Dependency Track: [-]  Timeout while waiting for processing result. Please check the OWASP Dependency Track status."
         exit 1
     fi
 done
 
-echo "[*] OWASP Dependency Track processing completed"
+echo "TIZONA - Dependency Track: [*] OWASP Dependency Track processing completed"
 
 # wait to make sure the score is available, some errors found during tests w/o this wait
 sleep 5
 
-echo "[*] Retrieving project information"
+echo "TIZONA - Dependency Track: [*] Retrieving project information"
 project=$(curl  $INSECURE $VERBOSE -s --location --request GET "$DTRACK_URL/api/v1/project/lookup?name=$GITHUB_REPOSITORY&version=$GITHUB_REF" \
 --header "X-Api-Key: $DTRACK_KEY")
 
-echo "$project"
+echo "TIZONA - Dependency Track: $project"
 
 project_uuid=$(echo $project | jq ".uuid" | tr -d "\"")
 risk_score=$(echo $project | jq ".lastInheritedRiskScore")
-echo "Project risk score: $risk_score"
+echo "TIZONA - Dependency Track: Project risk score: $risk_score"
 
-echo "::set-output name=riskscore::$risk_score"
+echo "TIZONA - Dependency Track: ::set-output name=riskscore::$risk_score"
