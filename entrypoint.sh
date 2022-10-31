@@ -261,7 +261,7 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    /bin/bash /app/config.sh $REVIEWDOG_ARGS $TRIVY_CONFIG_ARGS $TRIVY_REPO_ARGS $TRIVY_COMMON_ARGS
+    /bin/bash /app/config.sh $ACTION_MODE $REVIEWDOG_ARGS $TRIVY_CONFIG_ARGS $TRIVY_REPO_ARGS $TRIVY_COMMON_ARGS
 
 else
     echo "TIZONA: Skip configuration check action"
