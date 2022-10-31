@@ -1,80 +1,78 @@
 #!/usr/bin/env bash
 
-set -e
-
 while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:" o; do
    case "${o}" in
        a)
-         export DTRACK_ENABLE=${OPTARG}
+         export ACTION_MODE=${OPTARG}
        ;;
        b)
-         export DTRACK_URL=${OPTARG}
+         export DTRACK_ENABLE=${OPTARG}
        ;;
        c)
-         export DTRACK_KEY=${OPTARG}
+         export DTRACK_URL=${OPTARG}
        ;;
        d)
-         export DTRACK_LANGUAGE=${OPTARG}
+         export DTRACK_KEY=${OPTARG}
        ;;
        e)
-         export DTRACK_DIR=${OPTARG}
+         export DTRACK_LANGUAGE=${OPTARG}
        ;;
        f)
-         export CODE_ENABLE=${OPTARG}
+         export DTRACK_DIR=${OPTARG}
        ;;
        g)
-         export SONAR_SOURCES=${OPTARG}
+         export CODE_ENABLE=${OPTARG}
        ;;
        h)
-         export SONAR_HOST=${OPTARG}
+         export SONAR_SOURCES=${OPTARG}
        ;;
        i)
-         export SONAR_LOGIN=${OPTARG}
+         export SONAR_HOST=${OPTARG}
        ;;
        j)
-         export SONAR_REPORT_PATH=${OPTARG}
+         export SONAR_LOGIN=${OPTARG}
        ;;
        k)
-         export CONFIG_ENABLE=${OPTARG}
+         export SONAR_REPORT_PATH=${OPTARG}
        ;;
        l)
-         export SECRETS_ENABLE=${OPTARG}
+         export CONFIG_ENABLE=${OPTARG}
        ;;
        m)
-         export REVIEWDOG_GIT_TOKEN=${OPTARG}
+         export SECRETS_ENABLE=${OPTARG}
        ;;
        n)
-         export REVIEWDOG_DIR=${OPTARG}
+         export REVIEWDOG_GIT_TOKEN=${OPTARG}
        ;;
        o)
-         export REVIEWDOG_LVL=${OPTARG}
+         export REVIEWDOG_DIR=${OPTARG}
        ;;
        p)
-         export REVIEWDOG_REPORTER=${OPTARG}
+         export REVIEWDOG_LVL=${OPTARG}
        ;;
        q)
-         export DEPCHECK_PROJECT=${OPTARG}
+         export REVIEWDOG_REPORTER=${OPTARG}
        ;;
        r)
-         export DEPCHECK_PATH=${OPTARG}
+         export DEPCHECK_PROJECT=${OPTARG}
        ;;
        s)
-         export DEPCHECK_FORMAT=${OPTARG}
+         export DEPCHECK_PATH=${OPTARG}
        ;;
        t)
-         export TRIVY_CONFIG_SCANREF=${OPTARG}
+         export DEPCHECK_FORMAT=${OPTARG}
        ;;
        u)
-         export TRIVY_CONFIG_SEVERITY=${OPTARG}
+         export TRIVY_CONFIG_SCANREF=${OPTARG}
        ;;
        v)
-         export TRIVY_REPO_SCANREF=${OPTARG}
+         export TRIVY_SEVERITY=${OPTARG}
        ;;
        w)
-         export TRIVY_REPO_IGNORE=${OPTARG}
+         export TRIVY_REPO_SCANREF=${OPTARG}
        ;;
        x)
-         export TRIVY_REPO_SEVERITY=${OPTARG}
+         export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
        y)
          export TRIVY_REPO_VULN=${OPTARG}
@@ -84,6 +82,14 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:" o; do
        ;;
   esac
 done
+
+if [[ ${ACTION_MODE} == *"false"* ]]; then
+  echo "Permissive mode disabled. The action will fail as soon as it encounters an error in the execution of the checks."
+  set -e
+else
+  echo "Permissive mode enabled. The action will continue even if errors are encountered in the execution of the checks. "
+fi
+
 
 echo "Starting security checks"
 
@@ -216,13 +222,6 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    if [ $TRIVY_CONFIG_SEVERITY ];then
-      TRIVY_CONFIG_ARGS="$TRIVY_CONFIG_ARGS $TRIVY_CONFIG_SEVERITY"
-    else
-      echo "Trivy requires severity for configuration scan. Exit"
-      exit 1
-    fi
-
     TRIVY_REPO_ARGS=""
 
     if [ $TRIVY_REPO_SCANREF ];then
@@ -239,13 +238,6 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    if [ $TRIVY_REPO_SEVERITY ];then
-      TRIVY_REPO_ARGS="$TRIVY_REPO_ARGS $TRIVY_REPO_SEVERITY"
-    else
-      echo "Trivy requires severity for repository scan. Exit"
-      exit 1
-    fi
-
     if [ $TRIVY_REPO_VULN ];then
       TRIVY_REPO_ARGS="$TRIVY_REPO_ARGS $TRIVY_REPO_VULN"
     else
@@ -254,6 +246,13 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
     fi
 
     TRIVY_COMMON_ARGS=""
+
+    if [ $TRIVY_SEVERITY ];then
+      TRIVY_COMMON_ARGS="$TRIVY_COMMON_ARGS $TRIVY_SEVERITY"
+    else
+      echo "Trivy requires severity for configuration scan. Exit"
+      exit 1
+    fi
 
     if [ $TRIVY_TIMEOUT ]; then
       TRIVY_COMMON_ARGS="$TRIVY_COMMON_ARGS $TRIVY_TIMEOUT"

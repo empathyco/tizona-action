@@ -6,9 +6,13 @@ branding:
   color: 'green'
 
 inputs:
+  permissive_mode:
+    description: 'Enables or disables the interruption of the action in the case of finding errors in the execution of the checks.'
+    required: false
+    default: 'true'
   deptrack_enable:
     description: 'Enables Dependency Track check'
-    required: true
+    required: false
     default: 'true'
   deptrack_url:  
     description: 'URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
@@ -27,8 +31,8 @@ inputs:
     required: false
     default: '.'
   code_enable:
-    description: 'Enables SonarQube check'
-    required: true
+    description: 'Enables code check'
+    required: false
     default: 'true'
   sonar_source:
     description: 'SonarQube source. Required to run SonarQube.'
@@ -48,11 +52,11 @@ inputs:
     default: '.scannerwork/report-task.txt'
   config_enable:
     description: 'Enables configuration check.'
-    required: true
+    required: false
     default: 'true'
   secrets_enable:
     description: 'Enables secrets check'
-    required: true
+    required: false
     default: 'true'
   reviewdog_github_token:
     description: 'GitHub token. Required if config checker or secrets checker are enabled.'
@@ -85,10 +89,6 @@ inputs:
     description: 'Config scan reference. Required if config checker is enabled.'
     required: false
     default: '.'
-  trivy_config_severity:
-    description: 'Severities of vulnerabilities to be displayed. Required if config checker is enabled.'
-    required: false
-    default: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
   trivy_repo_scan-ref:
     description: 'FS scan reference. Required if config checker is enabled.'
     required: false
@@ -97,14 +97,14 @@ inputs:
     description: 'Ignore unfixed vulnerabilities. Required if config checker is enabled.'
     required: false
     default: 'false'
-  trivy_repo_severity:
-    description: 'Severities of vulnerabilities to be displayed. Required if config checker is enabled.'
-    required: false
-    default: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
   trivy_repo_vuln:
     description: 'comma-separated list of vulnerability types (os,library). Required if config checker is enabled.'
     required: false
     default: 'os,library'
+  trivy_severity:
+    description: 'Severities of vulnerabilities to be displayed. Required if config checker is enabled.'
+    required: false
+    default: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
   trivy_timeout:
     description: 'Trivy timeout duration. Required if config checker is enabled.'
     required: false
@@ -122,29 +122,29 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - '-a ${{ inputs.deptrack_enable }}'
-    - '-b ${{ inputs.deptrack_url }}'
-    - '-c ${{ inputs.deptrack_key }}'
-    - '-d ${{ inputs.deptrack_language }}'
-    - '-e ${{ inputs.deptrack_dir }}'
-    - '-f ${{ inputs.code_enable }}'
-    - '-g ${{ inputs.sonar_source }}'
-    - '-h ${{ inputs.sonar_host }}'
-    - '-i ${{ inputs.sonar_login }}'
-    - '-j ${{ inputs.sonar_report_path }}'
-    - '-k ${{ inputs.config_enable }}'
-    - '-l ${{ inputs.secrets_enable }}'
-    - '-m ${{ inputs.reviewdog_github_token }}'
-    - '-n ${{ inputs.reviewdog_working_directory }}'
-    - '-o ${{ inputs.reviewdog_level }}'
-    - '-p ${{ inputs.reviewdog_reporter }}'
-    - '-q ${{ inputs.depcheck_project }}'
-    - '-r ${{ inputs.depcheck_path }}'
-    - '-s ${{ inputs.depcheck_format }}'
-    - '-t ${{ inputs.trivy_config_scan-ref }}'
-    - '-u ${{ inputs.trivy_config_severity }}'
-    - '-v ${{ inputs.trivy_repo_scan-ref }}'
-    - '-w ${{ inputs.trivy_repo_ignore-unfixed }}'
-    - '-x ${{ inputs.trivy_repo_severity }}'
+    - '-a ${{ inputs.permissive_mode }}'
+    - '-b ${{ inputs.deptrack_enable }}'
+    - '-c ${{ inputs.deptrack_url }}'
+    - '-d ${{ inputs.deptrack_key }}'
+    - '-e ${{ inputs.deptrack_language }}'
+    - '-f ${{ inputs.deptrack_dir }}'
+    - '-g ${{ inputs.code_enable }}'
+    - '-h ${{ inputs.sonar_source }}'
+    - '-i ${{ inputs.sonar_host }}'
+    - '-j ${{ inputs.sonar_login }}'
+    - '-k ${{ inputs.sonar_report_path }}'
+    - '-l ${{ inputs.config_enable }}'
+    - '-m ${{ inputs.secrets_enable }}'
+    - '-n ${{ inputs.reviewdog_github_token }}'
+    - '-o ${{ inputs.reviewdog_working_directory }}'
+    - '-p ${{ inputs.reviewdog_level }}'
+    - '-q ${{ inputs.reviewdog_reporter }}'
+    - '-r ${{ inputs.depcheck_project }}'
+    - '-s ${{ inputs.depcheck_path }}'
+    - '-t ${{ inputs.depcheck_format }}'
+    - '-u ${{ inputs.trivy_config_scan-ref }}'
+    - '-v ${{ inputs.trivy_severity }}'
+    - '-w ${{ inputs.trivy_repo_scan-ref }}'
+    - '-x ${{ inputs.trivy_repo_ignore-unfixed }}'
     - '-y ${{ inputs.trivy_repo_vuln }}'
     - '-z ${{ inputs.trivy_timeout }}'
