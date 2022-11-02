@@ -291,8 +291,10 @@ while wait -fn || werr=$?; ((werr != 127)); do
   ((err == 0)) || break
 done
 ## If you want to still wait for children to finish before exiting
-## parent (even if you handle the failed child early) uncomment this:
-#trap 'wait || :' EXIT
+## parent (even if you handle the failed child early):
+if [[ ${ACTION_MODE} == *"true"* ]]; then
+  trap 'wait || :' EXIT
+fi
 if ((err == 0)); then
   echo "TIZONA: Success"
 else
