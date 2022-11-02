@@ -284,22 +284,21 @@ else
     echo "TIZONA: Skip secrets leaks action"
 fi
 
-declare -i err=0 werr=0
-while wait -fn || werr=$?; ((werr != 127)); do
-  err=$werr
-  ## To handle *as soon as* first failure happens:
-  ((err == 0)) || break
-done
-## If you want to still wait for children to finish before exiting
-## parent (even if you handle the failed child early):
-if [[ ${ACTION_MODE} == *"true"* ]]; then
-  trap 'wait || :' EXIT
-fi
-if ((err == 0)); then
-  echo "TIZONA: Success"
+if [[ ${ACTION_MODE} == *"false"* ]]; then
+  declare -i err=0 werr=0
+  while wait -fn || werr=$?; ((werr != 127)); do
+    err=$werr
+    ## To handle *as soon as* first failure happens:
+    ((err == 0)) || break
+  done
+  if ((err == 0)); then
+    echo "TIZONA: Success"
+  else
+    echo "TIZONA: Failure! At least one error found."
+    exit $err
+  fi
 else
-  echo "TIZONA: Failure! At least one error found."
-  exit $err
+  wait
 fi
 
 echo "TIZONA: Security checks finished"
