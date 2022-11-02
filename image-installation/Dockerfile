@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # using --no-install-recommends to reduce image size
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install --no-install-recommends -y git npm golang lsb-release openjdk-17-jdk openjdk-17-jre \
-    curl jq build-essential apt-transport-https unzip wget nodejs gnupg snapd \
+    curl jq procps file build-essential apt-transport-https unzip wget nodejs gnupg snapd \
     libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g 
 
 RUN go get github.com/ozonru/cyclonedx-go/cmd/cyclonedx-go && cp /root/go/bin/cyclonedx-go /usr/bin/
