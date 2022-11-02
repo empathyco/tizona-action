@@ -284,6 +284,6 @@ else
     echo "TIZONA: Skip secrets leaks action"
 fi
 
-wait
+wait || { echo "TIZONA: background check failed: $?" >&2; exit 1;}
 
 echo "TIZONA: Security checks finished"
