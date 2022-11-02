@@ -35,15 +35,15 @@ inputs:
     required: false
     default: 'true'
   sonar_source:
-    description: 'SonarQube source. Required to run SonarQube.'
+    description: 'SonarQube source. Required to run SonarQube. SonarQube also needs sonar-project.properties file.'
     required: false
     default: '.'
   sonar_host:
-    description: 'SonarQube host. Required to run SonarQube.'
+    description: 'SonarQube host. Required to run SonarQube. SonarQube also needs sonar-project.properties file.'
     required: false
     default: 'SONAR_HOST'
   sonar_login:
-    description: 'SonarQube login key. Required to run SonarQube.'
+    description: 'SonarQube login key. Required to run SonarQube.SonarQube also needs sonar-project.properties file.'
     required: false
     default: 'SONAR_LOGIN'
   sonar_report_path:

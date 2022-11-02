@@ -13,7 +13,7 @@ fi
 # Fail fast on errors, unset variables, and failures in piped commands
 set -Eeuo pipefail
 
-cd "${GITHUB_WORKSPACE}/${REVIEWDOG_DIR}" || exit
+cd "${GITHUB_WORKSPACE}/${REVIEWDOG_DIR}" || { echo "TIZONA - Tfsec review: Terraform directory not found, skipping." ; exit 1;}
 
 echo "TIZONA - Tfsec review: Print tfsec details ..."
 tfsec --version
