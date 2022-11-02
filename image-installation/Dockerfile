@@ -15,6 +15,7 @@ RUN apt-get update && apt-get upgrade -y \
 
 RUN go get github.com/ozonru/cyclonedx-go/cmd/cyclonedx-go && cp /root/go/bin/cyclonedx-go /usr/bin/
 
+RUN echo "" > .dockerenv
 RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | NONINTERACTIVE=1 /bin/bash -s 
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 RUN brew install cyclonedx/cyclonedx/cyclonedx-cli
