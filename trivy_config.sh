@@ -25,6 +25,8 @@ trivy --quiet ${TIMEOUT} config --format sarif --output ${TRIVY_OUTPUT} ${ARGS} 
 
 echo "TIZONA - Trivy configuration analysis: Upload trivy config scan result to Github"
 
+set +Eeuo pipefail
+
 jq '.runs[0].results[] | "\(.level):\(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.endLine):\(.locations[0].physicalLocation.region.startColumn): \(.message.text)"' < ${TRIVY_OUTPUT} | sed 's/"//g' |  reviewdog -efm="%t%.%+:%f:%l:%c: %m" -reporter=github-pr-check -fail-on-error=true
 
 reviewdog_return="${PIPESTATUS[3]}" exit_code=$?
