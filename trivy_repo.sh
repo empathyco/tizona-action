@@ -39,7 +39,7 @@ set +Eeuo pipefail
 
 jq '.runs[0].results[] | "\(.level):\(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.endLine):\(.locations[0].physicalLocation.region.startColumn): \(.message.text)"' < ${TRIVY_OUTPUT} | sed 's/"//g' |  reviewdog -efm="%t%.%+:%f:%l:%c: %m" -reporter=github-pr-check -fail-on-error=true
 
-reviewdog_return="${PIPESTATUS[3]}" exit_code=$?
+reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 
 echo "TIZONA - Trvy repository analysis: set-output name=reviewdog-return-code: ${reviewdog_return}"
 
