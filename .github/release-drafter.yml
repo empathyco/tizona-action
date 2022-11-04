@@ -1,0 +1,2 @@
+_extends: .github
+name-template: 'v$RESOLVED_VERSION 🌈'
