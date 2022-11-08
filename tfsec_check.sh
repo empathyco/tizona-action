@@ -16,7 +16,7 @@ set -Eeuo pipefail
 cd "${GITHUB_WORKSPACE}/${REVIEWDOG_DIR}" || { echo "TIZONA - Tfsec review: Terraform directory not found, skipping." ; exit 1;}
 
 echo "TIZONA - Tfsec review: Print tfsec details ..."
-tfsec_v= `tfsec --version`
+tfsec_v=`tfsec --version`
 echo "TIZONA - Tfsec review: Tfsec version: ${tfsec_v}"
 
 echo 'TIZONA - Tfsec review: Running tfsec with reviewdog ...'
