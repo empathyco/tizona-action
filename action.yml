@@ -30,6 +30,10 @@ inputs:
     description: 'Dependency track directory path. Required if Dependency Track is enabled.'
     required: false
     default: '.'
+  deptrack_branch:
+    description: 'Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled.'
+    required: false
+    default: 'main'
   code_enable:
     description: 'Enables code check'
     required: false
@@ -75,7 +79,7 @@ inputs:
     required: false
   depcheck_project:
     description: 'Dependency check project. Required if code checker is enabled.'
-    default: '.'
+    default: 'MY_PROJECT'
     required: false
   depcheck_path:
     description: 'Dependency check path.  Required if code checker is enabled.'
@@ -144,3 +148,4 @@ runs:
     - '-x ${{ inputs.trivy_repo_ignore-unfixed }}'
     - '-y ${{ inputs.trivy_repo_vuln }}'
     - '-z ${{ inputs.trivy_timeout }}'
+    - '-A ${{ inputs.deptrack_branch }}'

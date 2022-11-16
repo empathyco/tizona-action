@@ -14,6 +14,7 @@ Checks and analyzes the security of the code added to the specified repository.
 | deptrack_key | Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_KEY |
 | deptrack_language | Programming language. Required if Dependency Track is enabled. | `false` | nodejs |
 | deptrack_dir | Dependency track directory path. Required if Dependency Track is enabled. | `false` | . |
+| deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
 | code_enable | Enables SonarQube check | `false` | true |
 | sonar_source | SonarQube source. Required to run SonarQube. | `false` | . |
 | sonar_host | SonarQube host. Required to run SonarQube. | `false` | SONAR_HOST |
@@ -25,7 +26,7 @@ Checks and analyzes the security of the code added to the specified repository.
 | reviewdog_working_directory | Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled. | `false` | . |
 | reviewdog_level | Report level for reviewdog [info,warning,error]. Required if config checker is enabled. | `false` | error |
 | reviewdog_reporter | Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required if config checker is enabled. | `false` | github-pr-check |
-| depcheck_project | Dependency check project. Required if code checker is enabled. | `false` | . |
+| depcheck_project | Dependency check project. Required if code checker is enabled. | `false` | MY_PROJECT |
 | depcheck_path | Dependency check path.  Required if code checker is enabled. | `false` | . |
 | depcheck_format | Dependency check format.  Required if code checker is enabled. | `false` | HTML |
 | trivy_config_scan-ref | Config scan reference. Required if config checker is enabled. | `false` | . |
@@ -48,7 +49,7 @@ This action is a `docker` action.
 
 ## Requirements
 
-### Dependency Ttrack - Maven/Java
+### Dependency Track - Maven/Java
 
 It is necessary to add the CycloneDX plugin to your project (only Maven/Java projects). Get the cyclonedx-maven-plugin. From the cyclonedx-maven-plugin repository, you'll be able to get the code below. Edit your `pom.xml` file by adding the plugin.
 
