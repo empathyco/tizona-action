@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -80,6 +80,9 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:" o; do
        z)
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
+       A)
+         export DEPTRACK_BRANCH=${OPTARG}
+       ;;
   esac
 done
 
@@ -125,9 +128,12 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    echo "TIZONA: Run Dependency Track action"
-    /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
-
+    if [[ ${GITHUB_REF_TYPE} == *"tag"* ]] || [[ ${{GITHUB_BASE_REF}} == *"$DEPTRACK_BRANCH"* ]]; then
+      echo "TIZONA: Run Dependency Track action"
+      /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
+    else
+      echo "TIZONA: Skipping Dependency Track action. Dependency Track action only runs on tags or on the master/main branch"
+    fi
 else
     echo "TIZONA: Skip Dependency Track action"
 fi
