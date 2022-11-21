@@ -128,11 +128,13 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    if [[ ${GITHUB_REF_TYPE} == *"tag"* ]] || [[ ${GITHUB_BASE_REF} == *"$DEPTRACK_BRANCH"* ]]; then
+    if [[ ${GITHUB_REF_TYPE} == *"tag"* || ${GITHUB_BASE_REF} == *"$DEPTRACK_BRANCH"* ]]; then
       echo "TIZONA: Run Dependency Track action"
       /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
     else
-      echo "TIZONA: Skipping Dependency Track action. Dependency Track action only runs on tags or on the master/main branch. Current action: $GITHUB_REF_TYPE - Current destiny branch: $GITHUB_BASE_REF and must be $DEPTRACK_BRANCH"
+      echo "TIZONA: Skipping Dependency Track action. Dependency Track action only runs on tags or on the master/main branch."
+      echo "TIZONA: Current action: $GITHUB_REF_TYPE"
+      echo "TIZONA: Current destiny branch: $GITHUB_BASE_REF, and must be $DEPTRACK_BRANCH"
     fi
 else
     echo "TIZONA: Skip Dependency Track action"
