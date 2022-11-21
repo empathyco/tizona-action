@@ -128,7 +128,7 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    if [[ ${GITHUB_REF_TYPE} == *"tag"* || ${GITHUB_BASE_REF} == *"$DEPTRACK_BRANCH"* ]]; then
+    if [[ ${GITHUB_REF_TYPE} == *"tag"* || ${DEPTRACK_BRANCH} == *"$GITHUB_BASE_REF"* ]]; then
       echo "TIZONA: Run Dependency Track action"
       /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
     else
