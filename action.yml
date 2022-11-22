@@ -34,6 +34,14 @@ inputs:
     description: 'Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled.'
     required: false
     default: 'main'
+  defectdojo_url:
+    description: 'Dependency track DefectDojo URL for its integration. Not required.'
+    required: false
+    default: 'DEFECTDOJO_URL'
+  defectdojo_token:
+    description: 'Dependency track DefectDojo token for its integration. Not required.'
+    required: false
+    default: 'DEFECTDOJO_TOKEN'
   code_enable:
     description: 'Enables code check'
     required: false
@@ -149,3 +157,5 @@ runs:
     - '-y ${{ inputs.trivy_repo_vuln }}'
     - '-z ${{ inputs.trivy_timeout }}'
     - '-A ${{ inputs.deptrack_branch }}'
+    - '-B ${{ inputs.defectdojo_url }}'
+    - '-C ${{ inputs.defectdojo_token }}'

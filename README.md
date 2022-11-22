@@ -15,6 +15,8 @@ Checks and analyzes the security of the code added to the specified repository.
 | deptrack_language | Programming language. Required if Dependency Track is enabled. | `false` | nodejs |
 | deptrack_dir | Dependency track directory path. Required if Dependency Track is enabled. | `false` | . |
 | deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
+| defectdojo_url | Dependency track DefectDojo URL for its integration. Not required. | `false` | DEFECTDOJO_URL |
+| defectdojo_token | Dependency track DefectDojo token for its integration. Not required. | `false` | DEFECTDOJO_TOKEN |
 | code_enable | Enables SonarQube check | `false` | true |
 | sonar_source | SonarQube source. Required to run SonarQube. | `false` | . |
 | sonar_host | SonarQube host. Required to run SonarQube. | `false` | SONAR_HOST |

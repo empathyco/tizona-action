@@ -4,6 +4,8 @@ DTRACK_URL=$1
 DTRACK_KEY=$2
 DTRACK_LANGUAGE=$3
 DTRACK_DIR=$4
+DEFECTDOJO_URL=$5
+DEFECTDOJO_TOKEN=$6
 
 INSECURE="--insecure"
 #VERBOSE="--verbose"
@@ -101,7 +103,19 @@ echo "TIZONA - Dependency Track: [*] BoM file succesfully generated"
 # Cyclonedx CLI conversion
 echo "TIZONA - Dependency Track: [*] Cyclonedx CLI conversion"
 #Does not upload to dtrack when output format = xml (every version available)
-cyclonedx convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_2
+cyclonedx convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_4
+
+if [ $DEFECTDOJO_TOKEN ];then
+    echo "TIZONA - Dependency Track: Trivy sbom scan"
+    trivy sbom sbom.xml -o trivy_scan.json -f json
+
+    current_date=$(date '+%Y-%m-%d')
+
+    echo "TIZONA - Dependency Track: Import Trivy scan to DefectDojo"
+    curl -X POST "${DEFECTDOJO_URL}/api/v2/import-scan/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data"  -H "Authorization: Token ${DEFECTDOJO_TOKEN}" -F "minimum_severity=High" -F "active=true" -F "verified=true" -F "close_old_findings=false" -F "push_to_jira=false" -F "file=@trivy_scan.json" -F "product_name=Tizona" -F "scan_date=${current_date}" -F "engagement_name=TizonaEngagement" -F "scan_type=Trivy Scan"
+else
+    echo "TIZONA - Dependency Track: DefectDojo integration not configured. Skipping"
+fi
 
 # UPLOAD BoM to Dependency track server
 echo "TIZONA - Dependency Track: [*] Uploading BoM file to Dependency Track server"
