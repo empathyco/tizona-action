@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -89,6 +89,15 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:" o; do
        C)
          export DEFECTDOJO_TOKEN=${OPTARG}
        ;;
+       D)
+         export NEXUS_URL=${OPTARG}
+       ;;
+       E)
+         export NEXUS_USER=${OPTARG}
+       ;;
+       F)
+         export NEXUS_PASS=${OPTARG}
+       ;;
   esac
 done
 
@@ -140,6 +149,18 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
 
     if [ $DEFECTDOJO_TOKEN ];then
       DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_TOKEN"
+    fi
+
+    if [ $NEXUS_URL ];then
+      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_URL"
+    fi
+
+    if [ $NEXUS_USER ];then
+      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_USER"
+    fi
+
+    if [ $NEXUS_PASS ];then
+      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_PASS"
     fi
 
     if [[ ${GITHUB_REF_TYPE} == *"tag"* || ${DEPTRACK_BRANCH} == *"$GITHUB_BASE_REF"* ]]; then

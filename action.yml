@@ -42,6 +42,18 @@ inputs:
     description: 'Dependency track DefectDojo token for its integration. Not required.'
     required: false
     default: 'DEFECTDOJO_TOKEN'
+  nexus_url:
+    description: 'Dependency track Nexus URL for maven and java review. Not required'
+    required: false
+    default: 'NEXUS_URL'
+  nexus_user:
+    description: 'Dependency track Nexus user for maven and java review. Not required'
+    required: false
+    default: 'NEXUS_USER'
+  nexus_pass:
+    description: 'Dependency track Nexus password for maven and java review. Not required'
+    required: false
+    default: 'NEXUS_PASS'
   code_enable:
     description: 'Enables code check'
     required: false
@@ -159,3 +171,6 @@ runs:
     - '-A ${{ inputs.deptrack_branch }}'
     - '-B ${{ inputs.defectdojo_url }}'
     - '-C ${{ inputs.defectdojo_token }}'
+    - '-D ${{ inputs.nexus_url }}'
+    - '-E ${{ inputs.nexus_user }}'
+    - '-F ${{ inputs.nexus_pass }}'

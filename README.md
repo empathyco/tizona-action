@@ -17,6 +17,9 @@ Checks and analyzes the security of the code added to the specified repository.
 | deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
 | defectdojo_url | Dependency track DefectDojo URL for its integration. Not required. | `false` | DEFECTDOJO_URL |
 | defectdojo_token | Dependency track DefectDojo token for its integration. Not required. | `false` | DEFECTDOJO_TOKEN |
+| nexus_url | Dependency track Nexus URL for maven and java review. Not required. | `false` | NEXUS_URL |
+| nexus_user | Dependency track Nexus user for maven and java review. Not required. | `false` | NEXUS_USER |
+| nexus_pass | Dependency track Nexus password for maven and java review. Not required. | `false` | NEXUS_PASS |
 | code_enable | Enables SonarQube check | `false` | true |
 | sonar_source | SonarQube source. Required to run SonarQube. | `false` | . |
 | sonar_host | SonarQube host. Required to run SonarQube. | `false` | SONAR_HOST |
