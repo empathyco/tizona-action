@@ -1,0 +1,34 @@
+<settings>
+  <servers>
+     <server>
+         <id>nexus</id>
+         <username>NEXUS_USER</username>
+         <password>NEXUS_PASS</password>
+     </server>
+  </servers>
+  <profiles>
+    <profile>
+      <id>default</id>
+      <repositories>
+        <repository>
+          <id>nexus</id>
+          <url>NEXUS_URL</url>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>default</activeProfile>
+  </activeProfiles>
+  <mirrors>
+    <mirror>
+      <id>nexus</id>
+      <url>NEXUS_URL</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+</settings>

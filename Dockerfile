@@ -11,6 +11,7 @@ COPY tfsec_check.sh tfsec_check.sh
 COPY trivy_config.sh trivy_config.sh
 COPY trivy_repo.sh trivy_repo.sh
 COPY to-rdjson.jq to-rdjson.jq
+COPY nexus_settings.xml nexus_settings.xml
 
 RUN chmod +x /app/*.sh
 

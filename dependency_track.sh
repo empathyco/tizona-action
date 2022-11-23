@@ -6,6 +6,9 @@ DTRACK_LANGUAGE=$3
 DTRACK_DIR=$4
 DEFECTDOJO_URL=$5
 DEFECTDOJO_TOKEN=$6
+NEXUS_URL=$7
+NEXUS_USER=$8
+NEXUS_PASS=$9
 
 INSECURE="--insecure"
 #VERBOSE="--verbose"
@@ -70,16 +73,27 @@ case $DTRACK_LANGUAGE in
         fi
 
         wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
-
         tar xzvf apache-maven-3.8.6-bin.tar.gz
         export PATH=/opt/apache-maven-3.8.6/bin:$PATH
         rm apache-maven-3.8.6-bin.tar.gz
         mv apache-maven-3.8.6 /opt
+
         echo "TIZONA - Dependency Track: Maven version:"
         mvn -v
         echo "JAVA VERSION:"
         java --version
 
+        if [[ ${NEXUS_URL} == *"NEXUS_URL"* ]]; then
+            echo "TIZONA - Dependency Track: Nexus access not established. No Nexus libraries will be downloaded"
+        else
+            # mkdir $HOME/.m2
+            cp /app/nexus_settings.xml $HOME/.m2/settings.xml
+            sed -i -e "s#NEXUS_USER#$NEXUS_USER#g" $HOME/.m2/settings.xml
+            sed -i -e "s#NEXUS_PASS#$NEXUS_PASS#g" $HOME/.m2/settings.xml
+            sed -i -e "s#NEXUS_URL#$NEXUS_URL#g" $HOME/.m2/settings.xml
+
+            echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
+        fi
         path="$GITHUB_WORKSPACE/target/bom.xml"
         echo "TIZONA - Dependency Track: maven compile"
         BoMResult=$(mvn compile)
@@ -105,7 +119,9 @@ echo "TIZONA - Dependency Track: [*] Cyclonedx CLI conversion"
 #Does not upload to dtrack when output format = xml (every version available)
 cyclonedx convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_4
 
-if [ $DEFECTDOJO_TOKEN ];then
+if [[ ${DEFECTDOJO_TOKEN} == *"DEFECTDOJO_TOKEN"* ]];then
+    echo "TIZONA - Dependency Track: DefectDojo integration not configured. Skipping"
+else
     echo "TIZONA - Dependency Track: Trivy sbom scan"
     trivy sbom sbom.xml -o trivy_scan.json -f json
 
@@ -113,8 +129,6 @@ if [ $DEFECTDOJO_TOKEN ];then
 
     echo "TIZONA - Dependency Track: Import Trivy scan to DefectDojo"
     curl -X POST "${DEFECTDOJO_URL}/api/v2/import-scan/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data"  -H "Authorization: Token ${DEFECTDOJO_TOKEN}" -F "minimum_severity=High" -F "active=true" -F "verified=true" -F "close_old_findings=false" -F "push_to_jira=false" -F "file=@trivy_scan.json" -F "product_name=Tizona" -F "scan_date=${current_date}" -F "engagement_name=TizonaEngagement" -F "scan_type=Trivy Scan"
-else
-    echo "TIZONA - Dependency Track: DefectDojo integration not configured. Skipping"
 fi
 
 # UPLOAD BoM to Dependency track server
