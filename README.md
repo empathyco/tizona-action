@@ -128,7 +128,7 @@ jobs:
           fetch-depth: 0
 
       - name: Security check
-        uses: empathyco/tizona-action@pre-v1
+        uses: empathyco/tizona-action@v1
         with:
           permissive_mode: 'true'
           deptrack_url: ${{ secrets.DEPENDENCY_TRACK_API_URL }}
