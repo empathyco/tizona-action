@@ -96,7 +96,8 @@ case $DTRACK_LANGUAGE in
         fi
         path="$GITHUB_WORKSPACE/target/bom.xml"
         echo "TIZONA - Dependency Track: maven compile"
-        BoMResult=$(mvn compile)
+        mvn compile
+        BoMResult="Test" #$(mvn compile)
         echo "TIZONA - Dependency Track: maven compiled"
         cd $GITHUB_WORKSPACE
         ;;
