@@ -95,9 +95,6 @@ case $DTRACK_LANGUAGE in
 
             echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
 
-            echo $ROOT_DIR
-            ls $ROOT_DIR/.m2/
-            cat $ROOT_DIR/.m2/settings.xml
         fi
         path="$GITHUB_WORKSPACE/target/bom.xml"
         echo "TIZONA - Dependency Track: maven compile"
