@@ -86,15 +86,16 @@ case $DTRACK_LANGUAGE in
         if [[ ${NEXUS_URL} == *"NEXUS_URL"* ]]; then
             echo "TIZONA - Dependency Track: Nexus access not established. No Nexus libraries will be downloaded"
         else
-            # mkdir $HOME/.m2
-            # cp /app/nexus_settings.xml $HOME/.m2/settings.xml
-            # sed -i -e "s#NEXUS_USER#$NEXUS_USER#g" $HOME/.m2/settings.xml
-            # sed -i -e "s#NEXUS_PASS#$NEXUS_PASS#g" $HOME/.m2/settings.xml
-            # sed -i -e "s#NEXUS_URL#$NEXUS_URL#g" $HOME/.m2/settings.xml
+            mkdir $HOME/.m2
+            cp /app/nexus_settings.xml $HOME/.m2/settings.xml
+            sed -i -e "s#NEXUS_USER#$NEXUS_USER#g" $HOME/.m2/settings.xml
+            sed -i -e "s#NEXUS_PASS#$NEXUS_PASS#g" $HOME/.m2/settings.xml
+            sed -i -e "s#NEXUS_URL#$NEXUS_URL#g" $HOME/.m2/settings.xml
 
             echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
 
-            cat /home/runner/.m2/settings.xml
+            ls ~/.m2/
+            cat ~/.m2/settings.xml
         fi
         path="$GITHUB_WORKSPACE/target/bom.xml"
         echo "TIZONA - Dependency Track: maven compile"
