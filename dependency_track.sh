@@ -86,7 +86,7 @@ case $DTRACK_LANGUAGE in
         if [[ ${NEXUS_URL} == *"NEXUS_URL"* ]]; then
             echo "TIZONA - Dependency Track: Nexus access not established. No Nexus libraries will be downloaded"
         else
-            # mkdir $HOME/.m2
+            mkdir $HOME/.m2
             cp /app/nexus_settings.xml $HOME/.m2/settings.xml
             sed -i -e "s#NEXUS_USER#$NEXUS_USER#g" $HOME/.m2/settings.xml
             sed -i -e "s#NEXUS_PASS#$NEXUS_PASS#g" $HOME/.m2/settings.xml
