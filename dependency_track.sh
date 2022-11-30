@@ -93,6 +93,8 @@ case $DTRACK_LANGUAGE in
             sed -i -e "s#NEXUS_URL#$NEXUS_URL#g" $HOME/.m2/settings.xml
 
             echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
+
+            cat $HOME/.m2/settings.xml
         fi
         path="$GITHUB_WORKSPACE/target/bom.xml"
         echo "TIZONA - Dependency Track: maven compile"
