@@ -94,6 +94,7 @@ case $DTRACK_LANGUAGE in
 
             echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
 
+            echo $HOME
             ls ~/.m2/
             cat ~/.m2/settings.xml
         fi
