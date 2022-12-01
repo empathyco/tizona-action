@@ -31,8 +31,8 @@ tfsec --format=json --force-all-dirs . | jq -r -f "/app/to-rdjson.jq" | reviewdo
 
 tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 
-echo "TIZONA - Tfsec review: set-output name=tfsec-return-code: ${tfsec_return}"
-echo "TIZONA - Tfsec review: set-output name=reviewdog-return-code: ${reviewdog_return}"
+echo "TIZONA - Tfsec review: tfsec-return-code: ${tfsec_return}"
+echo "TIZONA - Tfsec review: reviewdog-return-code: ${reviewdog_return}"
 
 echo "TIZONA - Tfsec review: Tfsec exit ${exit_code}"
 exit ${exit_code}

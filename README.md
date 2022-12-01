@@ -34,8 +34,6 @@ Checks and analyzes the security of the code added to the specified repository.
 | depcheck_project | Dependency check project. Required if code checker is enabled. | `false` | MY_PROJECT |
 | depcheck_path | Dependency check path.  Required if code checker is enabled. | `false` | . |
 | depcheck_format | Dependency check format.  Required if code checker is enabled. | `false` | HTML |
-| trivy_config_scan-ref | Config scan reference. Required if config checker is enabled. | `false` | . |
-| trivy_repo_scan-ref | FS scan reference. Required if config checker is enabled. | `false` | . |
 | trivy_repo_ignore-unfixed | Ignore unfixed vulnerabilities. Required if config checker is enabled. | `false` | false |
 | trivy_repo_vuln | comma-separated list of vulnerability types (os,library). Required if config checker is enabled. | `false` | os,library |
 | trivy_severity | Severities of vulnerabilities to be displayed. Required if config checker is enabled. | `false` | UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL |

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -63,39 +63,33 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:"
          export DEPCHECK_FORMAT=${OPTARG}
        ;;
        u)
-         export TRIVY_CONFIG_SCANREF=${OPTARG}
-       ;;
-       v)
          export TRIVY_SEVERITY=${OPTARG}
        ;;
-       w)
-         export TRIVY_REPO_SCANREF=${OPTARG}
-       ;;
-       x)
+       v)
          export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
-       y)
+       w)
          export TRIVY_REPO_VULN=${OPTARG}
        ;;
-       z)
+       x)
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
-       A)
+       y)
          export DEPTRACK_BRANCH=${OPTARG}
        ;;
-       B)
+       z)
          export DEFECTDOJO_URL=${OPTARG}
        ;;
-       C)
+       A)
          export DEFECTDOJO_TOKEN=${OPTARG}
        ;;
-       D)
+       B)
          export NEXUS_URL=${OPTARG}
        ;;
-       E)
+       C)
          export NEXUS_USER=${OPTARG}
        ;;
-       F)
+       D)
          export NEXUS_PASS=${OPTARG}
        ;;
   esac
@@ -257,22 +251,6 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
     fi
 
     TRIVY_CONFIG_ARGS=""
-
-    if [ $TRIVY_CONFIG_SCANREF ];then
-      TRIVY_CONFIG_ARGS="$TRIVY_CONFIG_ARGS $TRIVY_CONFIG_SCANREF"
-    else
-      echo "TIZONA: Trivy requires path to scan configuration. Exit"
-      exit 1
-    fi
-
-    TRIVY_REPO_ARGS=""
-
-    if [ $TRIVY_REPO_SCANREF ];then
-      TRIVY_REPO_ARGS="$TRIVY_REPO_ARGS $TRIVY_REPO_SCANREF"
-    else
-      echo "TIZONA: Trivy requires path to scan repository. Exit"
-      exit 1
-    fi
 
     if [ $TRIVY_REPO_IGNORE ];then
       TRIVY_REPO_ARGS="$TRIVY_REPO_ARGS $TRIVY_REPO_IGNORE"
