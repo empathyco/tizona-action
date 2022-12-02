@@ -30,7 +30,7 @@ Checks and analyzes the security of the code added to the specified repository.
 | reviewdog_github_token | GitHub token. Required if config checker is enabled. | `false` |  |
 | reviewdog_working_directory | Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled. | `false` | . |
 | reviewdog_level | Report level for reviewdog [info,warning,error]. Required if config checker is enabled. | `false` | error |
-| reviewdog_reporter | Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required if config checker is enabled. | `false` | github-pr-check |
+| reviewdog_reporter | Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required for config checker and for secrets leaks checker. | `false` | github-pr-check |
 | depcheck_project | Dependency check project. Required if code checker is enabled. | `false` | MY_PROJECT |
 | depcheck_path | Dependency check path.  Required if code checker is enabled. | `false` | . |
 | depcheck_format | Dependency check format.  Required if code checker is enabled. | `false` | HTML |
