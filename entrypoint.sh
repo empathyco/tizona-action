@@ -119,8 +119,7 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     if [ $DTRACK_KEY ];then
       DTRACK_ARGS="$DTRACK_ARGS $DTRACK_KEY"
     else
-      echo "TIZONA: Dependency Track requires key to access OWASP Dependency Track REST API. Exit"
-      exit 1
+      echo "TIZONA: Dependency Track requires key to access OWASP Dependency Track REST API."
     fi
 
     if [ $DTRACK_LANGUAGE ];then
@@ -158,8 +157,12 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     fi
 
     if [[ ${GITHUB_REF_TYPE} == *"tag"* || ${DEPTRACK_BRANCH} == *"$GITHUB_BASE_REF"* ]]; then
-      echo "TIZONA: Run Dependency Track action"
-      /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
+      if [ $DTRACK_KEY ];then
+        echo "TIZONA: Run Dependency Track action"
+        /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
+      else
+        echo "TIZONA: No Dependency Track key was found. Skipping Dependency Track check"
+      fi
     else
       echo "TIZONA: Skipping Dependency Track action. Dependency Track action only runs on tags or on the master/main branch."
       echo "TIZONA: Current action: $GITHUB_REF_TYPE"
@@ -210,8 +213,12 @@ if [[ ${CODE_ENABLE} == *"true"* ]]; then
       CODE_ARGS="$CODE_ARGS $SONAR_REPORT_PATH"
     fi
 
-    echo "TIZONA: Run code check action"
-    /bin/bash /app/code.sh $CODE_ARGS &
+    if [ $SONAR_HOST ];then
+      echo "TIZONA: Run code check action"
+      /bin/bash /app/code.sh $CODE_ARGS &
+    else 
+      echo "TIZONA: Sonar arguments needs al leats a default value. Skipping code check action"
+    fi
 
 else
     echo "TIZONA: Skip code check action"
