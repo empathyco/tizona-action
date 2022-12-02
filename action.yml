@@ -109,14 +109,6 @@ inputs:
     description: 'Dependency check format.  Required if code checker is enabled.'
     default: 'HTML'
     required: false
-  trivy_config_scan-ref:
-    description: 'Config scan reference. Required if config checker is enabled.'
-    required: false
-    default: '.'
-  trivy_repo_scan-ref:
-    description: 'FS scan reference. Required if config checker is enabled.'
-    required: false
-    default: '.'
   trivy_repo_ignore-unfixed:
     description: 'Ignore unfixed vulnerabilities. Required if config checker is enabled.'
     required: false
@@ -162,15 +154,13 @@ runs:
     - '-r ${{ inputs.depcheck_project }}'
     - '-s ${{ inputs.depcheck_path }}'
     - '-t ${{ inputs.depcheck_format }}'
-    - '-u ${{ inputs.trivy_config_scan-ref }}'
-    - '-v ${{ inputs.trivy_severity }}'
-    - '-w ${{ inputs.trivy_repo_scan-ref }}'
-    - '-x ${{ inputs.trivy_repo_ignore-unfixed }}'
-    - '-y ${{ inputs.trivy_repo_vuln }}'
-    - '-z ${{ inputs.trivy_timeout }}'
-    - '-A ${{ inputs.deptrack_branch }}'
-    - '-B ${{ inputs.defectdojo_url }}'
-    - '-C ${{ inputs.defectdojo_token }}'
-    - '-D ${{ inputs.nexus_url }}'
-    - '-E ${{ inputs.nexus_user }}'
-    - '-F ${{ inputs.nexus_pass }}'
+    - '-u ${{ inputs.trivy_severity }}'
+    - '-v ${{ inputs.trivy_repo_ignore-unfixed }}'
+    - '-w ${{ inputs.trivy_repo_vuln }}'
+    - '-x ${{ inputs.trivy_timeout }}'
+    - '-y ${{ inputs.deptrack_branch }}'
+    - '-z ${{ inputs.defectdojo_url }}'
+    - '-A ${{ inputs.defectdojo_token }}'
+    - '-B ${{ inputs.nexus_url }}'
+    - '-C ${{ inputs.nexus_user }}'
+    - '-D ${{ inputs.nexus_pass }}'
