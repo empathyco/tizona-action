@@ -225,15 +225,12 @@ else
 fi
 
 if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
-    echo "TIZONA: Run configuration check action"
-
     REVIEWDOG_ARGS=""
 
     if [ $REVIEWDOG_GIT_TOKEN ];then
       REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_GIT_TOKEN"
     else
       echo "TIZONA: ReviewDog requires GitHub token. Exit"
-      exit 1
     fi
 
     if [ $REVIEWDOG_DIR ];then
@@ -289,7 +286,12 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       exit 1
     fi
 
-    /bin/bash /app/config.sh $ACTION_MODE $REVIEWDOG_ARGS $TRIVY_CONFIG_ARGS $TRIVY_REPO_ARGS $TRIVY_COMMON_ARGS &
+    if [ $REVIEWDOG_GIT_TOKEN ];then
+      echo "TIZONA: Run configuration check action"
+      /bin/bash /app/config.sh $ACTION_MODE $REVIEWDOG_ARGS $TRIVY_CONFIG_ARGS $TRIVY_REPO_ARGS $TRIVY_COMMON_ARGS &
+    else
+      echo "TIZONA: No ReviewDog token detected. Skipping config checker"
+    fi
 
 else
     echo "TIZONA: Skip configuration check action"
@@ -301,13 +303,11 @@ if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
 
     if [ $REVIEWDOG_GIT_TOKEN ];then
       SECRETS_ARGS="$SECRETS_ARGS $REVIEWDOG_GIT_TOKEN"
+      echo "TIZONA: Run secrets leaks action"
+      /bin/bash /app/secrets_leaks.sh $SECRETS_ARGS &
     else
       echo "TIZONA: ReviewDog requires GitHub token. Exit"
-      exit 1
     fi
-
-    echo "TIZONA: Run secrets leaks action"
-    /bin/bash /app/secrets_leaks.sh $SECRETS_ARGS &
 else
     echo "TIZONA: Skip secrets leaks action"
 fi
