@@ -45,7 +45,7 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:" o; 
          export REVIEWDOG_GIT_TOKEN=${OPTARG}
        ;;
        o)
-         export REVIEWDOG_DIR=${OPTARG}
+         export TERRAFORM_DIR=${OPTARG}
        ;;
        p)
          export REVIEWDOG_LVL=${OPTARG}
@@ -233,8 +233,8 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       echo "TIZONA: ReviewDog requires GitHub token. Exit"
     fi
 
-    if [ $REVIEWDOG_DIR ];then
-      REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_DIR"
+    if [ $TERRAFORM_DIR ];then
+      REVIEWDOG_ARGS="$REVIEWDOG_ARGS $TERRAFORM_DIR"
     else
       echo "TIZONA: ReviewDog requires path to review. Exit"
       exit 1

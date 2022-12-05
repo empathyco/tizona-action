@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 REVIEWDOG_GIT_TOKEN=$1
-REVIEWDOG_DIR=$2
+TERRAFORM_DIR=$2
 REVIEWDOG_LVL=$3
 REVIEWDOG_REPORTER=$4
 
@@ -12,8 +12,6 @@ fi
 
 # Fail fast on errors, unset variables, and failures in piped commands
 set -Eeuo pipefail
-
-cd "${GITHUB_WORKSPACE}/${REVIEWDOG_DIR}" || { echo "TIZONA - Tfsec review: Terraform directory not found, skipping." ; exit 1;}
 
 echo "TIZONA - Tfsec review: Print tfsec details ..."
 tfsec_v=`tfsec --version`
@@ -30,7 +28,7 @@ set +Eeuo pipefail
 if [ "pull_request" = "$GITHUB_EVENT_NAME" ]; then
   TFSEC_DIRS=$(git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} --dirstat | awk -F '% ' '{print $2}')
 else
-  TFSEC_DIRS="."
+  TFSEC_DIRS=${TERRAFORM_DIR}
 fi
 
 for dir in $TFSEC_DIRS

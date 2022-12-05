@@ -28,7 +28,7 @@ Checks and analyzes the security of the code added to the specified repository.
 | config_enable | Enables configuration check. | `false` | true |
 | secrets_enable | Enables secrets check. | `false` | true |
 | reviewdog_github_token | GitHub token. Required if config checker is enabled. | `false` |  |
-| reviewdog_working_directory | Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled. | `false` | . |
+| terraform_working_directory | Directory to run the Tfsec action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled. | `false` | . |
 | reviewdog_level | Report level for reviewdog [info,warning,error]. Required if config checker is enabled. | `false` | error |
 | reviewdog_reporter | Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required for config checker and for secrets leaks checker. | `false` | github-pr-check |
 | depcheck_project | Dependency check project. Required if code checker is enabled. | `false` | MY_PROJECT |
@@ -132,8 +132,8 @@ jobs:
           deptrack_url: ${{ secrets.DEPENDENCY_TRACK_API_URL }}
           deptrack_key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
           deptrack_language: 'java'
+          terraform_working_directory: 'terraform'
           reviewdog_github_token: ${{ secrets.github_token }}
-          reviewdog_working_directory: 'terraform'
           reviewdog_level: 'info'
           reviewdog_reporter: 'github-pr-review'
           depcheck_project: 'example-project'

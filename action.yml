@@ -85,7 +85,7 @@ inputs:
   reviewdog_github_token:
     description: 'GitHub token. Required if config checker or secrets checker are enabled.'
     required: false
-  reviewdog_working_directory:
+  terraform_working_directory:
     description: 'Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled.'
     default: '.'
     required: false
@@ -148,7 +148,7 @@ runs:
     - '-l ${{ inputs.config_enable }}'
     - '-m ${{ inputs.secrets_enable }}'
     - '-n ${{ inputs.reviewdog_github_token }}'
-    - '-o ${{ inputs.reviewdog_working_directory }}'
+    - '-o ${{ inputs.terraform_working_directory }}'
     - '-p ${{ inputs.reviewdog_level }}'
     - '-q ${{ inputs.reviewdog_reporter }}'
     - '-r ${{ inputs.depcheck_project }}'
