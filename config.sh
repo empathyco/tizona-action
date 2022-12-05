@@ -20,7 +20,7 @@ TRIVY_TIMEOUT=${9}
 echo "TIZONA - Configuration analysis: Run Tfsec"
 /bin/bash /app/tfsec_check.sh ${REVIEWDOG_GIT_TOKEN} ${REVIEWDOG_DIR} ${REVIEWDOG_LVL} ${REVIEWDOG_REPORTER}
 
-if [[ *"pull_request"* == ${GITHUB_EVENT_NAME} ]]; then
+if [ "pull_request" = "$GITHUB_EVENT_NAME" ]; then
   echo "TTIZONA - Configuration analysis: Trivy configuration enabled for Pull Requests"
 
   echo "TIZONA - Configuration analysis: Run Trivy for config"
