@@ -29,6 +29,11 @@ if [ $TRIVY_TIMEOUT ];then
   TIMEOUT="$TIMEOUT --timeout $TRIVY_TIMEOUT"
 fi
 
+echo ${GITHUB_BASE_REF}
+echo ${GITHUB_HEAD_REF} 
+echo "git diff ${GITHUB_BASE_REF} ${GITHUB_HEAD_REF} --dirstat | awk -F '% ' '{print $2}'"
+TRIVY_DIRS=$(git diff ${GITHUB_BASE_REF} ${GITHUB_HEAD_REF} --dirstat | awk -F '% ' '{print $2}')
+
 for dir in $TRIVY_DIRS
 do 
   echo "TIZONA - Trivy repository analysis of $dir: Building SARIF config report"
