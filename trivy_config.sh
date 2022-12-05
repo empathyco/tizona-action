@@ -19,8 +19,6 @@ if [ $TRIVY_TIMEOUT ];then
   TIMEOUT="$TIMEOUT --timeout $TRIVY_TIMEOUT"
 fi
 
-echo ${GITHUB_BASE_REF}
-echo ${GITHUB_HEAD_REF} 
 TRIVY_DIRS=$(git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} --dirstat | awk -F '% ' '{print $2}')
 
 for dir in $TRIVY_DIRS

@@ -27,12 +27,28 @@ set +Eeuo pipefail
 
 # shellcheck disable=SC2086
 
-tfsec --format=json --force-all-dirs . | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error=true 
+if [ "pull_request" = "$GITHUB_EVENT_NAME" ]; then
+  TFSEC_DIRS=$(git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} --dirstat | awk -F '% ' '{print $2}')
+else
+  TFSEC_DIRS="."
+fi
 
-tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
+for dir in $TFSEC_DIRS
+do 
+  tfsec --format=json --force-all-dirs $dir | jq -r -f "/app/to-rdjson.jq" | reviewdog -f=rdjson -name="tfsec" -reporter="${REVIEWDOG_REPORTER}" -level="${REVIEWDOG_LVL}" -fail-on-error=true 
 
-echo "TIZONA - Tfsec review: tfsec-return-code: ${tfsec_return}"
-echo "TIZONA - Tfsec review: reviewdog-return-code: ${reviewdog_return}"
+  tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 
-echo "TIZONA - Tfsec review: Tfsec exit ${exit_code}"
+  echo "TIZONA - Tfsec review of $dir: tfsec-return-code: ${tfsec_return}"
+  echo "TIZONA - Tfsec review of $dir: reviewdog-return-code: ${reviewdog_return}"
+
+  echo "TIZONA - Tfsec review of $dir: Tfsec exit ${exit_code}"
+
+  if [[ ${exit_code} != *"0"* ]]; then
+    echo "TIZONA - Tfsec review of $dir: exit code is not 0"
+    break
+  fi
+
+done
+
 exit ${exit_code}
