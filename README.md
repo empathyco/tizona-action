@@ -121,7 +121,7 @@ jobs:
   security_check_job:
     runs-on: [self-hosted, platform]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
