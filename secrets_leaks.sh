@@ -14,6 +14,8 @@ git config --global --add safe.directory /github/workspace
 echo "TIZONA - Secrets leaks analysis: Running gitleaks"
 /gitleaks detect --no-git -f sarif --exit-code 0 -r $FILE_REPORT
 
+set +Eeuo pipefail
+
 echo "TIZONA - Secrets leaks analysis: Formatting findings"
 jq '.runs[0].results[] | "\(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.endLine):\(.locations[0].physicalLocation.region.startColumn): \(.message.text)"' < $FILE_REPORT | sed 's/"//g'
 
