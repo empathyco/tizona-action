@@ -42,6 +42,14 @@ inputs:
     description: 'Dependency track DefectDojo token for its integration. Not required.'
     required: false
     default: 'DEFECTDOJO_TOKEN'
+  defectdojo_product:
+    description: 'Dependency track DefectDojo product name for its integration. Not required.'
+    required: false
+    default: 'Tizona'
+  defectdojo_engagement:
+    description: 'Dependency track DefectDojo engagement name for its integration. Not required.'
+    required: false
+    default: 'TizonaEngagement'
   nexus_url:
     description: 'Dependency track Nexus URL for maven and java review. Not required'
     required: false
@@ -164,3 +172,5 @@ runs:
     - '-B ${{ inputs.nexus_url }}'
     - '-C ${{ inputs.nexus_user }}'
     - '-D ${{ inputs.nexus_pass }}'
+    - '-E ${{ inputs.defectdojo_product }}'
+    - '-F ${{ inputs.defectdojo_engagement }}'

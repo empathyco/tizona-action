@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
-DTRACK_URL=$1
-DTRACK_KEY=$2
-DTRACK_LANGUAGE=$3
-DTRACK_DIR=$4
-DEFECTDOJO_URL=$5
-DEFECTDOJO_TOKEN=$6
-NEXUS_URL=$7
-NEXUS_USER=$8
-NEXUS_PASS=$9
+DTRACK_URL=${1}
+DTRACK_KEY=${2}
+DTRACK_LANGUAGE=${3}
+DTRACK_DIR=${4}
+DEFECTDOJO_URL=${5}
+DEFECTDOJO_TOKEN=${6}
+DEFECTDOJO_PRODUCT=${7}
+DEFECTDOJO_ENGAGEMENT=${8}
+NEXUS_URL=${9}
+NEXUS_USER=${10}
+NEXUS_PASS=${11}
 
 INSECURE="--insecure"
 #VERBOSE="--verbose"
@@ -135,7 +137,7 @@ else
     current_date=$(date '+%Y-%m-%d')
 
     echo "TIZONA - Dependency Track: Import Trivy scan to DefectDojo"
-    curl -X POST "${DEFECTDOJO_URL}/api/v2/import-scan/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data"  -H "Authorization: Token ${DEFECTDOJO_TOKEN}" -F "minimum_severity=High" -F "active=true" -F "verified=true" -F "close_old_findings=false" -F "push_to_jira=false" -F "file=@trivy_scan.json" -F "product_name=Tizona" -F "scan_date=${current_date}" -F "engagement_name=TizonaEngagement" -F "scan_type=Trivy Scan"
+    curl -X POST "${DEFECTDOJO_URL}/api/v2/import-scan/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data"  -H "Authorization: Token ${DEFECTDOJO_TOKEN}" -F "minimum_severity=High" -F "active=true" -F "verified=true" -F "close_old_findings=false" -F "push_to_jira=false" -F "file=@trivy_scan.json" -F "product_name=${DEFECTDOJO_PRODUCT}" -F "scan_date=${current_date}" -F "engagement_name=${DEFECTDOJO_ENGAGEMENT}" -F "scan_type=Trivy Scan"
 fi
 
 # UPLOAD BoM to Dependency track server
