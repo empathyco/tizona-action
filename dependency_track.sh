@@ -40,7 +40,12 @@ case $DTRACK_LANGUAGE in
     "python")
         cd $DTRACK_DIR
         echo "TIZONA - Dependency Track: [*]  Processing Python BoM"
-        apt-get install --no-install-recommends -y python3 python3-pip
+        apt-get install --no-install-recommends -y python3 python3-pip python3-packaging
+        echo "TIZONA - Dependency Track: Upgrade pip"
+        pip3 install --upgrade pip
+        echo "TIZONA - Dependency Track: pip install packagin"
+        pip3 install packaging==21.3
+        # Current version 22.0 fail
         freeze=$(pip freeze > requirements.txt)
         if [ ! $? = 0 ]; then
             echo "TIZONA - Dependency Track: [-] Error executing pip freeze to get a requirements.txt with frozen parameters. Stopping the action!"
@@ -48,7 +53,7 @@ case $DTRACK_LANGUAGE in
         fi
         pip install cyclonedx-bom
         path="$GITHUB_WORKSPACE/bom.xml"
-        BoMResult=$(cyclonedx-py -o bom.xml)
+        BoMResult=$(cyclonedx-py -o bom.xml -r)
         cd $GITHUB_WORKSPACE
         ;;
     
