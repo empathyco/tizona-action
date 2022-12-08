@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -92,6 +92,12 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:" o; 
        D)
          export NEXUS_PASS=${OPTARG}
        ;;
+       E)
+         export DEFECTDOJO_PRODUCT=${OPTARG}
+       ;;
+       F)
+         export DEFECTDOJO_ENGAGEMENT=${OPTARG}
+       ;;
   esac
 done
 
@@ -142,6 +148,14 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
 
     if [ $DEFECTDOJO_TOKEN ];then
       DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_TOKEN"
+    fi
+
+    if [ $DEFECTDOJO_PRODUCT ];then
+      DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_PRODUCT"
+    fi
+
+    if [ $DEFECTDOJO_ENGAGEMENT ];then
+      DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_ENGAGEMENT"
     fi
 
     if [ $NEXUS_URL ];then
