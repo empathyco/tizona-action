@@ -179,13 +179,12 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
           echo "TIZONA: No Dependency Track key was found. Skipping Dependency Track check"
         fi
       else
-        echo "TIZONA: Skipping Dependency Track action. Dependency Track action only runs on push on the $DEPTRACK_BRANCH branch."
-        echo "TIZONA: Current destiny branch: $GITHUB_REF, and must be $DEPTRACK_BRANCH"
+        echo "TIZONA: Skipping Dependency Track action."
+        echo "TIZONA: Current ref: $GITHUB_REF, and must contain: $DEPTRACK_BRANCH"
       fi
     else
-      echo "TIZONA: Skipping Dependency Track action. Dependency Track action only runs on push on the $DEPTRACK_BRANCH branch."
-      echo "TIZONA: Current action: $GITHUB_EVENT_NAME"
-      echo "TIZONA: Current destiny branch: $GITHUB_REF, and must be $DEPTRACK_BRANCH"
+      echo "TIZONA: Skipping Dependency Track action."
+      echo "TIZONA: Current action: $GITHUB_EVENT_NAME and must be push."
     fi
 else
     echo "TIZONA: Skip Dependency Track action"
