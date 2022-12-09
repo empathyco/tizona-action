@@ -171,7 +171,9 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
     fi
 
     if [ "push" = "$GITHUB_EVENT_NAME" ]; then
-      if [[ "$GITHUB_REF" == *"$DEPTRACK_BRANCH"* ]]; then
+      MY_REF=${GITHUB_REF// /.}
+      MY_BRANCH=${DEPTRACK_BRANCH// /.}
+      if [[ "$MY_REF" == *"$MY_BRANCH"* ]]; then
         if [ $DTRACK_KEY ];then
           echo "TIZONA: Run Dependency Track action"
           /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
@@ -180,7 +182,7 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
         fi
       else
         echo "TIZONA: Skipping Dependency Track action."
-        echo "TIZONA: Current ref: $GITHUB_REF, and must contain: $DEPTRACK_BRANCH"
+        echo "TIZONA: Current ref: $MY_REF, and must contain: $MY_BRANCH"
       fi
     else
       echo "TIZONA: Skipping Dependency Track action."
