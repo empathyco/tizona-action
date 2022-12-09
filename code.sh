@@ -18,16 +18,22 @@ if [[ -f $SONAR_PROPERTIES ]]; then
   SONAR_LOGIN=$6
   SONAR_PROJECT=`sed -n 's/^sonar.projectKey=\(.*\)/\1/p' < $SONAR_PROPERTIES`
   SONAR_EXCLUSION=`sed -n 's/^sonar.exclusions=\(.*\)/\1/p' < $SONAR_PROPERTIES`
+  SONAR_JAVA_BINARIES`sed -n 's/^= **/*.java=\(.*\)/\1/p' < $SONAR_PROPERTIES`
+
+  if [ $SONAR_JAVA_BINARIES ]
+    SONAR_ADD_ARGS=`-Dsonar.java.binaries=$SONAR_JAVA_BINARIES`
+  fi
 
   echo "TIZONA - Code analysis: Run SonarQube"
-  echo "TIZONA - Code analysis: sonar-scanner -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.sources=$SONAR_SOURCES -Dsonar.host.url=$SONAR_HOST -Dsonar.login=$SONAR_LOGIN -Dsonar.exclusions=$SONAR_EXCLUSION"
+  echo "TIZONA - Code analysis: sonar-scanner -Dsonar.projectKey=$SONAR_PROJECT -Dsonar.sources=$SONAR_SOURCES -Dsonar.host.url=$SONAR_HOST -Dsonar.login=$SONAR_LOGIN -Dsonar.exclusions=$SONAR_EXCLUSION $SONAR_ADD_ARGS"
 
   sonar-scanner \
     -Dsonar.projectKey=$SONAR_PROJECT \
     -Dsonar.sources=$SONAR_SOURCES \
     -Dsonar.host.url=$SONAR_HOST \
     -Dsonar.login=$SONAR_LOGIN \
-    -Dsonar.exclusions=$SONAR_EXCLUSION
+    -Dsonar.exclusions=$SONAR_EXCLUSION \
+    $SONAR_ADD_ARGS
 
   echo "TIZONA - Code analysis: SonarQube scan finished"
   echo "TIZONA - Code analysis: Run quality gate scan"
