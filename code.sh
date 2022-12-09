@@ -20,7 +20,7 @@ if [[ -f $SONAR_PROPERTIES ]]; then
   SONAR_EXCLUSION=`sed -n 's/^sonar.exclusions=\(.*\)/\1/p' < $SONAR_PROPERTIES`
   SONAR_JAVA_BINARIES`sed -n 's/^= **/*.java=\(.*\)/\1/p' < $SONAR_PROPERTIES`
 
-  if [ $SONAR_JAVA_BINARIES ]
+  if [ $SONAR_JAVA_BINARIES ]; then
     SONAR_ADD_ARGS=`-Dsonar.java.binaries=$SONAR_JAVA_BINARIES`
   fi
 
