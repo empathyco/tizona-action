@@ -18,7 +18,7 @@ if [[ -f $SONAR_PROPERTIES ]]; then
   SONAR_LOGIN=$6
   SONAR_PROJECT=`sed -n 's/^sonar.projectKey=\(.*\)/\1/p' < $SONAR_PROPERTIES`
   SONAR_EXCLUSION=`sed -n 's/^sonar.exclusions=\(.*\)/\1/p' < $SONAR_PROPERTIES`
-  SONAR_JAVA_BINARIES=`sed -n 's/^=sonar.java.binaries=\(.*\)/\1/p' < $SONAR_PROPERTIES`
+  SONAR_JAVA_BINARIES=`sed -n 's/^sonar.java.binaries=\(.*\)/\1/p' < $SONAR_PROPERTIES`
 
   SONAR_ADD_ARGS=""
   if [ $SONAR_JAVA_BINARIES ]; then
