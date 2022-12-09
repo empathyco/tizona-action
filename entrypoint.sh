@@ -170,7 +170,7 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
       DTRACK_ARGS="$DTRACK_ARGS $NEXUS_PASS"
     fi
 
-    if [ "push" = "$GITHUB_EVENT_NAME" ]  && [ "$DEPTRACK_BRANCH" = "$GITHUB_BASE_REF" ]; then
+    if [[ *"push"* == "$GITHUB_EVENT_NAME"  &&  "$GITHUB_REF" == *"$DEPTRACK_BRANCH"* ]]; then
       if [ $DTRACK_KEY ];then
         echo "TIZONA: Run Dependency Track action"
         /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
