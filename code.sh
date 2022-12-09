@@ -20,11 +20,12 @@ if [[ -f $SONAR_PROPERTIES ]]; then
   SONAR_EXCLUSION=`sed -n 's/^sonar.exclusions=\(.*\)/\1/p' < $SONAR_PROPERTIES`
   SONAR_JAVA_BINARIES=`sed -n 's/^=sonar.java.binaries=\(.*\)/\1/p' < $SONAR_PROPERTIES`
 
+  SONAR_ADD_ARGS=""
   if [ $SONAR_JAVA_BINARIES ]; then
-    echo "TIZONA - Code analysis: SonarQube java binaries properties not found"
-    SONAR_ADD_ARGS=`-Dsonar.java.binaries=$SONAR_JAVA_BINARIES`
+    echo "TIZONA - Code analysis: SonarQube java binaries properties found"
+    SONAR_ADD_ARGS="-Dsonar.java.binaries=$SONAR_JAVA_BINARIES"
   else
-    echo "TIZONA - Code analysis: SonarQube java binaries properties file found"
+    echo "TIZONA - Code analysis: SonarQube java binaries properties not found"
   fi
 
   echo "TIZONA - Code analysis: Run SonarQube"
