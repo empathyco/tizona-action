@@ -106,6 +106,15 @@ _Plugin_
 
 Note that you must **change** the `<phase>` tag value to `compile` (`package` by default), otherwise the action won't even generate the bom.xml. This action will compile your Maven Java project and expects to find a resulting `bom.xml`. 
 
+### SonarQube
+
+We will need the file `sonar-project.properties` with at least, the following content: 
+
+```
+sonar.projectKey=<PROJECT_KEY>
+sonar.dependencyCheck.htmlReportPath=<REPORT_PATH>
+sonar.exclusions=<EXCLUSIONS>
+```
 
 ## Workflow 
 
