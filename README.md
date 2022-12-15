@@ -108,7 +108,7 @@ Note that you must **change** the `<phase>` tag value to `compile` (`package` by
 
 ### SonarQube
 
-We will need the file `sonar-project.properties` with at least, the following content: 
+We will need the file `sonar-project.properties` in the root of the repository to be analyzed, with at least, the following content: 
 
 ```
 sonar.projectKey=<PROJECT_KEY>
