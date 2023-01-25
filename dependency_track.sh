@@ -79,11 +79,11 @@ case $DTRACK_LANGUAGE in
             exit 1
         fi
 
-        wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
-        tar xzvf apache-maven-3.8.6-bin.tar.gz
-        export PATH=/opt/apache-maven-3.8.6/bin:$PATH
-        rm apache-maven-3.8.6-bin.tar.gz
-        mv apache-maven-3.8.6 /opt
+        wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+        tar xzvf apache-maven-3.8.7-bin.tar.gz
+        export PATH=/opt/apache-maven-3.8.7/bin:$PATH
+        rm apache-maven-3.8.7-bin.tar.gz
+        mv apache-maven-3.8.7 /opt
 
         echo "TIZONA - Dependency Track: Maven version:"
         mvn -v
