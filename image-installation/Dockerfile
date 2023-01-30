@@ -1,4 +1,3 @@
-# Container image that runs your code
 FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -9,16 +8,17 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # using --no-install-recommends to reduce image size
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install --no-install-recommends -y git npm golang lsb-release openjdk-17-jdk openjdk-17-jre \
+    && apt-get install --no-install-recommends -y git npm golang lsb-release \
     curl jq procps file build-essential apt-transport-https unzip wget nodejs gnupg snapd \
     libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g 
 
-RUN go get github.com/ozonru/cyclonedx-go/cmd/cyclonedx-go && cp /root/go/bin/cyclonedx-go /usr/bin/
 
-RUN echo "" >> .dockerenv
-RUN curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | NONINTERACTIVE=1 /bin/bash -s 
-ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
-RUN brew install cyclonedx/cyclonedx/cyclonedx-cli
+ENV JAVA_HOME_8=/opt/java/java8
+COPY --from=eclipse-temurin:8 /opt/java/openjdk $JAVA_HOME_8
+ENV JAVA_HOME=/opt/java/java17
+COPY --from=eclipse-temurin:17 /opt/java/openjdk $JAVA_HOME
+ENV PATH "${JAVA_HOME}/bin:${PATH}"
+
 
 ##################################################################
 # Secrets leaks requirements
@@ -76,6 +76,3 @@ RUN wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.2.1/
     rm dependency-check-7.2.1-release.zip 
 
 ENV PATH=$PATH:/var/opt/dependency-check/bin/
-ENV JAVA_HOME="/lib/jvm/java-17-openjdk-amd64"
-
-RUN /var/opt/dependency-check/bin/dependency-check.sh --updateonly
