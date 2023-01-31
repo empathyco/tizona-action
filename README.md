@@ -59,8 +59,6 @@ This action is a `docker` action.
 
 It is necessary to add the CycloneDX plugin to your project (only Maven/Java projects). Get the cyclonedx-maven-plugin. From the cyclonedx-maven-plugin repository, you'll be able to get the code below. Edit your `pom.xml` file by adding the plugin.
 
-**NOTE: Tizona uses Java 17 version.**
-
 Example
 
 _Properties_
