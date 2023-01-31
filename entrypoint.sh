@@ -120,6 +120,9 @@ else
 fi
 
 export PATH=${JAVA_HOME}/bin:$PATH
+echo $PATH
+echo $JAVA_HOME
+java -version
 
 echo "TIZONA: Starting security checks"
 

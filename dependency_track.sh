@@ -83,7 +83,7 @@ case $DTRACK_LANGUAGE in
         echo "TIZONA - Dependency Track: Maven version:"
         mvn -v
         echo "JAVA VERSION:"
-        java --version
+        java -version
 
         if [[ ${NEXUS_URL} == *"NEXUS_URL"* ]]; then
             echo "TIZONA - Dependency Track: Nexus access not established. No Nexus libraries will be downloaded"
