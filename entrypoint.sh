@@ -111,7 +111,7 @@ else
   echo "TIZONA: Permissive mode enabled. The action will continue even if errors are encountered in the execution of the checks. "
 fi
 
-if [[ ${ACTION_MODE} == *"8"* ]]; then
+if [[ ${JAVA_VERSION_TIZONA} == *"8"* ]]; then
   echo "TIZONA: Set Java 8 version to JAVA_HOME"
   export JAVA_HOME="/opt/java/java8"
 else
