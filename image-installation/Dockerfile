@@ -70,4 +70,4 @@ RUN /var/opt/dependency-check/bin/dependency-check.sh --updateonly
 # remove unnecessary packages
 ##################################################################
 
-RUN apt remove -y python2 && apt autoremove --purge -y
+RUN apt remove -y python2
