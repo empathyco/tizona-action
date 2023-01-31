@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # using --no-install-recommends to reduce image size
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install --no-install-recommends -y git npm lsb-release unzip \
+    && apt-get install --no-install-recommends -y git lsb-release unzip \
     curl jq procps file build-essential apt-transport-https wget nodejs gnupg snapd \
     libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g python-is-python3
 
@@ -70,4 +70,4 @@ RUN /var/opt/dependency-check/bin/dependency-check.sh --updateonly
 # remove unnecessary packages
 ##################################################################
 
-RUN apt remove -y python2
+RUN apt remove -y python2 && apt autoremove --purge -y
