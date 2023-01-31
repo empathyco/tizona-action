@@ -10,12 +10,14 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Tool installation changed. 
+- Tools installation changed in Dockerfile.
+- Cyclonedx cli installation from packages. 
 
 ### Removed
 
 - Dependencies installation.
 - Golang check from Dependency Track
+- Python v2.7
 
 ## v2 2022-12-07
 
