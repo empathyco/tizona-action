@@ -109,6 +109,18 @@ inputs:
     description: 'Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required if config checker is enabled.'
     default: 'github-pr-check'
     required: false
+  depcheck_project:
+    description: 'Dependency check project. Required if code checker is enabled.'
+    default: 'MY_PROJECT'
+    required: false
+  depcheck_path:
+    description: 'Dependency check path.  Required if code checker is enabled.'
+    default: '.'
+    required: false  
+  depcheck_format:
+    description: 'Dependency check format.  Required if code checker is enabled.'
+    default: 'HTML'
+    required: false
   trivy_repo_ignore-unfixed:
     description: 'Ignore unfixed vulnerabilities. Required if config checker is enabled.'
     required: false
@@ -151,16 +163,19 @@ runs:
     - '-o ${{ inputs.terraform_working_directory }}'
     - '-p ${{ inputs.reviewdog_level }}'
     - '-q ${{ inputs.reviewdog_reporter }}'
-    - '-r ${{ inputs.trivy_severity }}'
-    - '-s ${{ inputs.trivy_repo_ignore-unfixed }}'
-    - '-t ${{ inputs.trivy_repo_vuln }}'
-    - '-u ${{ inputs.trivy_timeout }}'
-    - '-v ${{ inputs.deptrack_branch }}'
-    - '-w ${{ inputs.defectdojo_url }}'
-    - '-x ${{ inputs.defectdojo_token }}'
-    - '-y ${{ inputs.nexus_url }}'
-    - '-z ${{ inputs.nexus_user }}'
-    - '-A ${{ inputs.nexus_pass }}'
-    - '-B ${{ inputs.defectdojo_product }}'
-    - '-C ${{ inputs.defectdojo_engagement }}'
-    - '-D ${{ inputs.java_version }}'
+    - '-r ${{ inputs.depcheck_project }}'
+    - '-s ${{ inputs.depcheck_path }}'
+    - '-t ${{ inputs.depcheck_format }}'
+    - '-u ${{ inputs.trivy_severity }}'
+    - '-v ${{ inputs.trivy_repo_ignore-unfixed }}'
+    - '-w ${{ inputs.trivy_repo_vuln }}'
+    - '-x ${{ inputs.trivy_timeout }}'
+    - '-y ${{ inputs.deptrack_branch }}'
+    - '-z ${{ inputs.defectdojo_url }}'
+    - '-A ${{ inputs.defectdojo_token }}'
+    - '-B ${{ inputs.nexus_url }}'
+    - '-C ${{ inputs.nexus_user }}'
+    - '-D ${{ inputs.nexus_pass }}'
+    - '-E ${{ inputs.defectdojo_product }}'
+    - '-F ${{ inputs.defectdojo_engagement }}'
+    - '-G ${{ inputs.java_version }}'

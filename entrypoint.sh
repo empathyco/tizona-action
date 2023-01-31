@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -54,42 +54,54 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:" o; 
          export REVIEWDOG_REPORTER=${OPTARG}
        ;;
        r)
+         export DEPCHECK_PROJECT=${OPTARG}
          export TRIVY_SEVERITY=${OPTARG}
        ;;
        s)
+         export DEPCHECK_PATH=${OPTARG}
          export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
        t)
+         export DEPCHECK_FORMAT=${OPTARG}
          export TRIVY_REPO_VULN=${OPTARG}
        ;;
        u)
-         export TRIVY_TIMEOUT=${OPTARG}
+         export TRIVY_SEVERITY=${OPTARG}
        ;;
        v)
-         export DEPTRACK_BRANCH=${OPTARG}
+         export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
        w)
-         export DEFECTDOJO_URL=${OPTARG}
+         export TRIVY_REPO_VULN=${OPTARG}
        ;;
        x)
-         export DEFECTDOJO_TOKEN=${OPTARG}
+         export TRIVY_TIMEOUT=${OPTARG}
        ;;
        y)
-         export NEXUS_URL=${OPTARG}
+         export DEPTRACK_BRANCH=${OPTARG}
        ;;
        z)
-         export NEXUS_USER=${OPTARG}
+         export DEFECTDOJO_URL=${OPTARG}
        ;;
        A)
-         export NEXUS_PASS=${OPTARG}
+         export DEFECTDOJO_TOKEN=${OPTARG}
        ;;
        B)
-         export DEFECTDOJO_PRODUCT=${OPTARG}
+         export NEXUS_URL=${OPTARG}
        ;;
        C)
-         export DEFECTDOJO_ENGAGEMENT=${OPTARG}
+         export NEXUS_USER=${OPTARG}
        ;;
        D)
+         export NEXUS_PASS=${OPTARG}
+       ;;
+       E)
+         export DEFECTDOJO_PRODUCT=${OPTARG}
+       ;;
+       F)
+         export DEFECTDOJO_ENGAGEMENT=${OPTARG}
+       ;;
+       G)
          export JAVA_VERSION_TIZONA=${OPTARG}
        ;;
   esac
@@ -198,6 +210,27 @@ fi
 if [[ ${CODE_ENABLE} == *"true"* ]]; then
 
     CODE_ARGS=""
+
+    if [ $DEPCHECK_PROJECT ];then
+      CODE_ARGS="$CODE_ARGS $DEPCHECK_PROJECT"
+    else
+      echo "TIZONA: Dependency Check requires project review. Exit"
+      exit 1
+    fi
+
+    if [ $DEPCHECK_PATH ];then
+      CODE_ARGS="$CODE_ARGS $DEPCHECK_PATH"
+    else
+      echo "TIZONA: Dependency Check requires path review. Exit"
+      exit 1
+    fi
+
+    if [ $DEPCHECK_FORMAT ];then
+      CODE_ARGS="$CODE_ARGS $DEPCHECK_FORMAT"
+    else
+      echo "TIZONA: Dependency Check requires output format. Exit"
+      exit 1
+    fi
 
     if [ $SONAR_SOURCES ];then
       CODE_ARGS="$CODE_ARGS $SONAR_SOURCES"

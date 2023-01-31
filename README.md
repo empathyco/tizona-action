@@ -34,6 +34,9 @@ Checks and analyzes the security of the code added to the specified repository.
 | terraform_working_directory | Directory to run the Tfsec action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled. | `false` | . |
 | reviewdog_level | Report level for reviewdog [info,warning,error]. Required if config checker is enabled. | `false` | error |
 | reviewdog_reporter | Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required for config checker and for secrets leaks checker. | `false` | github-pr-check |
+| depcheck_project | Dependency check project. Required if code checker is enabled. | `false` | MY_PROJECT |
+| depcheck_path | Dependency check path.  Required if code checker is enabled. | `false` | . |
+| depcheck_format | Dependency check format.  Required if code checker is enabled. | `false` | HTML |
 | trivy_repo_ignore-unfixed | Ignore unfixed vulnerabilities. Required if config checker is enabled. | `false` | false |
 | trivy_repo_vuln | comma-separated list of vulnerability types (os,library). Required if config checker is enabled. | `false` | os,library |
 | trivy_severity | Severities of vulnerabilities to be displayed. Required if config checker is enabled. | `false` | UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL |

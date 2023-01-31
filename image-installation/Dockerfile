@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # using --no-install-recommends to reduce image size
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install --no-install-recommends -y git npm lsb-release \
+    && apt-get install --no-install-recommends -y git npm lsb-release unzip \
     curl jq procps file build-essential apt-transport-https wget nodejs gnupg snapd \
     libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g python-is-python3
 
@@ -52,6 +52,19 @@ COPY --from=tfsec/tfsec /usr/bin/tfsec /usr/bin/tfsec
 COPY --from=aquasec/trivy /usr/local/bin/trivy /usr/local/bin/trivy
 COPY --from=aquasec/trivy contrib/ contrib/
 
+##################################################################
+# Dependency Check
+##################################################################
+
+RUN wget https://github.com/jeremylong/DependencyCheck/releases/download/v7.2.1/dependency-check-7.2.1-release.zip  && \
+    unzip dependency-check-7.2.1-release.zip && \
+    mv dependency-check /var/opt && \
+    rm dependency-check-7.2.1-release.zip 
+
+ENV PATH=$PATH:/var/opt/dependency-check/bin/
+ENV JAVA_HOME="/opt/java/java17"
+
+RUN /var/opt/dependency-check/bin/dependency-check.sh --updateonly
 
 ##################################################################
 # remove unnecessary packages

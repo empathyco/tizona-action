@@ -2,12 +2,20 @@
 
 set -e
 
+DEPCHECK_PROJECT=$1
+DEPCHECK_PATH=$2
+DEPCHECK_FORMAT=$3
+
+echo "TIZONA - Code analysis: Run Dependency check"
+
+/var/opt/dependency-check/bin/dependency-check.sh --project ${DEPCHECK_PROJECT} --scan ${DEPCHECK_PATH} --format ${DEPCHECK_FORMAT} --out '/github/workspace/reports' --noupdate --disableYarnAudit
+
 SONAR_PROPERTIES="sonar-project.properties"
 if [[ -f $SONAR_PROPERTIES ]]; then
   echo "TIZONA - Code analysis: SonarQube properties file found"
-  SONAR_SOURCES=$1
-  SONAR_HOST=$2
-  SONAR_LOGIN=$3
+  SONAR_SOURCES=$4
+  SONAR_HOST=$5
+  SONAR_LOGIN=$6
   SONAR_PROJECT=`sed -n 's/^sonar.projectKey=\(.*\)/\1/p' < $SONAR_PROPERTIES`
   SONAR_EXCLUSION=`sed -n 's/^sonar.exclusions=\(.*\)/\1/p' < $SONAR_PROPERTIES`
   SONAR_JAVA_BINARIES=`sed -n 's/^sonar.java.binaries=\(.*\)/\1/p' < $SONAR_PROPERTIES`
