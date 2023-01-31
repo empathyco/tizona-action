@@ -10,6 +10,10 @@ inputs:
     description: 'Enables or disables the interruption of the action in the case of finding errors in the execution of the checks.'
     required: false
     default: 'true'
+  java_version:
+    description: 'Sets the Java version to be used in the checks. Java versions available: 8, 17(default).'
+    required: false
+    default: '17'
   deptrack_enable:
     description: 'Enables Dependency Track check'
     required: false
@@ -174,3 +178,4 @@ runs:
     - '-D ${{ inputs.nexus_pass }}'
     - '-E ${{ inputs.defectdojo_product }}'
     - '-F ${{ inputs.defectdojo_engagement }}'
+    - '-G ${{ inputs.java_version }}'

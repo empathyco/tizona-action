@@ -9,10 +9,11 @@ Checks and analyzes the security of the code added to the specified repository.
 | parameter | description | required | default |
 | --- | --- | --- | --- |
 | permissive_mode | Enables or disables the interruption of the action in the case of finding errors in the execution of the checks. | `false` | true |
+| java_version | Sets the Java version to be used in the checks. Java versions available: 8, 17(default) | `false` | 17 |
 | deptrack_enable | Enables Dependency Track check. | `false` | true |
 | deptrack_url | URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_URL |
 | deptrack_key | Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_KEY |
-| deptrack_language | Programming language. Required if Dependency Track is enabled. | `false` | nodejs |
+| deptrack_language | Programming language. Languages availables: nodejs, python and java. Required if Dependency Track is enabled. | `false` | nodejs |
 | deptrack_dir | Dependency track directory path. Required if Dependency Track is enabled. | `false` | . |
 | deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
 | defectdojo_url | Dependency track DefectDojo URL for its integration. Not required. | `false` | DEFECTDOJO_URL |

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
+set -e
+
 DEPCHECK_PROJECT=$1
 DEPCHECK_PATH=$2
 DEPCHECK_FORMAT=$3
-
-set -e
 
 echo "TIZONA - Code analysis: Run Dependency check"
 

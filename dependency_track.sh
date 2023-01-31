@@ -19,6 +19,13 @@ apt-get upgrade -y
 
 # Access directory where GitHub will mount the repository code
 # $GITHUB_ variables are directly accessible in the script
+
+echo "TIZONA - Dependency Track: Install cyclondex-cli"
+wget https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.24.2/cyclonedx-linux-x64
+cp cyclonedx-linux-x64 /usr/bin/cyclonedx-cli
+chmod +x /usr/bin/cyclonedx-cli
+echo "TIZONA - Dependency Track: cyclondex-cli installed"
+
 cd $GITHUB_WORKSPACE
 
 case $DTRACK_LANGUAGE in
@@ -56,18 +63,6 @@ case $DTRACK_LANGUAGE in
         pip install cyclonedx-bom
         path="$GITHUB_WORKSPACE/bom.xml"
         BoMResult=$(cyclonedx-py -o bom.xml -r)
-        cd $GITHUB_WORKSPACE
-        ;;
-    
-    "golang")
-        cd $DTRACK_DIR
-        echo "TIZONA - Dependency Track: [*]  Processing Golang BoM"
-        if [ ! $? = 0 ]; then
-            echo "TIZONA - Dependency Track: [-] Error executing go build. Stopping the action!"
-            exit 1
-        fi
-        path="$GITHUB_WORKSPACE/bom.xml"
-        BoMResult=$(cyclonedx-go -o bom.xml)
         cd $GITHUB_WORKSPACE
         ;;
 
@@ -126,7 +121,7 @@ echo "TIZONA - Dependency Track: [*] BoM file succesfully generated"
 # Cyclonedx CLI conversion
 echo "TIZONA - Dependency Track: [*] Cyclonedx CLI conversion"
 #Does not upload to dtrack when output format = xml (every version available)
-cyclonedx convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_4
+cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_4
 
 if [[ ${DEFECTDOJO_TOKEN} == *"DEFECTDOJO_TOKEN"* ]];then
     echo "TIZONA - Dependency Track: DefectDojo integration not configured. Skipping"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -98,6 +98,9 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:"
        F)
          export DEFECTDOJO_ENGAGEMENT=${OPTARG}
        ;;
+       G)
+         export JAVA_VERSION_TIZONA=${OPTARG}
+       ;;
   esac
 done
 
@@ -108,6 +111,15 @@ else
   echo "TIZONA: Permissive mode enabled. The action will continue even if errors are encountered in the execution of the checks. "
 fi
 
+if [[ ${ACTION_MODE} == *"8"* ]]; then
+  echo "TIZONA: Set Java 8 version to JAVA_HOME"
+  export JAVA_HOME="/opt/java/java8"
+else
+  echo "TIZONA: Set Java 17 version (default) to JAVA_HOME"
+  export JAVA_HOME="/opt/java/java17"
+fi
+
+export PATH=${JAVA_HOME}/bin:$PATH
 
 echo "TIZONA: Starting security checks"
 
