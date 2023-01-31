@@ -12,7 +12,7 @@ FILE_REPORT=report-secrets.json
 git config --global --add safe.directory /github/workspace
 
 echo "TIZONA - Secrets leaks analysis: Running gitleaks"
-/gitleaks detect --no-git -f sarif --exit-code 0 -r $FILE_REPORT
+gitleaks detect --no-git -f sarif --exit-code 0 -r $FILE_REPORT
 
 set +Eeuo pipefail
 

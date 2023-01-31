@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -54,49 +54,43 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:"
          export REVIEWDOG_REPORTER=${OPTARG}
        ;;
        r)
-         export DEPCHECK_PROJECT=${OPTARG}
-       ;;
-       s)
-         export DEPCHECK_PATH=${OPTARG}
-       ;;
-       t)
-         export DEPCHECK_FORMAT=${OPTARG}
-       ;;
-       u)
          export TRIVY_SEVERITY=${OPTARG}
        ;;
-       v)
+       s)
          export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
-       w)
+       t)
          export TRIVY_REPO_VULN=${OPTARG}
        ;;
-       x)
+       u)
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
-       y)
+       v)
          export DEPTRACK_BRANCH=${OPTARG}
        ;;
-       z)
+       w)
          export DEFECTDOJO_URL=${OPTARG}
        ;;
-       A)
+       x)
          export DEFECTDOJO_TOKEN=${OPTARG}
        ;;
-       B)
+       y)
          export NEXUS_URL=${OPTARG}
        ;;
-       C)
+       z)
          export NEXUS_USER=${OPTARG}
        ;;
-       D)
+       A)
          export NEXUS_PASS=${OPTARG}
        ;;
-       E)
+       B)
          export DEFECTDOJO_PRODUCT=${OPTARG}
        ;;
-       F)
+       C)
          export DEFECTDOJO_ENGAGEMENT=${OPTARG}
+       ;;
+       D)
+         export JAVA_VERSION_TIZONA=${OPTARG}
        ;;
   esac
 done
@@ -108,6 +102,15 @@ else
   echo "TIZONA: Permissive mode enabled. The action will continue even if errors are encountered in the execution of the checks. "
 fi
 
+if [[ ${ACTION_MODE} == *"8"* ]]; then
+  echo "TIZONA: Set Java 8 version to JAVA_HOME"
+  export JAVA_HOME="/opt/java/java8"
+else
+  echo "TIZONA: Set Java 17 version (default) to JAVA_HOME"
+  export JAVA_HOME="/opt/java/java17"
+fi
+
+export PATH=${JAVA_HOME}/bin:$PATH
 
 echo "TIZONA: Starting security checks"
 
@@ -195,27 +198,6 @@ fi
 if [[ ${CODE_ENABLE} == *"true"* ]]; then
 
     CODE_ARGS=""
-
-    if [ $DEPCHECK_PROJECT ];then
-      CODE_ARGS="$CODE_ARGS $DEPCHECK_PROJECT"
-    else
-      echo "TIZONA: Dependency Check requires project review. Exit"
-      exit 1
-    fi
-
-    if [ $DEPCHECK_PATH ];then
-      CODE_ARGS="$CODE_ARGS $DEPCHECK_PATH"
-    else
-      echo "TIZONA: Dependency Check requires path review. Exit"
-      exit 1
-    fi
-
-    if [ $DEPCHECK_FORMAT ];then
-      CODE_ARGS="$CODE_ARGS $DEPCHECK_FORMAT"
-    else
-      echo "TIZONA: Dependency Check requires output format. Exit"
-      exit 1
-    fi
 
     if [ $SONAR_SOURCES ];then
       CODE_ARGS="$CODE_ARGS $SONAR_SOURCES"

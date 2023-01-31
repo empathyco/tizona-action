@@ -9,10 +9,11 @@ Checks and analyzes the security of the code added to the specified repository.
 | parameter | description | required | default |
 | --- | --- | --- | --- |
 | permissive_mode | Enables or disables the interruption of the action in the case of finding errors in the execution of the checks. | `false` | true |
+| java_version | Sets the Java version to be used in the checks. Java versions available: 8, 17(default) | `false` | 17 |
 | deptrack_enable | Enables Dependency Track check. | `false` | true |
 | deptrack_url | URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_URL |
 | deptrack_key | Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_KEY |
-| deptrack_language | Programming language. Required if Dependency Track is enabled. | `false` | nodejs |
+| deptrack_language | Programming language. Languages availables: nodejs, python and java. Required if Dependency Track is enabled. | `false` | nodejs |
 | deptrack_dir | Dependency track directory path. Required if Dependency Track is enabled. | `false` | . |
 | deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
 | defectdojo_url | Dependency track DefectDojo URL for its integration. Not required. | `false` | DEFECTDOJO_URL |
@@ -33,9 +34,6 @@ Checks and analyzes the security of the code added to the specified repository.
 | terraform_working_directory | Directory to run the Tfsec action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled. | `false` | . |
 | reviewdog_level | Report level for reviewdog [info,warning,error]. Required if config checker is enabled. | `false` | error |
 | reviewdog_reporter | Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required for config checker and for secrets leaks checker. | `false` | github-pr-check |
-| depcheck_project | Dependency check project. Required if code checker is enabled. | `false` | MY_PROJECT |
-| depcheck_path | Dependency check path.  Required if code checker is enabled. | `false` | . |
-| depcheck_format | Dependency check format.  Required if code checker is enabled. | `false` | HTML |
 | trivy_repo_ignore-unfixed | Ignore unfixed vulnerabilities. Required if config checker is enabled. | `false` | false |
 | trivy_repo_vuln | comma-separated list of vulnerability types (os,library). Required if config checker is enabled. | `false` | os,library |
 | trivy_severity | Severities of vulnerabilities to be displayed. Required if config checker is enabled. | `false` | UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL |

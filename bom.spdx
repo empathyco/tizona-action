@@ -1,0 +1,842 @@
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: data-tagging-playboard-0.1
+DocumentNamespace: http://spdx.org/spdxpackages/data-tagging-playboard-0.1-4038edfb-65f1-469c-9eb0-4429927e013b
+Creator: Tool: spdx-sbom-generator-v0.0.10
+Created: 2023-01-27T14:04:18Z
+
+##### Package representing the data-tagging-playboard
+
+PackageName: data-tagging-playboard
+SPDXID: SPDXRef-Package-data-tagging-playboard
+PackageVersion: 0.1
+PackageSupplier: Organization: co.empathy
+PackageDownloadLocation: https://mvnrepository.com/artifact/co.empathy
+FilesAnalyzed: false
+PackageChecksum: SHA1: 3652e28502e1c749f77f45a4cf6c6a1f4053444b
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-Package-data-tagging-playboard
+
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-validation-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-junit-jupiter-engine-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-junit-jupiter-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-testcontainers-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-assembly-plugin-2.2-beta-5 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-site-plugin-3.3 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-http-server-netty-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-antrun-plugin-1.3 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-shade-plugin-3.2.4 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-test-junit5-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-micrometer-core-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-lombok-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-function-maven-plugin-0.9.4 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-clean-plugin-2.5 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-dependency-plugin-2.8 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-junit-jupiter-api-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-jakarta.annotation-api-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-protoc-jar-maven-plugin-3.11.4 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-inject-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-micrometer-registry-prometheus-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-logback-classic-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-exec-maven-plugin- Plugin org.codehaus.mojo
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-jackson-databind-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-mongodb-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-release-plugin-2.5.3 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-2023-01-27T14-38Z
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-http-client-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-management-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-runtime-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-mongo-reactive-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-micronaut-reactor-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-swagger-annotations-
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-reactor-test-3.4.15
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-failsafe-plugin-2.22.2 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-jib-maven-plugin-3.1.4 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-azure-functions-maven-plugin-1.5.0 is missing, no dependency information available
+Relationship: SPDXRef-Package-data-tagging-playboard DEPENDS_ON SPDXRef-Package-maven-surefire-plugin-2.22.2 is missing, no dependency information available
+
+##### Package representing the micronaut-inject
+
+PackageName: micronaut-inject
+SPDXID: SPDXRef-Package-micronaut-inject-
+PackageSupplier: Organization: micronaut-inject
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut/micronaut-inject/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 85ef22d1cd9caeaa19a3c72eb9668fbc25778d11
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-validation
+
+PackageName: micronaut-validation
+SPDXID: SPDXRef-Package-micronaut-validation-
+PackageSupplier: Organization: micronaut-validation
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut/micronaut-validation/
+FilesAnalyzed: false
+PackageChecksum: SHA1: c59e03305e63170013898d562bb99b32f0d6e4bb
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the junit-jupiter-api
+
+PackageName: junit-jupiter-api
+SPDXID: SPDXRef-Package-junit-jupiter-api-
+PackageSupplier: Organization: junit-jupiter-api
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 291236e0cbf7650459c969286655c4592ee5b639
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the junit-jupiter-engine
+
+PackageName: junit-jupiter-engine
+SPDXID: SPDXRef-Package-junit-jupiter-engine-
+PackageSupplier: Organization: junit-jupiter-engine
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine/
+FilesAnalyzed: false
+PackageChecksum: SHA1: dcc147301359920d82d8ee68c73c587b9faac23f
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-test-junit5
+
+PackageName: micronaut-test-junit5
+SPDXID: SPDXRef-Package-micronaut-test-junit5-
+PackageSupplier: Organization: micronaut-test-junit5
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut.test/micronaut-test-junit5/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 0cb07e11a2f909d4bf54c24a3e4f7387090a6cdd
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-http-client
+
+PackageName: micronaut-http-client
+SPDXID: SPDXRef-Package-micronaut-http-client-
+PackageSupplier: Organization: micronaut-http-client
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut/micronaut-http-client/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 7058d0e613b3c99083e3d40d0038987e6ddbb569
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-http-server-netty
+
+PackageName: micronaut-http-server-netty
+SPDXID: SPDXRef-Package-micronaut-http-server-netty-
+PackageSupplier: Organization: micronaut-http-server-netty
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut/micronaut-http-server-netty/
+FilesAnalyzed: false
+PackageChecksum: SHA1: a5d785b312c01ac297586a3f2056af408c90f06c
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-jackson-databind
+
+PackageName: micronaut-jackson-databind
+SPDXID: SPDXRef-Package-micronaut-jackson-databind-
+PackageSupplier: Organization: micronaut-jackson-databind
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut/micronaut-jackson-databind/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 212012dba4733b6d4aa88164bb1fdc9418729806
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-management
+
+PackageName: micronaut-management
+SPDXID: SPDXRef-Package-micronaut-management-
+PackageSupplier: Organization: micronaut-management
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut/micronaut-management/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 9024ea1ab7cee5693c5febbc2cf524cfc45e69ea
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-runtime
+
+PackageName: micronaut-runtime
+SPDXID: SPDXRef-Package-micronaut-runtime-
+PackageSupplier: Organization: micronaut-runtime
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut/micronaut-runtime/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 45f0877e458c047bdd01a0badea89abd0436c48f
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-micrometer-core
+
+PackageName: micronaut-micrometer-core
+SPDXID: SPDXRef-Package-micronaut-micrometer-core-
+PackageSupplier: Organization: micronaut-micrometer-core
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut.micrometer/micronaut-micrometer-core/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 2d858e32a21eea8f2133c4c9e11726c6f4fa84aa
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-micrometer-registry-prometheus
+
+PackageName: micronaut-micrometer-registry-prometheus
+SPDXID: SPDXRef-Package-micronaut-micrometer-registry-prometheus-
+PackageSupplier: Organization: micronaut-micrometer-registry-prometheus
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut.micrometer/micronaut-micrometer-registry-prometheus/
+FilesAnalyzed: false
+PackageChecksum: SHA1: fc55c95b198583301322a7d1d667a2a8b18ce633
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-mongo-reactive
+
+PackageName: micronaut-mongo-reactive
+SPDXID: SPDXRef-Package-micronaut-mongo-reactive-
+PackageSupplier: Organization: micronaut-mongo-reactive
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut.mongodb/micronaut-mongo-reactive/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 21f1a29d883b6120ee6fdbd6497978e698b47b99
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the micronaut-reactor
+
+PackageName: micronaut-reactor
+SPDXID: SPDXRef-Package-micronaut-reactor-
+PackageSupplier: Organization: micronaut-reactor
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.micronaut.reactor/micronaut-reactor/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 88e1590c8da363faff172e9fcb600c0b19d11275
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the swagger-annotations
+
+PackageName: swagger-annotations
+SPDXID: SPDXRef-Package-swagger-annotations-
+PackageSupplier: Organization: swagger-annotations
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations/
+FilesAnalyzed: false
+PackageChecksum: SHA1: b2fa1563ee0e0ffe1cbe3a2d902585ce39ad6283
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jakarta.annotation-api
+
+PackageName: jakarta.annotation-api
+SPDXID: SPDXRef-Package-jakarta.annotation-api-
+PackageSupplier: Organization: jakarta.annotation-api
+PackageDownloadLocation: https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api/
+FilesAnalyzed: false
+PackageChecksum: SHA1: ec1926773468f9bd1f7bf76ec323189a2a14872e
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the logback-classic
+
+PackageName: logback-classic
+SPDXID: SPDXRef-Package-logback-classic-
+PackageSupplier: Organization: logback-classic
+PackageDownloadLocation: https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/
+FilesAnalyzed: false
+PackageChecksum: SHA1: cab098ae945c6ae85fac0d4a60c7ffe502e6cfb8
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the lombok
+
+PackageName: lombok
+SPDXID: SPDXRef-Package-lombok-
+PackageSupplier: Organization: lombok
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.projectlombok/lombok/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 639c691746effcf238606040dab014731ad79001
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the reactor-test
+
+PackageName: reactor-test
+SPDXID: SPDXRef-Package-reactor-test-3.4.15
+PackageVersion: 3.4.15
+PackageSupplier: Organization: reactor-test
+PackageDownloadLocation: https://mvnrepository.com/artifact/io.projectreactor/reactor-test/3.4.15
+FilesAnalyzed: false
+PackageChecksum: SHA1: b4e2ff6a8bb7a46866eee7a002c3717de7b87e95
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the junit-jupiter
+
+PackageName: junit-jupiter
+SPDXID: SPDXRef-Package-junit-jupiter-
+PackageSupplier: Organization: junit-jupiter
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter/
+FilesAnalyzed: false
+PackageChecksum: SHA1: f2c05fa818d60e7afea449ab2939750e7923a348
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the mongodb
+
+PackageName: mongodb
+SPDXID: SPDXRef-Package-mongodb-
+PackageSupplier: Organization: mongodb
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.testcontainers/mongodb/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 7f1c982e835a68959859b5d3da2b8e4b3af30b31
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the testcontainers
+
+PackageName: testcontainers
+SPDXID: SPDXRef-Package-testcontainers-
+PackageSupplier: Organization: testcontainers
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.testcontainers/testcontainers/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 3946c5338c876e02c226f06dafed277e8a586433
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the protoc-jar-maven-plugin
+
+PackageName: protoc-jar-maven-plugin
+SPDXID: SPDXRef-Package-protoc-jar-maven-plugin- Plugin com.github.os72
+PackageVersion:  Plugin com.github.os72
+PackageSupplier: Organization: protoc-jar-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for com.github.os72/protoc-jar-maven-plugin/ Plugin com.github.os72
+FilesAnalyzed: false
+PackageChecksum: SHA1: ea9191dabf4da0c7ee3d549a814906911b2bfa41
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the function-maven-plugin
+
+PackageName: function-maven-plugin
+SPDXID: SPDXRef-Package-function-maven-plugin- Plugin com.google.cloud.functions
+PackageVersion:  Plugin com.google.cloud.functions
+PackageSupplier: Organization: function-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for com.google.cloud.functions/function-maven-plugin/ Plugin com.google.cloud.functions
+FilesAnalyzed: false
+PackageChecksum: SHA1: 8b18d9673828308beb07481d78431b568be9166f
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jib-maven-plugin
+
+PackageName: jib-maven-plugin
+SPDXID: SPDXRef-Package-jib-maven-plugin- Plugin com.google.cloud.tools
+PackageVersion:  Plugin com.google.cloud.tools
+PackageSupplier: Organization: jib-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for com.google.cloud.tools/jib-maven-plugin/ Plugin com.google.cloud.tools
+FilesAnalyzed: false
+PackageChecksum: SHA1: 007e1df47d1e53af5769c8a6947d176ea236267a
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the azure-functions-maven-plugin
+
+PackageName: azure-functions-maven-plugin
+SPDXID: SPDXRef-Package-azure-functions-maven-plugin- Plugin com.microsoft.azure
+PackageVersion:  Plugin com.microsoft.azure
+PackageSupplier: Organization: azure-functions-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for com.microsoft.azure/azure-functions-maven-plugin/ Plugin com.microsoft.azure
+FilesAnalyzed: false
+PackageChecksum: SHA1: 6b439b347e5759956803f88256a5ca517a5f8435
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-antrun-plugin
+
+PackageName: maven-antrun-plugin
+SPDXID: SPDXRef-Package-maven-antrun-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-antrun-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-antrun-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: b8ae7e26f7fca23ed28a3e7a39b4e33fc32919a5
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-assembly-plugin
+
+PackageName: maven-assembly-plugin
+SPDXID: SPDXRef-Package-maven-assembly-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-assembly-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-assembly-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: 6381595cb9f1c465cec19ae14ce7b1785b6acdfd
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-clean-plugin
+
+PackageName: maven-clean-plugin
+SPDXID: SPDXRef-Package-maven-clean-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-clean-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-clean-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: 10c987062aa8b94186a151fb61d00b58229a7a47
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-dependency-plugin
+
+PackageName: maven-dependency-plugin
+SPDXID: SPDXRef-Package-maven-dependency-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-dependency-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-dependency-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: 454728243c5e9d592dd26e4ef4626a78a51b041f
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-failsafe-plugin
+
+PackageName: maven-failsafe-plugin
+SPDXID: SPDXRef-Package-maven-failsafe-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-failsafe-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-failsafe-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: a5498d48419677f122cffd9a027df54780dcb269
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-release-plugin
+
+PackageName: maven-release-plugin
+SPDXID: SPDXRef-Package-maven-release-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-release-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-release-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: fd7254958a4a2baf03d756cc819ec6e7892ab64c
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-shade-plugin
+
+PackageName: maven-shade-plugin
+SPDXID: SPDXRef-Package-maven-shade-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-shade-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-shade-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: 5dffb60c7ecefa8267800abb3077248ecd6c8ee3
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-site-plugin
+
+PackageName: maven-site-plugin
+SPDXID: SPDXRef-Package-maven-site-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-site-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-site-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: 0a660974fe3e81de94e0f70dcc798b0a4f18601e
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-surefire-plugin
+
+PackageName: maven-surefire-plugin
+SPDXID: SPDXRef-Package-maven-surefire-plugin- Plugin org.apache.maven.plugins
+PackageVersion:  Plugin org.apache.maven.plugins
+PackageSupplier: Organization: maven-surefire-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.apache.maven.plugins/maven-surefire-plugin/ Plugin org.apache.maven.plugins
+FilesAnalyzed: false
+PackageChecksum: SHA1: 100019959222e1c0c13d3bee514aa034d2376685
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the exec-maven-plugin
+
+PackageName: exec-maven-plugin
+SPDXID: SPDXRef-Package-exec-maven-plugin- Plugin org.codehaus.mojo
+PackageVersion:  Plugin org.codehaus.mojo
+PackageSupplier: Organization: exec-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/Failed to retrieve plugin descriptor for org.codehaus.mojo/exec-maven-plugin/ Plugin org.codehaus.mojo
+FilesAnalyzed: false
+PackageChecksum: SHA1: ecb9d3f0e2aaa4472d0bb870b169cd013476f383
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the 2023-01-27T14
+
+PackageName: 2023-01-27T14
+SPDXID: SPDXRef-Package-2023-01-27T14-38Z
+PackageVersion: 38Z
+PackageSupplier: Organization: 2023-01-27T14
+PackageDownloadLocation: https://mvnrepository.com/artifact/Finished at/2023-01-27T14/38Z
+FilesAnalyzed: false
+PackageChecksum: SHA1: a14a9e9535d1c886a7f27853a3bda0bb5458baba
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the protoc-jar-maven-plugin
+
+PackageName: protoc-jar-maven-plugin
+SPDXID: SPDXRef-Package-protoc-jar-maven-plugin-3.11.4 is missing, no dependency information available
+PackageVersion: 3.11.4 is missing, no dependency information available
+PackageSupplier: Organization: protoc-jar-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for com.github.os72/protoc-jar-maven-plugin/3.11.4 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: ea9191dabf4da0c7ee3d549a814906911b2bfa41
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the function-maven-plugin
+
+PackageName: function-maven-plugin
+SPDXID: SPDXRef-Package-function-maven-plugin-0.9.4 is missing, no dependency information available
+PackageVersion: 0.9.4 is missing, no dependency information available
+PackageSupplier: Organization: function-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for com.google.cloud.functions/function-maven-plugin/0.9.4 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 8b18d9673828308beb07481d78431b568be9166f
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jib-maven-plugin
+
+PackageName: jib-maven-plugin
+SPDXID: SPDXRef-Package-jib-maven-plugin-3.1.4 is missing, no dependency information available
+PackageVersion: 3.1.4 is missing, no dependency information available
+PackageSupplier: Organization: jib-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for com.google.cloud.tools/jib-maven-plugin/3.1.4 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 007e1df47d1e53af5769c8a6947d176ea236267a
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the azure-functions-maven-plugin
+
+PackageName: azure-functions-maven-plugin
+SPDXID: SPDXRef-Package-azure-functions-maven-plugin-1.5.0 is missing, no dependency information available
+PackageVersion: 1.5.0 is missing, no dependency information available
+PackageSupplier: Organization: azure-functions-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for com.microsoft.azure/azure-functions-maven-plugin/1.5.0 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 6b439b347e5759956803f88256a5ca517a5f8435
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-antrun-plugin
+
+PackageName: maven-antrun-plugin
+SPDXID: SPDXRef-Package-maven-antrun-plugin-1.3 is missing, no dependency information available
+PackageVersion: 1.3 is missing, no dependency information available
+PackageSupplier: Organization: maven-antrun-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-antrun-plugin/1.3 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: b8ae7e26f7fca23ed28a3e7a39b4e33fc32919a5
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-assembly-plugin
+
+PackageName: maven-assembly-plugin
+SPDXID: SPDXRef-Package-maven-assembly-plugin-2.2-beta-5 is missing, no dependency information available
+PackageVersion: 2.2-beta-5 is missing, no dependency information available
+PackageSupplier: Organization: maven-assembly-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-assembly-plugin/2.2-beta-5 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 6381595cb9f1c465cec19ae14ce7b1785b6acdfd
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-clean-plugin
+
+PackageName: maven-clean-plugin
+SPDXID: SPDXRef-Package-maven-clean-plugin-2.5 is missing, no dependency information available
+PackageVersion: 2.5 is missing, no dependency information available
+PackageSupplier: Organization: maven-clean-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-clean-plugin/2.5 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 10c987062aa8b94186a151fb61d00b58229a7a47
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-dependency-plugin
+
+PackageName: maven-dependency-plugin
+SPDXID: SPDXRef-Package-maven-dependency-plugin-2.8 is missing, no dependency information available
+PackageVersion: 2.8 is missing, no dependency information available
+PackageSupplier: Organization: maven-dependency-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-dependency-plugin/2.8 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 454728243c5e9d592dd26e4ef4626a78a51b041f
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-failsafe-plugin
+
+PackageName: maven-failsafe-plugin
+SPDXID: SPDXRef-Package-maven-failsafe-plugin-2.22.2 is missing, no dependency information available
+PackageVersion: 2.22.2 is missing, no dependency information available
+PackageSupplier: Organization: maven-failsafe-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-failsafe-plugin/2.22.2 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: a5498d48419677f122cffd9a027df54780dcb269
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-release-plugin
+
+PackageName: maven-release-plugin
+SPDXID: SPDXRef-Package-maven-release-plugin-2.5.3 is missing, no dependency information available
+PackageVersion: 2.5.3 is missing, no dependency information available
+PackageSupplier: Organization: maven-release-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-release-plugin/2.5.3 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: fd7254958a4a2baf03d756cc819ec6e7892ab64c
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-shade-plugin
+
+PackageName: maven-shade-plugin
+SPDXID: SPDXRef-Package-maven-shade-plugin-3.2.4 is missing, no dependency information available
+PackageVersion: 3.2.4 is missing, no dependency information available
+PackageSupplier: Organization: maven-shade-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-shade-plugin/3.2.4 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 5dffb60c7ecefa8267800abb3077248ecd6c8ee3
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-site-plugin
+
+PackageName: maven-site-plugin
+SPDXID: SPDXRef-Package-maven-site-plugin-3.3 is missing, no dependency information available
+PackageVersion: 3.3 is missing, no dependency information available
+PackageSupplier: Organization: maven-site-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-site-plugin/3.3 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 0a660974fe3e81de94e0f70dcc798b0a4f18601e
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-surefire-plugin
+
+PackageName: maven-surefire-plugin
+SPDXID: SPDXRef-Package-maven-surefire-plugin-2.22.2 is missing, no dependency information available
+PackageVersion: 2.22.2 is missing, no dependency information available
+PackageSupplier: Organization: maven-surefire-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/The POM for org.apache.maven.plugins/maven-surefire-plugin/2.22.2 is missing, no dependency information available
+FilesAnalyzed: false
+PackageChecksum: SHA1: 100019959222e1c0c13d3bee514aa034d2376685
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
