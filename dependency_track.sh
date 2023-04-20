@@ -33,6 +33,7 @@ case $DTRACK_LANGUAGE in
         cd $DTRACK_DIR
         lscommand=$(ls)
         echo "TIZONA - Dependency Track: [*] Processing NodeJS BoM"
+        apt-get update
         apt-get install --no-install-recommends -y nodejs npm
         npm install
         npm audit fix --force
