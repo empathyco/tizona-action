@@ -15,7 +15,7 @@ RUN apt-get update && apt-get upgrade -y \
 
 
 ##################################################################
-# JAVA 8 & 17 installation
+# JAVA v8 & v17 installation
 ##################################################################
 
 COPY --from=eclipse-temurin:8 /opt/java/openjdk /opt/java/java8
