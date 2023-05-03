@@ -1,0 +1,5 @@
+[repositories]
+local
+my-ivy-proxy-releases: IVY_PROXY_RELEASE, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
+my-maven-proxy-releases: NEXUS_URL
+maven-central

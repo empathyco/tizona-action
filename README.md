@@ -13,7 +13,7 @@ Checks and analyzes the security of the code added to the specified repository.
 | deptrack_enable | Enables Dependency Track check. | `false` | true |
 | deptrack_url | URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_URL |
 | deptrack_key | Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_KEY |
-| deptrack_language | Programming language. Languages availables: nodejs, python and java. Required if Dependency Track is enabled. | `false` | nodejs |
+| deptrack_language | Programming language (java, scala-sbt, scala-gradle, python, nodejs). Required if Dependency Track is enabled. | `false` | nodejs |
 | deptrack_dir | Dependency track directory path. Required if Dependency Track is enabled. | `false` | . |
 | deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
 | defectdojo_url | Dependency track DefectDojo URL for its integration. Not required. | `false` | DEFECTDOJO_URL |
@@ -23,6 +23,8 @@ Checks and analyzes the security of the code added to the specified repository.
 | nexus_url | Dependency track Nexus URL for maven and java review. Not required. | `false` | NEXUS_URL |
 | nexus_user | Dependency track Nexus user for maven and java review. Not required. | `false` | NEXUS_USER |
 | nexus_pass | Dependency track Nexus password for maven and java review. Not required. | `false` | NEXUS_PASS |
+| nexus_address | Dependency track Nexus ADDRESS for Scala SBT review, like Nexus URL without https:// substring. Not required. | `false` | NEXUS_ADDRESS |
+| ivy_proxy_release | Dependency track Nexus Ivy proxy release for Scala SBT review. Not required. | `false` | IVY_PROXY_RELEASE |
 | code_enable | Enables SonarQube check | `false` | true |
 | sonar_source | SonarQube source. Required to run SonarQube. | `false` | . |
 | sonar_host | SonarQube host. Required to run SonarQube. | `false` | SONAR_HOST |

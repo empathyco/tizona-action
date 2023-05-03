@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G:H:I:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -93,12 +93,18 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G
          export NEXUS_PASS=${OPTARG}
        ;;
        E)
-         export DEFECTDOJO_PRODUCT=${OPTARG}
+         export NEXUS_ADDRESS=${OPTARG}
        ;;
        F)
-         export DEFECTDOJO_ENGAGEMENT=${OPTARG}
+         export IVY_PROXY_RELEASE=${OPTARG}
        ;;
        G)
+         export DEFECTDOJO_PRODUCT=${OPTARG}
+       ;;
+       H)
+         export DEFECTDOJO_ENGAGEMENT=${OPTARG}
+       ;;
+       I)
          export JAVA_VERSION_TIZONA=${OPTARG}
        ;;
   esac
@@ -180,6 +186,14 @@ if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
 
     if [ $NEXUS_PASS ];then
       DTRACK_ARGS="$DTRACK_ARGS $NEXUS_PASS"
+    fi
+
+    if [ $NEXUS_ADDRESS ];then
+      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_ADDRESS"
+    fi
+
+    if [ $IVY_PROXY_RELEASE ];then
+      DTRACK_ARGS="$DTRACK_ARGS $IVY_PROXY_RELEASE"
     fi
 
     if [ "push" = "$GITHUB_EVENT_NAME" ]; then
