@@ -111,7 +111,7 @@ Note that you must **change** the `<phase>` tag value to `compile` (`package` by
 
 - Gradle
 
-(Github reference)[https://github.com/CycloneDX/cyclonedx-gradle-plugin]
+[Github reference](https://github.com/CycloneDX/cyclonedx-gradle-plugin)
 
 Configuration:
 
@@ -154,7 +154,7 @@ cyclonedxBom {
 
 - SBT
 
-(GitHub reference)[https://github.com/siculo/sbt-bom]
+[GitHub reference](https://github.com/siculo/sbt-bom)
 
 Configuration:
 
