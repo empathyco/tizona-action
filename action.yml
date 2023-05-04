@@ -27,7 +27,7 @@ inputs:
     required: false
     default: 'DEPTRACK_KEY'
   deptrack_language:
-    description: 'Programming language. Required if Dependency Track is enabled.'
+    description: 'Programming language (java, scala-sbt, scala-gradle, python, nodejs). Required if Dependency Track is enabled. '
     required: false
     default: 'nodejs'
   deptrack_dir:
@@ -66,6 +66,14 @@ inputs:
     description: 'Dependency track Nexus password for maven and java review. Not required'
     required: false
     default: 'NEXUS_PASS'
+  nexus_address:
+    description: 'Dependency track Nexus ADDRESS for Scala SBT review, like Nexus URL without https:// substring. Not required'
+    required: false
+    default: 'NEXUS_ADDRESS'
+  ivy_proxy_release:
+    description: 'Dependency track Nexus Ivy proxy release for Scala SBT review. Not required'
+    required: false
+    default: 'IVY_PROXY_RELEASE'
   code_enable:
     description: 'Enables code check'
     required: false
@@ -176,6 +184,8 @@ runs:
     - '-B ${{ inputs.nexus_url }}'
     - '-C ${{ inputs.nexus_user }}'
     - '-D ${{ inputs.nexus_pass }}'
-    - '-E ${{ inputs.defectdojo_product }}'
-    - '-F ${{ inputs.defectdojo_engagement }}'
-    - '-G ${{ inputs.java_version }}'
+    - '-E ${{ inputs.nexus_address }}'
+    - '-F ${{ inputs.ivy_proxy_release }}'
+    - '-G ${{ inputs.defectdojo_product }}'
+    - '-H ${{ inputs.defectdojo_engagement }}'
+    - '-I ${{ inputs.java_version }}'

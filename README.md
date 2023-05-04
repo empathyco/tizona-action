@@ -13,7 +13,7 @@ Checks and analyzes the security of the code added to the specified repository.
 | deptrack_enable | Enables Dependency Track check. | `false` | true |
 | deptrack_url | URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_URL |
 | deptrack_key | Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_KEY |
-| deptrack_language | Programming language. Languages availables: nodejs, python and java. Required if Dependency Track is enabled. | `false` | nodejs |
+| deptrack_language | Programming language (java, scala-sbt, scala-gradle, python, nodejs). Required if Dependency Track is enabled. | `false` | nodejs |
 | deptrack_dir | Dependency track directory path. Required if Dependency Track is enabled. | `false` | . |
 | deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
 | defectdojo_url | Dependency track DefectDojo URL for its integration. Not required. | `false` | DEFECTDOJO_URL |
@@ -23,6 +23,8 @@ Checks and analyzes the security of the code added to the specified repository.
 | nexus_url | Dependency track Nexus URL for maven and java review. Not required. | `false` | NEXUS_URL |
 | nexus_user | Dependency track Nexus user for maven and java review. Not required. | `false` | NEXUS_USER |
 | nexus_pass | Dependency track Nexus password for maven and java review. Not required. | `false` | NEXUS_PASS |
+| nexus_address | Dependency track Nexus ADDRESS for Scala SBT review, like Nexus URL without https:// substring. Not required. | `false` | NEXUS_ADDRESS |
+| ivy_proxy_release | Dependency track Nexus Ivy proxy release for Scala SBT review. Not required. | `false` | IVY_PROXY_RELEASE |
 | code_enable | Enables SonarQube check | `false` | true |
 | sonar_source | SonarQube source. Required to run SonarQube. | `false` | . |
 | sonar_host | SonarQube host. Required to run SonarQube. | `false` | SONAR_HOST |
@@ -68,7 +70,7 @@ _Properties_
     . . .
     <properties>
         . . .
-        <cyclonedx.version>2.5.2</cyclonedx.version>
+        <cyclonedx.version>2.7.3</cyclonedx.version>
     </properties>
 . . .
 ```
@@ -104,6 +106,63 @@ _Plugin_
 ```
 
 Note that you must **change** the `<phase>` tag value to `compile` (`package` by default), otherwise the action won't even generate the bom.xml. This action will compile your Maven Java project and expects to find a resulting `bom.xml`. 
+
+### Dependency Track - Scala
+
+- Gradle
+
+[Github reference](https://github.com/CycloneDX/cyclonedx-gradle-plugin)
+
+Configuration:
+
+To generate BOM for a single project add the plugin to the `build.gradle`.
+
+```gradle
+plugins {
+    id 'org.cyclonedx.bom' version '1.7.4'
+}
+```
+
+You can add the following configuration to `build.gradle` to control various options in generating a BOM:
+
+```gradle
+cyclonedxBom {
+    // includeConfigs is the list of configuration names to include when generating the BOM (leave empty to include every configuration)
+    includeConfigs = ["runtimeClasspath"]
+    // skipConfigs is a list of configuration names to exclude when generating the BOM
+    skipConfigs = ["compileClasspath", "testCompileClasspath"]
+    // skipProjects is a list of project names to exclude when generating the BOM
+    skipProjects = [rootProject.name, "yourTestSubProject"]
+    // Specified the type of project being built. Defaults to 'library'
+    projectType = "application"
+    // Specified the version of the CycloneDX specification to use. Defaults to '1.4'
+    schemaVersion = "1.4"
+    // Boms destination directory. Defaults to 'build/reports'
+    destination = file("build/reports")
+    // The file name for the generated BOMs (before the file format suffix). Defaults to 'bom'
+    outputName = "bom"
+    // The file format generated, can be xml, json or all for generating both. Defaults to 'all'
+    outputFormat = "xml"
+    // Exclude BOM Serial Number. Defaults to 'true'
+    includeBomSerialNumber = false
+    // Exclude License Text. Defaults to 'true'
+    includeLicenseText = false
+    // Override component version. Defaults to the project version
+    componentVersion = "2.0.0"
+}
+```
+
+- SBT
+
+[GitHub reference](https://github.com/siculo/sbt-bom)
+
+Configuration:
+
+Add the plugin dependency to the file `project/plugins.sbt` using addSbtPlugin :
+
+```sbt
+addSbtPlugin("io.github.siculo" %% "sbt-bom" % "0.3.0")
+```
 
 ### SonarQube
 

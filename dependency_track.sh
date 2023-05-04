@@ -11,6 +11,8 @@ DEFECTDOJO_ENGAGEMENT=${8}
 NEXUS_URL=${9}
 NEXUS_USER=${10}
 NEXUS_PASS=${11}
+NEXUS_ADDRESS=${12}
+IVY_PROXY_RELEASE=${13}
 
 INSECURE="--insecure"
 #VERBOSE="--verbose"
@@ -67,6 +69,75 @@ case $DTRACK_LANGUAGE in
         cd $GITHUB_WORKSPACE
         ;;
 
+    "scala-sbt")
+        cd $DTRACK_DIR
+        echo "TIZONA - Dependency Track: [*]  Processing Scala SBT BoM"
+
+        echo "TIZONA - Dependency Track: [*]  Installing Scala & SBT"
+        apt-get update
+        apt-get install apt-transport-https gnupg -yqq
+
+        apt-get install default-jdk -y
+        apt-get install scala -y
+
+        echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | tee /etc/apt/sources.list.d/sbt.list
+        echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | tee /etc/apt/sources.list.d/sbt_old.list
+        curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/scalasbt-release.gpg --import
+        chmod 644 /etc/apt/trusted.gpg.d/scalasbt-release.gpg
+        apt-get update
+        apt-get install sbt
+        
+        if [[ ${NEXUS_ADDRESS} == *"NEXUS_ADDRESS"* ]]; then
+            echo "TIZONA - Dependency Track: Nexus access not established. No Nexus libraries will be downloaded"
+        else
+            ROOT_DIR="/root"
+            mkdir $ROOT_DIR/.sbt
+
+            cp /app/sbt_credentials $ROOT_DIR/.sbt/.credentials
+            sed -i -e "s#NEXUS_USER#$NEXUS_USER#g" $ROOT_DIR/.sbt/.credentials
+            sed -i -e "s#NEXUS_PASS#$NEXUS_PASS#g" $ROOT_DIR/.sbt/.credentials
+            sed -i -e "s#NEXUS_ADDRESS#$NEXUS_ADDRESS#g" $ROOT_DIR/.sbt/.credentials
+
+            cp /app/sbt_repositories $ROOT_DIR/.sbt/repositories
+            sed -i -e "s#IVY_PROXY_RELEASE#$IVY_PROXY_RELEASE#g" $ROOT_DIR/.sbt/repositories
+            sed -i -e "s#NEXUS_URL#$NEXUS_URL#g" $ROOT_DIR/.sbt/repositories
+
+            echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
+
+        fi
+
+        cd target
+        BOM_NAME=$(ls *.bom.xml)
+        mv $BOM_NAME bom.xml
+        cd ..
+        path="$GITHUB_WORKSPACE/target/bom.xml"
+
+        echo "TIZONA - Dependency Track: [*]  SBT makeBom"
+        sbt makeBom
+        echo "TIZONA - Dependency Track: [*]  SBT bom.xml created:"
+        ls -la $path
+        cd $GITHUB_WORKSPACE
+        ;;
+
+    "scala-gradle")
+        cd $DTRACK_DIR
+        echo "TIZONA - Dependency Track: [*]  Processing Scala GRADLE BoM"
+        echo "TIZONA - Dependency Track: [*]  Processing Scala GRADLE - install sdk"
+
+        apt-get update
+        apt-get install zip
+        curl -s "https://get.sdkman.io" | bash
+        source "/root/.sdkman/bin/sdkman-init.sh"
+        echo "TIZONA - Dependency Track: [*]  Processing Scala GRADLE - install gradle"
+        sdk install gradle
+        path="$GITHUB_WORKSPACE/build/reports/bom.xml"
+        echo "TIZONA - Dependency Track: [*]  Processing Scala GRADLE - generate bom.xml"
+        gradle cyclonedxBom -info
+        echo "TIZONA - Dependency Track: [*]  Scala GRADLE bom.xml created:"
+        ls -la $path
+        cd $GITHUB_WORKSPACE
+        ;;
+
     "java")
         cd $DTRACK_DIR
         echo "TIZONA - Dependency Track: [*]  Processing Java BoM"
@@ -103,6 +174,8 @@ case $DTRACK_LANGUAGE in
         echo "TIZONA - Dependency Track: maven compile"
         BoMResult=$(mvn compile)
         echo "TIZONA - Dependency Track: maven compiled"
+        echo "TIZONA - Dependency Track: [*]  maven bom.xml created:"
+        ls -la $path
         cd $GITHUB_WORKSPACE
         ;;
         
