@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v4 2023-05-04
+
+### Added
+
+- Dependency Track now supports Scala with SBT and Gradle.
+
 ## v3 2023-01-31
 
 ### Added
