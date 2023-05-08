@@ -126,7 +126,7 @@ case $DTRACK_LANGUAGE in
         apt-get update
         apt-get install zip
         curl -s "https://get.sdkman.io" | bash
-        source "/root/.sdkman/bin/sdkman-init.sh"
+        source "/github/home/.sdkman/bin/sdkman-init.sh"
         echo "TIZONA - Dependency Track: [*]  Processing Scala GRADLE - install gradle"
         sdk install gradle
         path="$GITHUB_WORKSPACE/build/reports/bom.xml"
