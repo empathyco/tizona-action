@@ -106,15 +106,14 @@ case $DTRACK_LANGUAGE in
 
         fi
 
+        echo "TIZONA - Dependency Track: [*]  SBT makeBom"
+        sbt makeBom
+        echo "TIZONA - Dependency Track: [*]  SBT bom.xml created:"
         cd target
         BOM_NAME=$(ls *.bom.xml)
         mv $BOM_NAME bom.xml
         cd ..
         path="$GITHUB_WORKSPACE/target/bom.xml"
-
-        echo "TIZONA - Dependency Track: [*]  SBT makeBom"
-        sbt makeBom
-        echo "TIZONA - Dependency Track: [*]  SBT bom.xml created:"
         ls -la $path
         cd $GITHUB_WORKSPACE
         ;;
