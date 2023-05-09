@@ -200,7 +200,7 @@ if [[ ${DEFECTDOJO_TOKEN} == *"DEFECTDOJO_TOKEN"* ]];then
     echo "TIZONA - Dependency Track: DefectDojo integration not configured. Skipping"
 else
     echo "TIZONA - Dependency Track: Trivy sbom scan"
-    trivy sbom sbom.xml -o trivy_scan.json -f json
+    trivy sbom sbom.xml -o trivy_scan.json -f json --timeout 5m
 
     current_date=$(date '+%Y-%m-%d')
 
