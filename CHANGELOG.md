@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## v5 2023-05-22
+
+### Added
+
+- Docker linter checker added.
+
 ## v4 2023-05-04
 
 ### Added
