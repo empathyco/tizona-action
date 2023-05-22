@@ -14,6 +14,7 @@ COPY to-rdjson.jq to-rdjson.jq
 COPY nexus_settings.xml nexus_settings.xml
 COPY sbt_credentials sbt_credentials
 COPY sbt_repositories sbt_repositories
+COPY docker_linter.sh docker_linter.sh
 
 RUN chmod +x /app/*.sh
 

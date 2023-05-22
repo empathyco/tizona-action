@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G:H:I:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G:H:I:J:K:L:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -106,6 +106,15 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G
        ;;
        I)
          export JAVA_VERSION_TIZONA=${OPTARG}
+       ;;
+       J)
+         export DOCKERLINT_ENABLE=${OPTARG}
+       ;;
+       K)
+         export DOCKERFILE_PATH=${OPTARG}
+       ;;
+       L)
+         export DOCKERLINT_LEVEL=${OPTARG}
        ;;
   esac
 done
@@ -345,10 +354,10 @@ fi
 
 if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
 
-    SECRETS_ARGS=""
+    DOCKER_ARGS=""
 
     if [ $REVIEWDOG_GIT_TOKEN ];then
-      SECRETS_ARGS="$SECRETS_ARGS $REVIEWDOG_GIT_TOKEN"
+      DOCKER_ARGS="$SECRETS_ARGS $REVIEWDOG_GIT_TOKEN"
       echo "TIZONA: Run secrets leaks action"
       /bin/bash /app/secrets_leaks.sh $SECRETS_ARGS &
     else
@@ -356,6 +365,28 @@ if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
     fi
 else
     echo "TIZONA: Skip secrets leaks action"
+fi
+
+if [[ ${DOCKERLINT_ENABLE} == *"true"* ]]; then
+
+    DOCKER_ARGS=""
+
+    if [ $DOCKERFILE_PATH ];then
+      DOCKER_ARGS="$DOCKER_ARGS $DOCKERFILE_PATH"
+    else
+      echo "TIZONA: Docker linter check requires Dockerfile path. Exit"
+      exit 1
+    fi
+
+    if [ $DOCKERLINT_LEVEL ];then
+      DOCKER_ARGS="$DOCKER_ARGS $DOCKERLINT_LEVEL"
+      echo "TIZONA: Run Docker linter check action"
+      /bin/bash /app/docker_linter.sh $DOCKER_ARGS &
+    else
+      echo "TIZONA: Docker linter check requires threshold level. Exit"
+    fi
+else
+    echo "TIZONA: Skip Docker linter check action"
 fi
 
 if [[ ${ACTION_MODE} == *"false"* ]]; then

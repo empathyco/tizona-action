@@ -145,6 +145,18 @@ inputs:
     description: 'Trivy timeout duration. Required if config checker is enabled.'
     required: false
     default: "5m"
+  dockerlint_enable:
+    description: 'Enables Docker lint check'
+    required: false
+    default: 'true'
+  dockerfile_path:
+    description: 'Dockerfile path'
+    required: false
+    default: './Dockerfile'
+  dockerlint_level:
+    description: 'Exit with failure code only when rules with a severity equal to or above THRESHOLD are violated. Accepted values: error, warning, info, style, ignore & none'
+    required: false
+    default: "error"
 
 outputs:
   riskscore:
@@ -189,3 +201,6 @@ runs:
     - '-G ${{ inputs.defectdojo_product }}'
     - '-H ${{ inputs.defectdojo_engagement }}'
     - '-I ${{ inputs.java_version }}'
+    - '-J ${{ inputs.dockerlint_enable }}'
+    - '-K ${{ inputs.dockerfile_path }}'
+    - '-L ${{ inputs.dockerlint_level }}'
