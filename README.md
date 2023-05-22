@@ -43,7 +43,9 @@ Checks and analyzes the security of the code added to the specified repository.
 | trivy_repo_vuln | comma-separated list of vulnerability types (os,library). Required if config checker is enabled. | `false` | os,library |
 | trivy_severity | Severities of vulnerabilities to be displayed. Required if config checker is enabled. | `false` | UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL |
 | trivy_timeout | Trivy timeout duration. Required if config checker is enabled. | `false` | 5m |
-
+| dockerlint_enable | Enables Docker lint check. | `false` | true |
+| dockerfile_path | Dockerfile path. Required if Docker linter checker is enabled. | `false` | ./Dockerfile |
+| dockerlint_level | Exit with failure code only when rules with a severity equal to or above THRESHOLD are violated. Accepted values: error, warning, info, style, ignore & none. Required if Docker linter checker is enabled. | `false` | error |
 
 ## Outputs
 
@@ -209,4 +211,6 @@ jobs:
           trivy_severity: 'CRITICAL,HIGH'
           trivy_repo_ignore-unfixed: 'true'
           trivy_timeout: '10m'
+          dockerfile_path: docker/Dockerfile
+          dockerlint_level: warning
 ```
