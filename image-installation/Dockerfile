@@ -46,7 +46,7 @@ ENV PATH=$PATH:/opt/sonar-scanner/bin/
 ##################################################################
 
 # Tfsec
-COPY --from=tfsec/tfsec /usr/bin/tfsec /usr/bin/tfsec
+COPY --from=aquasec/tfsec /usr/bin/tfsec /usr/bin/tfsec
 
 # Trivy
 COPY --from=aquasec/trivy /usr/local/bin/trivy /usr/local/bin/trivy
