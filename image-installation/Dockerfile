@@ -67,6 +67,12 @@ ENV JAVA_HOME="/opt/java/java17"
 RUN /var/opt/dependency-check/bin/dependency-check.sh --updateonly
 
 ##################################################################
+# Docker hadolint requirements
+##################################################################
+
+COPY --chmod=777 --from=hadolint/hadolint /bin/hadolint /bin/hadolint
+
+##################################################################
 # remove unnecessary packages
 ##################################################################
 
