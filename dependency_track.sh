@@ -169,7 +169,7 @@ case $DTRACK_LANGUAGE in
             echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
 
         fi
-        path="$GITHUB_WORKSPACE/target/bom.xml"
+        path="$DTRACK_DIR/target/bom.xml"
         echo "TIZONA - Dependency Track: maven compile"
         BoMResult=$(mvn compile)
         echo "TIZONA - Dependency Track: maven compiled"
