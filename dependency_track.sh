@@ -169,13 +169,13 @@ case $DTRACK_LANGUAGE in
             echo "TIZONA - Dependency Track: Nexus access established. Nexus libraries will be downloaded"
 
         fi
-        path="$DTRACK_DIR/target/bom.xml"
+        path="${DTRACK_DIR}/target/bom.xml"
         echo "TIZONA - Dependency Track: maven compile"
         BoMResult=$(mvn compile)
         echo "TIZONA - Dependency Track: maven compiled"
         echo "TIZONA - Dependency Track: [*]  maven bom.xml created:"
-        ls -la $path
-        cd $GITHUB_WORKSPACE
+        ls -la target
+        cd ${GITHUB_WORKSPACE}
         ;;
         
     *)
@@ -192,7 +192,7 @@ fi
 echo "TIZONA - Dependency Track: [*] BoM file succesfully generated"
 
 # Cyclonedx CLI conversion
-echo "TIZONA - Dependency Track: [*] Cyclonedx CLI conversion"
+echo "TIZONA - Dependency Track: [*] Cyclonedx CLI conversion for ${path} from ${GITHUB_WORKSPACE}"
 #Does not upload to dtrack when output format = xml (every version available)
 cyclonedx-cli convert --input-file $path --output-file sbom.xml --output-format json --output-version v1_4
 
