@@ -174,7 +174,8 @@ case $DTRACK_LANGUAGE in
         BoMResult=$(mvn compile)
         echo "TIZONA - Dependency Track: maven compiled"
         echo "TIZONA - Dependency Track: [*]  maven bom.xml created:"
-        ls -la target
+        pwd
+        ls -la .
         cd ${GITHUB_WORKSPACE}
         ;;
         
