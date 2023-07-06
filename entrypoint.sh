@@ -354,10 +354,10 @@ fi
 
 if [[ ${SECRETS_ENABLE} == *"true"* ]]; then
 
-    DOCKER_ARGS=""
+    SECRETS_ARGS=""
 
     if [ $REVIEWDOG_GIT_TOKEN ];then
-      DOCKER_ARGS="$SECRETS_ARGS $REVIEWDOG_GIT_TOKEN"
+      SECRETS_ARGS="$SECRETS_ARGS $REVIEWDOG_GIT_TOKEN"
       echo "TIZONA: Run secrets leaks action"
       /bin/bash /app/secrets_leaks.sh $SECRETS_ARGS &
     else
