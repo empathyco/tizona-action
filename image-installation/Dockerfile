@@ -10,15 +10,14 @@ ENV DEBIAN_FRONTEND noninteractive
 # using --no-install-recommends to reduce image size
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install --no-install-recommends -y git lsb-release unzip \
-    curl jq procps file build-essential apt-transport-https wget nodejs gnupg snapd \
-    libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g python-is-python3
+    curl jq procps file build-essential apt-transport-https wget gnupg snapd \
+    python-is-python3
 
 
 ##################################################################
-# JAVA v8 & v17 installation
+# JAVA v17 installation
 ##################################################################
 
-COPY --from=eclipse-temurin:8 /opt/java/openjdk /opt/java/java8
 COPY --from=eclipse-temurin:17 /opt/java/openjdk /opt/java/java17
 
 
@@ -44,9 +43,6 @@ ENV PATH=$PATH:/opt/sonar-scanner/bin/
 ##################################################################
 # Configuration checker requirements
 ##################################################################
-
-# Tfsec
-COPY --from=aquasec/tfsec /usr/bin/tfsec /usr/bin/tfsec
 
 # Trivy
 COPY --from=aquasec/trivy /usr/local/bin/trivy /usr/local/bin/trivy
