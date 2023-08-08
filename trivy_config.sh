@@ -21,6 +21,8 @@ fi
 
 TRIVY_DIRS=$(git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} --dirstat | awk -F '% ' '{print $2}')
 
+echo "TIZONA - Direscotories to be scanned: ${TRIVY_DIRS}"
+
 for dir in $TRIVY_DIRS
 do 
   echo "TIZONA - Trivy configuration analysis of $dir: Building SARIF config report"
