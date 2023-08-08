@@ -7,18 +7,10 @@ if [[ ${ACTION_MODE} == *"false"* ]]; then
 fi
 
 REVIEWDOG_GIT_TOKEN=${2}
-TERRAFORM_DIR=${3}
-REVIEWDOG_LVL=${4}
-REVIEWDOG_REPORTER=${5}
-
-TRIVY_REPO_IGNORE=${6}
-TRIVY_REPO_VULN=${7}
-TRIVY_SEVERITY=${8}
-TRIVY_TIMEOUT=${9}
-
-
-echo "TIZONA - Configuration analysis: Run Tfsec"
-/bin/bash /app/tfsec_check.sh ${REVIEWDOG_GIT_TOKEN} ${TERRAFORM_DIR} ${REVIEWDOG_LVL} ${REVIEWDOG_REPORTER}
+TRIVY_REPO_IGNORE=${3}
+TRIVY_REPO_VULN=${4}
+TRIVY_SEVERITY=${5}
+TRIVY_TIMEOUT=${6}
 
 if [ "pull_request" = "$GITHUB_EVENT_NAME" ]; then
   echo "TTIZONA - Configuration analysis: Trivy configuration enabled for Pull Requests"

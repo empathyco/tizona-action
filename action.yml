@@ -45,18 +45,6 @@ inputs:
   reviewdog_github_token:
     description: 'GitHub token. Required if config checker or secrets checker are enabled.'
     required: false
-  terraform_working_directory:
-    description: 'Directory to run the action on, from the repo root.. Default is . ( root of the repository). Required if config checker is enabled.'
-    default: '.'
-    required: false
-  reviewdog_level:
-    description: 'Report level for reviewdog [info,warning,error]. Required if config checker is enabled.'
-    default: 'error'
-    required: false
-  reviewdog_reporter:
-    description: 'Reporter of reviewdog command [github-pr-check,github-pr-review]. Default is github-pr-check.. Required if config checker is enabled.'
-    default: 'github-pr-check'
-    required: false
   depcheck_project:
     description: 'Dependency check project. Required if code checker is enabled.'
     default: 'MY_PROJECT'
@@ -115,17 +103,14 @@ runs:
     - '-g ${{ inputs.config_enable }}'
     - '-h ${{ inputs.secrets_enable }}'
     - '-i ${{ inputs.reviewdog_github_token }}'
-    - '-j ${{ inputs.terraform_working_directory }}'
-    - '-k ${{ inputs.reviewdog_level }}'
-    - '-l ${{ inputs.reviewdog_reporter }}'
-    - '-m ${{ inputs.depcheck_project }}'
-    - '-n ${{ inputs.depcheck_path }}'
-    - '-o ${{ inputs.depcheck_format }}'
-    - '-p ${{ inputs.trivy_severity }}'
-    - '-q ${{ inputs.trivy_repo_ignore-unfixed }}'
-    - '-r ${{ inputs.trivy_repo_vuln }}'
-    - '-s ${{ inputs.trivy_timeout }}'
-    - '-t ${{ inputs.java_version }}'
-    - '-u ${{ inputs.dockerlint_enable }}'
-    - '-v ${{ inputs.dockerfile_path }}'
-    - '-w ${{ inputs.dockerlint_level }}'
+    - '-j ${{ inputs.depcheck_project }}'
+    - '-k ${{ inputs.depcheck_path }}'
+    - '-l ${{ inputs.depcheck_format }}'
+    - '-m ${{ inputs.trivy_severity }}'
+    - '-n ${{ inputs.trivy_repo_ignore-unfixed }}'
+    - '-o ${{ inputs.trivy_repo_vuln }}'
+    - '-p ${{ inputs.trivy_timeout }}'
+    - '-q ${{ inputs.java_version }}'
+    - '-r ${{ inputs.dockerlint_enable }}'
+    - '-s ${{ inputs.dockerfile_path }}'
+    - '-t ${{ inputs.dockerlint_level }}'

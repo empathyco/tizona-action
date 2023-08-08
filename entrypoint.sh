@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -30,45 +30,36 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:" o; do
          export REVIEWDOG_GIT_TOKEN=${OPTARG}
        ;;
        j)
-         export TERRAFORM_DIR=${OPTARG}
-       ;;
-       k)
-         export REVIEWDOG_LVL=${OPTARG}
-       ;;
-       l)
-         export REVIEWDOG_REPORTER=${OPTARG}
-       ;;
-       m)
          export DEPCHECK_PROJECT=${OPTARG}
        ;;
-       n)
+       k)
          export DEPCHECK_PATH=${OPTARG}
        ;;
-       o)
+       l)
          export DEPCHECK_FORMAT=${OPTARG}
        ;;
-       p)
+       m)
          export TRIVY_SEVERITY=${OPTARG}
        ;;
-       q)
+       n)
          export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
-       r)
+       o)
          export TRIVY_REPO_VULN=${OPTARG}
        ;;
-       s)
+       p)
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
-       t)
+       q)
          export JAVA_VERSION_TIZONA=${OPTARG}
        ;;
-       u)
+       r)
          export DOCKERLINT_ENABLE=${OPTARG}
        ;;
-       v)
+       s)
          export DOCKERFILE_PATH=${OPTARG}
        ;;
-       w)
+       t)
          export DOCKERLINT_LEVEL=${OPTARG}
        ;;
        *)
@@ -150,27 +141,6 @@ if [[ ${CONFIG_ENABLE} == *"true"* ]]; then
       REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_GIT_TOKEN"
     else
       echo "TIZONA: ReviewDog requires GitHub token. Exit"
-    fi
-
-    if [ $TERRAFORM_DIR ];then
-      REVIEWDOG_ARGS="$REVIEWDOG_ARGS $TERRAFORM_DIR"
-    else
-      echo "TIZONA: ReviewDog requires path to review. Exit"
-      exit 1
-    fi
-
-    if [ $REVIEWDOG_LVL ];then
-      REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_LVL"
-    else
-      echo "TIZONA: ReviewDog requires level. Exit"
-      exit 1
-    fi
-
-    if [ $REVIEWDOG_REPORTER ];then
-      REVIEWDOG_ARGS="$REVIEWDOG_ARGS $REVIEWDOG_REPORTER"
-    else
-      echo "TIZONA: ReviewDog requires reporter of reviewdog command [github-pr-check,github-pr-review]. Exit"
-      exit 1
     fi
 
     TRIVY_CONFIG_ARGS=""
