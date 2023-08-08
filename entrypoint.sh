@@ -1,120 +1,79 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z:A:B:C:D:E:F:G:H:I:J:K:L:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
        ;;
        b)
-         export DTRACK_ENABLE=${OPTARG}
-       ;;
-       c)
-         export DTRACK_URL=${OPTARG}
-       ;;
-       d)
-         export DTRACK_KEY=${OPTARG}
-       ;;
-       e)
-         export DTRACK_LANGUAGE=${OPTARG}
-       ;;
-       f)
-         export DTRACK_DIR=${OPTARG}
-       ;;
-       g)
          export CODE_ENABLE=${OPTARG}
        ;;
-       h)
+       c)
          export SONAR_SOURCES=${OPTARG}
        ;;
-       i)
+       d)
          export SONAR_HOST=${OPTARG}
        ;;
-       j)
+       e)
          export SONAR_LOGIN=${OPTARG}
        ;;
-       k)
+       f)
          export SONAR_REPORT_PATH=${OPTARG}
        ;;
-       l)
+       g)
          export CONFIG_ENABLE=${OPTARG}
        ;;
-       m)
+       h)
          export SECRETS_ENABLE=${OPTARG}
        ;;
-       n)
+       i)
          export REVIEWDOG_GIT_TOKEN=${OPTARG}
        ;;
-       o)
+       j)
          export TERRAFORM_DIR=${OPTARG}
        ;;
-       p)
+       k)
          export REVIEWDOG_LVL=${OPTARG}
        ;;
-       q)
+       l)
          export REVIEWDOG_REPORTER=${OPTARG}
        ;;
-       r)
+       m)
          export DEPCHECK_PROJECT=${OPTARG}
        ;;
-       s)
+       n)
          export DEPCHECK_PATH=${OPTARG}
        ;;
-       t)
+       o)
          export DEPCHECK_FORMAT=${OPTARG}
        ;;
-       u)
+       p)
          export TRIVY_SEVERITY=${OPTARG}
        ;;
-       v)
+       q)
          export TRIVY_REPO_IGNORE=${OPTARG}
        ;;
-       w)
+       r)
          export TRIVY_REPO_VULN=${OPTARG}
        ;;
-       x)
+       s)
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
-       y)
-         export DEPTRACK_BRANCH=${OPTARG}
-       ;;
-       z)
-         export DEFECTDOJO_URL=${OPTARG}
-       ;;
-       A)
-         export DEFECTDOJO_TOKEN=${OPTARG}
-       ;;
-       B)
-         export NEXUS_URL=${OPTARG}
-       ;;
-       C)
-         export NEXUS_USER=${OPTARG}
-       ;;
-       D)
-         export NEXUS_PASS=${OPTARG}
-       ;;
-       E)
-         export NEXUS_ADDRESS=${OPTARG}
-       ;;
-       F)
-         export IVY_PROXY_RELEASE=${OPTARG}
-       ;;
-       G)
-         export DEFECTDOJO_PRODUCT=${OPTARG}
-       ;;
-       H)
-         export DEFECTDOJO_ENGAGEMENT=${OPTARG}
-       ;;
-       I)
+       t)
          export JAVA_VERSION_TIZONA=${OPTARG}
        ;;
-       J)
+       u)
          export DOCKERLINT_ENABLE=${OPTARG}
        ;;
-       K)
+       v)
          export DOCKERFILE_PATH=${OPTARG}
        ;;
-       L)
+       w)
          export DOCKERLINT_LEVEL=${OPTARG}
+       ;;
+       *)
+         echo "TIZONA: Arguments flag error. Exit"
+         exit 1
        ;;
   esac
 done
@@ -126,106 +85,11 @@ else
   echo "TIZONA: Permissive mode enabled. The action will continue even if errors are encountered in the execution of the checks. "
 fi
 
-if [[ ${JAVA_VERSION_TIZONA} == *"8"* ]]; then
-  echo "TIZONA: Set Java 8 version to JAVA_HOME"
-  export JAVA_HOME="/opt/java/java8"
-else
-  echo "TIZONA: Set Java 17 version (default) to JAVA_HOME"
-  export JAVA_HOME="/opt/java/java17"
-fi
-
-export PATH=${JAVA_HOME}/bin:$PATH
+echo "TIZONA: Set Java 17 version (default) to JAVA_HOME"
+export JAVA_HOME="/opt/java/java17"
+export PATH=${JAVA_HOME}/bin:${PATH}
 
 echo "TIZONA: Starting security checks"
-
-if [[ ${DTRACK_ENABLE} == *"true"* ]]; then
-    
-    DTRACK_ARGS=""
-
-    if [ $DTRACK_URL ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DTRACK_URL"
-    else
-      echo "TIZONA: Dependency Track requires URL of OWASP Dependency Track REST API. Exit"
-      exit 1
-    fi
-
-    if [ $DTRACK_KEY ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DTRACK_KEY"
-    else
-      echo "TIZONA: Dependency Track requires key to access OWASP Dependency Track REST API."
-    fi
-
-    if [ $DTRACK_LANGUAGE ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DTRACK_LANGUAGE"
-    else
-      echo "TIZONA: Dependency Track requires programming language to review. Exit"
-      exit 1
-    fi
-
-    if [ $DTRACK_DIR ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DTRACK_DIR"
-    else
-      echo "TIZONA: Dependency Track requires specific directory. Exit"
-      exit 1
-    fi
-
-    if [ $DEFECTDOJO_URL ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_URL"
-    fi
-
-    if [ $DEFECTDOJO_TOKEN ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_TOKEN"
-    fi
-
-    if [ $DEFECTDOJO_PRODUCT ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_PRODUCT"
-    fi
-
-    if [ $DEFECTDOJO_ENGAGEMENT ];then
-      DTRACK_ARGS="$DTRACK_ARGS $DEFECTDOJO_ENGAGEMENT"
-    fi
-
-    if [ $NEXUS_URL ];then
-      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_URL"
-    fi
-
-    if [ $NEXUS_USER ];then
-      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_USER"
-    fi
-
-    if [ $NEXUS_PASS ];then
-      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_PASS"
-    fi
-
-    if [ $NEXUS_ADDRESS ];then
-      DTRACK_ARGS="$DTRACK_ARGS $NEXUS_ADDRESS"
-    fi
-
-    if [ $IVY_PROXY_RELEASE ];then
-      DTRACK_ARGS="$DTRACK_ARGS $IVY_PROXY_RELEASE"
-    fi
-
-    if [ "push" = "$GITHUB_EVENT_NAME" ]; then
-      MY_REF=${GITHUB_REF// /}
-      MY_BRANCH=${DEPTRACK_BRANCH// /}
-      if [[ "$MY_REF" == *"$MY_BRANCH"* ]]; then
-        if [ $DTRACK_KEY ];then
-          echo "TIZONA: Run Dependency Track action"
-          /bin/bash /app/dependency_track.sh $DTRACK_ARGS &
-        else
-          echo "TIZONA: No Dependency Track key was found. Skipping Dependency Track check"
-        fi
-      else
-        echo "TIZONA: Skipping Dependency Track action."
-        echo "TIZONA: Current ref: $MY_REF, and must contain: $MY_BRANCH"
-      fi
-    else
-      echo "TIZONA: Skipping Dependency Track action."
-      echo "TIZONA: Current action: $GITHUB_EVENT_NAME and must be push."
-    fi
-else
-    echo "TIZONA: Skip Dependency Track action"
-fi
 
 if [[ ${CODE_ENABLE} == *"true"* ]]; then
 

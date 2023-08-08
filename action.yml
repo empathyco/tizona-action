@@ -14,66 +14,6 @@ inputs:
     description: 'Sets the Java version to be used in the checks. Java versions available: 8, 17(default).'
     required: false
     default: '17'
-  deptrack_enable:
-    description: 'Enables Dependency Track check'
-    required: false
-    default: 'true'
-  deptrack_url:  
-    description: 'URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
-    required: false
-    default: 'DEPTRACK_URL'
-  deptrack_key:
-    description: 'Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled.'
-    required: false
-    default: 'DEPTRACK_KEY'
-  deptrack_language:
-    description: 'Programming language (java, scala-sbt, scala-gradle, python, nodejs). Required if Dependency Track is enabled. '
-    required: false
-    default: 'nodejs'
-  deptrack_dir:
-    description: 'Dependency track directory path. Required if Dependency Track is enabled.'
-    required: false
-    default: '.'
-  deptrack_branch:
-    description: 'Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled.'
-    required: false
-    default: 'main'
-  defectdojo_url:
-    description: 'Dependency track DefectDojo URL for its integration. Not required.'
-    required: false
-    default: 'DEFECTDOJO_URL'
-  defectdojo_token:
-    description: 'Dependency track DefectDojo token for its integration. Not required.'
-    required: false
-    default: 'DEFECTDOJO_TOKEN'
-  defectdojo_product:
-    description: 'Dependency track DefectDojo product name for its integration. Not required.'
-    required: false
-    default: 'Tizona'
-  defectdojo_engagement:
-    description: 'Dependency track DefectDojo engagement name for its integration. Not required.'
-    required: false
-    default: 'TizonaEngagement'
-  nexus_url:
-    description: 'Dependency track Nexus URL for maven and java review. Not required'
-    required: false
-    default: 'NEXUS_URL'
-  nexus_user:
-    description: 'Dependency track Nexus user for maven and java review. Not required'
-    required: false
-    default: 'NEXUS_USER'
-  nexus_pass:
-    description: 'Dependency track Nexus password for maven and java review. Not required'
-    required: false
-    default: 'NEXUS_PASS'
-  nexus_address:
-    description: 'Dependency track Nexus ADDRESS for Scala SBT review, like Nexus URL without https:// substring. Not required'
-    required: false
-    default: 'NEXUS_ADDRESS'
-  ivy_proxy_release:
-    description: 'Dependency track Nexus Ivy proxy release for Scala SBT review. Not required'
-    required: false
-    default: 'IVY_PROXY_RELEASE'
   code_enable:
     description: 'Enables code check'
     required: false
@@ -148,7 +88,7 @@ inputs:
   dockerlint_enable:
     description: 'Enables Docker lint check'
     required: false
-    default: 'true'
+    default: 'false'
   dockerfile_path:
     description: 'Dockerfile path'
     required: false
@@ -166,41 +106,26 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - '-a ${{ inputs.permissive_mode }}'
-    - '-b ${{ inputs.deptrack_enable }}'
-    - '-c ${{ inputs.deptrack_url }}'
-    - '-d ${{ inputs.deptrack_key }}'
-    - '-e ${{ inputs.deptrack_language }}'
-    - '-f ${{ inputs.deptrack_dir }}'
-    - '-g ${{ inputs.code_enable }}'
-    - '-h ${{ inputs.sonar_source }}'
-    - '-i ${{ inputs.sonar_host }}'
-    - '-j ${{ inputs.sonar_login }}'
-    - '-k ${{ inputs.sonar_report_path }}'
-    - '-l ${{ inputs.config_enable }}'
-    - '-m ${{ inputs.secrets_enable }}'
-    - '-n ${{ inputs.reviewdog_github_token }}'
-    - '-o ${{ inputs.terraform_working_directory }}'
-    - '-p ${{ inputs.reviewdog_level }}'
-    - '-q ${{ inputs.reviewdog_reporter }}'
-    - '-r ${{ inputs.depcheck_project }}'
-    - '-s ${{ inputs.depcheck_path }}'
-    - '-t ${{ inputs.depcheck_format }}'
-    - '-u ${{ inputs.trivy_severity }}'
-    - '-v ${{ inputs.trivy_repo_ignore-unfixed }}'
-    - '-w ${{ inputs.trivy_repo_vuln }}'
-    - '-x ${{ inputs.trivy_timeout }}'
-    - '-y ${{ inputs.deptrack_branch }}'
-    - '-z ${{ inputs.defectdojo_url }}'
-    - '-A ${{ inputs.defectdojo_token }}'
-    - '-B ${{ inputs.nexus_url }}'
-    - '-C ${{ inputs.nexus_user }}'
-    - '-D ${{ inputs.nexus_pass }}'
-    - '-E ${{ inputs.nexus_address }}'
-    - '-F ${{ inputs.ivy_proxy_release }}'
-    - '-G ${{ inputs.defectdojo_product }}'
-    - '-H ${{ inputs.defectdojo_engagement }}'
-    - '-I ${{ inputs.java_version }}'
-    - '-J ${{ inputs.dockerlint_enable }}'
-    - '-K ${{ inputs.dockerfile_path }}'
-    - '-L ${{ inputs.dockerlint_level }}'
+    - '-a ${{ inputs.permissive_mode }}''
+    - '-b ${{ inputs.code_enable }}'
+    - '-c ${{ inputs.sonar_source }}'
+    - '-d ${{ inputs.sonar_host }}'
+    - '-e ${{ inputs.sonar_login }}'
+    - '-f ${{ inputs.sonar_report_path }}'
+    - '-g ${{ inputs.config_enable }}'
+    - '-h ${{ inputs.secrets_enable }}'
+    - '-i ${{ inputs.reviewdog_github_token }}'
+    - '-j ${{ inputs.terraform_working_directory }}'
+    - '-k ${{ inputs.reviewdog_level }}'
+    - '-l ${{ inputs.reviewdog_reporter }}'
+    - '-m ${{ inputs.depcheck_project }}'
+    - '-n ${{ inputs.depcheck_path }}'
+    - '-o ${{ inputs.depcheck_format }}'
+    - '-p ${{ inputs.trivy_severity }}'
+    - '-q ${{ inputs.trivy_repo_ignore-unfixed }}'
+    - '-r ${{ inputs.trivy_repo_vuln }}'
+    - '-s ${{ inputs.trivy_timeout }}'
+    - '-t ${{ inputs.java_version }}'
+    - '-u ${{ inputs.dockerlint_enable }}'
+    - '-v ${{ inputs.dockerfile_path }}'
+    - '-w ${{ inputs.dockerlint_level }}'

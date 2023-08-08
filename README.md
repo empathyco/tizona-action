@@ -10,21 +10,6 @@ Checks and analyzes the security of the code added to the specified repository.
 | --- | --- | --- | --- |
 | permissive_mode | Enables or disables the interruption of the action in the case of finding errors in the execution of the checks. | `false` | true |
 | java_version | Sets the Java version to be used in the checks. Java versions available: 8, 17(default) | `false` | 17 |
-| deptrack_enable | Enables Dependency Track check. | `false` | true |
-| deptrack_url | URL of OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_URL |
-| deptrack_key | Key to access OWASP Dependency Track REST API. Required if Dependency Track is enabled. | `false` | DEPTRACK_KEY |
-| deptrack_language | Programming language (java, scala-sbt, scala-gradle, python, nodejs). Required if Dependency Track is enabled. | `false` | nodejs |
-| deptrack_dir | Dependency track directory path. Required if Dependency Track is enabled. | `false` | . |
-| deptrack_branch | Dependency track GitHub only runs on tags or on this branch. Required if Dependency Track is enabled. | `false` | main |
-| defectdojo_url | Dependency track DefectDojo URL for its integration. Not required. | `false` | DEFECTDOJO_URL |
-| defectdojo_token | Dependency track DefectDojo token for its integration. Not required. | `false` | DEFECTDOJO_TOKEN |
-| defectdojo_product | Dependency track DefectDojo product name for its integration. Not required. | false | `Tizona`|
-| defectdojo_engagement | Dependency track DefectDojo engagement name for its integration. Not required. | false | `TizonaEngagement`|
-| nexus_url | Dependency track Nexus URL for maven and java review. Not required. | `false` | NEXUS_URL |
-| nexus_user | Dependency track Nexus user for maven and java review. Not required. | `false` | NEXUS_USER |
-| nexus_pass | Dependency track Nexus password for maven and java review. Not required. | `false` | NEXUS_PASS |
-| nexus_address | Dependency track Nexus ADDRESS for Scala SBT review, like Nexus URL without https:// substring. Not required. | `false` | NEXUS_ADDRESS |
-| ivy_proxy_release | Dependency track Nexus Ivy proxy release for Scala SBT review. Not required. | `false` | IVY_PROXY_RELEASE |
 | code_enable | Enables SonarQube check | `false` | true |
 | sonar_source | SonarQube source. Required to run SonarQube. | `false` | . |
 | sonar_host | SonarQube host. Required to run SonarQube. | `false` | SONAR_HOST |
@@ -43,7 +28,7 @@ Checks and analyzes the security of the code added to the specified repository.
 | trivy_repo_vuln | comma-separated list of vulnerability types (os,library). Required if config checker is enabled. | `false` | os,library |
 | trivy_severity | Severities of vulnerabilities to be displayed. Required if config checker is enabled. | `false` | UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL |
 | trivy_timeout | Trivy timeout duration. Required if config checker is enabled. | `false` | 5m |
-| dockerlint_enable | Enables Docker lint check. | `false` | true |
+| dockerlint_enable | Enables Docker lint check. | `false` | false |
 | dockerfile_path | Dockerfile path. Required if Docker linter checker is enabled. | `false` | ./Dockerfile |
 | dockerlint_level | Exit with failure code only when rules with a severity equal to or above THRESHOLD are violated. Accepted values: error, warning, info, style, ignore & none. Required if Docker linter checker is enabled. | `false` | error |
 
