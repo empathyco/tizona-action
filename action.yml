@@ -10,10 +10,6 @@ inputs:
     description: 'Enables or disables the interruption of the action in the case of finding errors in the execution of the checks.'
     required: false
     default: 'true'
-  java_version:
-    description: 'Sets the Java version to be used in the checks. Java versions available: 8, 17(default).'
-    required: false
-    default: '17'
   code_enable:
     description: 'Enables code check'
     required: false
@@ -110,7 +106,6 @@ runs:
     - '-n ${{ inputs.trivy_repo_ignore-unfixed }}'
     - '-o ${{ inputs.trivy_repo_vuln }}'
     - '-p ${{ inputs.trivy_timeout }}'
-    - '-q ${{ inputs.java_version }}'
-    - '-r ${{ inputs.dockerlint_enable }}'
-    - '-s ${{ inputs.dockerfile_path }}'
-    - '-t ${{ inputs.dockerlint_level }}'
+    - '-q ${{ inputs.dockerlint_enable }}'
+    - '-r ${{ inputs.dockerfile_path }}'
+    - '-s ${{ inputs.dockerlint_level }}'
