@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -51,15 +51,12 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:" o; do
          export TRIVY_TIMEOUT=${OPTARG}
        ;;
        q)
-         export JAVA_VERSION_TIZONA=${OPTARG}
-       ;;
-       r)
          export DOCKERLINT_ENABLE=${OPTARG}
        ;;
-       s)
+       r)
          export DOCKERFILE_PATH=${OPTARG}
        ;;
-       t)
+       s)
          export DOCKERLINT_LEVEL=${OPTARG}
        ;;
        *)

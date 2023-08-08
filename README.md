@@ -9,7 +9,6 @@ Checks and analyzes the security of the code added to the specified repository.
 | parameter | description | required | default |
 | --- | --- | --- | --- |
 | permissive_mode | Enables or disables the interruption of the action in the case of finding errors in the execution of the checks. | `false` | true |
-| java_version | Sets the Java version to be used in the checks. Java versions available: 8, 17(default) | `false` | 17 |
 | code_enable | Enables SonarQube check | `false` | true |
 | sonar_source | SonarQube source. Required to run SonarQube. | `false` | . |
 | sonar_host | SonarQube host. Required to run SonarQube. | `false` | SONAR_HOST |
