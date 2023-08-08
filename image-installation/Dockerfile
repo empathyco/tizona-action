@@ -44,9 +44,6 @@ ENV PATH=$PATH:/opt/sonar-scanner/bin/
 # Configuration checker requirements
 ##################################################################
 
-# Tfsec
-COPY --from=aquasec/tfsec /usr/bin/tfsec /usr/bin/tfsec
-
 # Trivy
 COPY --from=aquasec/trivy /usr/local/bin/trivy /usr/local/bin/trivy
 COPY --from=aquasec/trivy contrib/ contrib/
