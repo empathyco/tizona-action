@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v6 2023-08-08
+
+### Removed
+
+- Removed the Tfsec scan because it is now integrated in Trivy.
+- Removed the Dependency Track scan and the integration with DefectDojo in order to use the [StackRox action](https://github.com/empathyco/stackrox-action) to track vulnerabilities.
 
 ## v5 2023-05-22
 
