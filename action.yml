@@ -90,7 +90,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - '-a ${{ inputs.permissive_mode }}''
+    - '-a ${{ inputs.permissive_mode }}'
     - '-b ${{ inputs.code_enable }}'
     - '-c ${{ inputs.sonar_source }}'
     - '-d ${{ inputs.sonar_host }}'
