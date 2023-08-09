@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed the Tfsec scan because it is now integrated in Trivy.
 - Removed the Dependency Track scan and the integration with DefectDojo in order to use the [StackRox action](https://github.com/empathyco/stackrox-action) to track vulnerabilities.
+- Docker linter scan is disabled by default.
 
 ## v5 2023-05-22
 
