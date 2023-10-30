@@ -32,26 +32,30 @@ fi
 TRIVY_DIRS=$(git diff origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF} --dirstat | awk -F '% ' '{print $2}')
 
 for dir in $TRIVY_DIRS
-do 
-  echo "TIZONA - Trivy repository analysis of $dir: Building SARIF config report"
+do
+  if [ -d $dir ]; then
+    echo "TIZONA - Trivy repository analysis of $dir: Building SARIF config report"
 
-  trivy --quiet ${TIMEOUT} fs --format sarif --output ${TRIVY_OUTPUT} ${ARGS} $dir
+    trivy --quiet ${TIMEOUT} fs --format sarif --output ${TRIVY_OUTPUT} ${ARGS} $dir
 
-  echo "TIZONA - Trvy repository analysis of $dir: Upload trivy repository scan result to Github"
+    echo "TIZONA - Trvy repository analysis of $dir: Upload trivy repository scan result to Github"
 
-  set +Eeuo pipefail
+    set +Eeuo pipefail
 
-  jq '.runs[0].results[] | "\(.level):\(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.endLine):\(.locations[0].physicalLocation.region.startColumn): \(.message.text)"' < ${TRIVY_OUTPUT} | sed 's/"//g' |  reviewdog -efm="%t%.%+:%f:%l:%c: %m" -reporter=github-pr-check -fail-on-error=true
+    jq '.runs[0].results[] | "\(.level):\(.locations[0].physicalLocation.artifactLocation.uri):\(.locations[0].physicalLocation.region.endLine):\(.locations[0].physicalLocation.region.startColumn): \(.message.text)"' < ${TRIVY_OUTPUT} | sed 's/"//g' |  reviewdog -efm="%t%.%+:%f:%l:%c: %m" -reporter=github-pr-check -fail-on-error=true
 
-  reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
+    reviewdog_return="${PIPESTATUS[2]}" exit_code=$?
 
-  echo "TIZONA - Trvy repository analysis of $dir: reviewdog-return-code: ${reviewdog_return}"
+    echo "TIZONA - Trvy repository analysis of $dir: reviewdog-return-code: ${reviewdog_return}"
 
-  echo "TIZONA - Trvy repository analysis of $dir: Trivy repo exit ${exit_code}"
+    echo "TIZONA - Trvy repository analysis of $dir: Trivy repo exit ${exit_code}"
 
-  if [[ ${exit_code} != *"0"* ]]; then
-    echo "TIZONA - Trivy configuration analysis of $dir: exit code is not 0"
-    break
+    if [[ ${exit_code} != *"0"* ]]; then
+      echo "TIZONA - Trivy configuration analysis of $dir: exit code is not 0"
+      break
+    fi
+  else
+    echo "TIZONA - $dir not found"
   fi
 
 done
