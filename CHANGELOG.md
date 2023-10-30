@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v7 2023-10-30
+
+### Removed
+
+- Removed Dockerlint path argument. Now Dockerlint runs if Dockerfile changes in Pull Request.
+
 ## v6 2023-08-08
 
 ### Removed

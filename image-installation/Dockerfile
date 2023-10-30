@@ -20,7 +20,6 @@ RUN apt-get update && apt-get upgrade -y \
 
 COPY --from=eclipse-temurin:17 /opt/java/openjdk /opt/java/java17
 
-
 ##################################################################
 # Secrets leaks requirements
 ##################################################################

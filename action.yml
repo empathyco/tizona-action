@@ -73,10 +73,6 @@ inputs:
     description: 'Enables Docker lint check'
     required: false
     default: 'false'
-  dockerfile_path:
-    description: 'Dockerfile path'
-    required: false
-    default: './Dockerfile'
   dockerlint_level:
     description: 'Exit with failure code only when rules with a severity equal to or above THRESHOLD are violated. Accepted values: error, warning, info, style, ignore & none'
     required: false
@@ -107,5 +103,4 @@ runs:
     - '-o ${{ inputs.trivy_repo_vuln }}'
     - '-p ${{ inputs.trivy_timeout }}'
     - '-q ${{ inputs.dockerlint_enable }}'
-    - '-r ${{ inputs.dockerfile_path }}'
-    - '-s ${{ inputs.dockerlint_level }}'
+    - '-r ${{ inputs.dockerlint_level }}'

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:" o; do
    case "${o}" in
        a)
          export ACTION_MODE=${OPTARG}
@@ -54,9 +54,6 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:" o; do
          export DOCKERLINT_ENABLE=${OPTARG}
        ;;
        r)
-         export DOCKERFILE_PATH=${OPTARG}
-       ;;
-       s)
          export DOCKERLINT_LEVEL=${OPTARG}
        ;;
        *)
@@ -201,13 +198,6 @@ fi
 if [[ ${DOCKERLINT_ENABLE} == *"true"* ]]; then
 
     DOCKER_ARGS=""
-
-    if [ $DOCKERFILE_PATH ];then
-      DOCKER_ARGS="$DOCKER_ARGS $DOCKERFILE_PATH"
-    else
-      echo "TIZONA: Docker linter check requires Dockerfile path. Exit"
-      exit 1
-    fi
 
     if [ $DOCKERLINT_LEVEL ];then
       DOCKER_ARGS="$DOCKER_ARGS $DOCKERLINT_LEVEL"
