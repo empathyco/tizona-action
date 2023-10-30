@@ -70,7 +70,7 @@ jobs:
           fetch-depth: 0
 
       - name: Security check
-        uses: empathyco/tizona-action@v6
+        uses: empathyco/tizona-action@v7
         with:
           permissive_mode: 'true'
           reviewdog_github_token: ${{ secrets.github_token }}
