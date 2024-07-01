@@ -2,7 +2,7 @@
 
 set +e
 
-DOCKERLINT_FILES=$(git diff --name-onlyv origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF})
+DOCKERLINT_FILES=$(git diff --name-only origin/${GITHUB_BASE_REF} origin/${GITHUB_HEAD_REF})
 DOCKERLINT_LVL=$1
 
 for file in $DOCKERLINT_FILES
